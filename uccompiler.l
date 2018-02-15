@@ -7,20 +7,11 @@
 
 %}
 
-
-NUMB						[0-9]
-CHARACTER 					([a-z]|[A-Z])
-UNDERSCORE 					"_"
-
 SPACE						" "
 NEWLINE						"\n"
 TAB							"\t"
 CARRIAGERETURN		 		"\r"
 FORMFEED					"\f"
-
-ID 							( {CHARACTER} | {UNDERSCORE} )+ ( {CHARACTER} | {UNDERSCORE} | {NUMB} )*
-
-RESERVED					("++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary")
 
 CHAR 						"char"
 ELSE 						"else"
@@ -55,10 +46,10 @@ PLUS 						"+"
 RBRACE 						"}"
 RPAR 						")"
 SEMI 						";"
+ID							([a-zA-Z]|"_")+([a-zA-Z0-9]|"_")*
+RESERVED					("++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary")
 
 %%
-
-{ID}						{imprime_com_conteudo("ID", yytext);}
 
 {RESERVED}					{imprime_com_conteudo("RESERVED", yytext);}
 
@@ -95,6 +86,9 @@ SEMI 						";"
 {RBRACE} 					{imprime("RBRACE");}
 {RPAR} 						{imprime("RPAR");}
 {SEMI} 						{imprime("SEMI");}
+
+{ID}						{imprime_com_conteudo("ID", yytext);}
+
 {SPACE}						;
 {NEWLINE}					;
 {TAB}						;
