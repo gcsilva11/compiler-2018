@@ -53,7 +53,7 @@ DOT							"."
 EXPONENTIAL					("E"|"e")("+"|"-")?{INTLIT}
 REALLIT						("+"|"-")?(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
 
-CHRLIT						"'"(\\t|[0-9a-zA-Z"\\\"]|\\[0-7]{1,3})"'"
+CHRLIT						"'"(.|^"'"|\\t|\\[0-7]{1,3})"'"
 
 ID							([a-zA-Z]|"_")+([a-zA-Z0-9]|"_")*
 RESERVED					("++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary")
@@ -103,11 +103,13 @@ RESERVED					("++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"defaul
 
 {ID}						{imprime_com_conteudo("ID", yytext);}
 
+
 {SPACE}						;
 {NEWLINE}					;
 {TAB}						;
 {CARRIAGERETURN}			;
 {FORMFEED}					;
+
 
 %%
 
