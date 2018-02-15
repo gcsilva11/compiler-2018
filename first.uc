@@ -1,6 +1,6 @@
 int main ( void ) {
-	char i = ’A’;
-	while (i <= ’Z’) {
+	char i = '\23';
+	while (i <= 'Z') {
 		putchar (i);
 		i = i + 1;
 	}
