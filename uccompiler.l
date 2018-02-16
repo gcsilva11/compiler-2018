@@ -1,17 +1,30 @@
 %{
 	#include <stdio.h>
 	#include <string.h>
+	
+	#define LINHA linha++; coluna=1;
+	#define COLUNA coluna+=yyleng;
+	
 	int flag = 0;
+	int coluna = 1, linha = 1;
+	
 	void imprime(char* msg);
 	void imprime_com_conteudo(char* msg, char* conteudo);
 
 %}
 
-SPACE						" "
-NEWLINE						"\n"
-TAB							"\t"
-CARRIAGERETURN		 		"\r"
-FORMFEED					"\f"
+SINGLECOMMENT				"//"
+STARTCOMMENT 				"/*"
+FINISHCOMMENT 				"*/"
+
+ID							([a-zA-Z]|"_")([a-zA-Z0-9]|"_")*
+
+DOT							"."
+EXPONENTIAL					("E"|"e")("+"|"-")?{INTLIT}
+
+INTLIT						[0-9]+
+REALLIT						("+"|"-")?(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
+CHRLIT						"'"([^\n\']|\\t|\\[0-7]{1,3})"'"
 
 CHAR 						"char"
 ELSE 						"else"
@@ -24,7 +37,7 @@ RETURN 						"return"
 VOID 						"void"
 BITWISEAND 					"&"
 BITWISEOR 					"|"
-BITWISEXOR 					"ˆ"
+BITWISEXOR 					"^"
 AND 						"&&"
 ASSIGN 						"="
 MUL 						"*"
@@ -47,74 +60,73 @@ RBRACE 						"}"
 RPAR 						")"
 SEMI 						";"
 
-INTLIT						[0-9]+
+RESERVED					"++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary"
 
-DOT							"."
-EXPONENTIAL					("E"|"e")("+"|"-")?{INTLIT}
-REALLIT						("+"|"-")?(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
-
-CHRLIT						"'"(.|^"'"|\\t|\\[0-7]{1,3})"'"
-
-ID							([a-zA-Z]|"_")+([a-zA-Z0-9]|"_")*
-RESERVED					("++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary")
+SPACE						" "
+NEWLINE						"\n"
+TAB							"\t"
+CARRIAGERETURN		 		"\r"
+LINETERMINATOR				"\n"|"\r\n"
 
 %%
 
-{RESERVED}					{imprime_com_conteudo("RESERVED", yytext);}
+{SINGLECOMMENT}				;
+{STARTCOMMENT}				;
+{FINISHCOMMENT}				;
 
-("+"|"-")?{INTLIT}			{imprime_com_conteudo("INTLIT",yytext);}
-{REALLIT}					{imprime_com_conteudo("REALLIT",yytext);}
+{ID}						{imprime_com_conteudo("ID", yytext);COLUNA;}
 
-{CHRLIT}					{imprime_com_conteudo("CHRLIT",yytext);}
+("+"|"-")?{INTLIT}			{imprime_com_conteudo("INTLIT",yytext);COLUNA;}
+{REALLIT}					{imprime_com_conteudo("REALLIT",yytext);COLUNA;}
+{CHRLIT}					{imprime_com_conteudo("CHRLIT",yytext);COLUNA;}
 
-{CHAR} 						{imprime("CHAR");}
-{ELSE} 						{imprime("ELSE");}
-{WHILE} 					{imprime("WHILE");}
-{IF} 						{imprime("IF");}
-{INT}						{imprime("INT");}
-{SHORT} 					{imprime("SHORT");}
-{DOUBLE}					{imprime("DOUBLE");}
-{RETURN} 					{imprime("RETURN");}
-{VOID} 						{imprime("VOID");}
-{BITWISEAND} 				{imprime("BITWISEAND");}
-{BITWISEOR} 				{imprime("BITWISEOR");}
-{BITWISEXOR} 				{imprime("BITWISEXOR");}
-{AND} 						{imprime("AND");}
-{ASSIGN} 					{imprime("ASSIGN");}
-{MUL} 						{imprime("MUL");}
-{COMMA} 					{imprime("COMMA");}
-{DIV} 						{imprime("DIV");}
-{EQ} 						{imprime("EQ");}
-{GE} 						{imprime("GE");}
-{GT} 						{imprime("GT");}
-{LBRACE} 					{imprime("LBRACE");}
-{LE} 						{imprime("LE");}
-{LPAR} 						{imprime("LPAR");}
-{LT} 						{imprime("LT");}
-{MINUS} 					{imprime("MINUS");}
-{MOD} 						{imprime("MOD");}
-{NE} 						{imprime("NE");}
-{NOT} 						{imprime("NOT");}
-{OR} 						{imprime("OR");}
-{PLUS} 						{imprime("PLUS");}
-{RBRACE} 					{imprime("RBRACE");}
-{RPAR} 						{imprime("RPAR");}
-{SEMI} 						{imprime("SEMI");}
+{CHAR} 						{imprime("CHAR");COLUNA;}
+{ELSE} 						{imprime("ELSE");COLUNA;}
+{WHILE} 					{imprime("WHILE");COLUNA;}
+{IF} 						{imprime("IF");COLUNA;}
+{INT}						{imprime("INT");COLUNA;}
+{SHORT} 					{imprime("SHORT");COLUNA;}
+{DOUBLE}					{imprime("DOUBLE");COLUNA;}
+{RETURN} 					{imprime("RETURN");COLUNA;}
+{VOID} 						{imprime("VOID");COLUNA;}
+{BITWISEAND} 				{imprime("BITWISEAND");COLUNA;}
+{BITWISEOR} 				{imprime("BITWISEOR");COLUNA;}
+{BITWISEXOR} 				{imprime("BITWISEXOR");COLUNA;}
+{AND} 						{imprime("AND");COLUNA;}
+{ASSIGN} 					{imprime("ASSIGN");COLUNA;}
+{MUL} 						{imprime("MUL");COLUNA;}
+{COMMA} 					{imprime("COMMA");COLUNA;}
+{DIV} 						{imprime("DIV");COLUNA;}
+{EQ} 						{imprime("EQ");COLUNA;}
+{GE} 						{imprime("GE");COLUNA;}
+{GT} 						{imprime("GT");COLUNA;}
+{LBRACE} 					{imprime("LBRACE");COLUNA;}
+{LE} 						{imprime("LE");COLUNA;}
+{LPAR} 						{imprime("LPAR");COLUNA;}
+{LT} 						{imprime("LT");COLUNA;}
+{MINUS} 					{imprime("MINUS");COLUNA;}
+{MOD} 						{imprime("MOD");COLUNA;}
+{NE} 						{imprime("NE");COLUNA;}
+{NOT} 						{imprime("NOT");COLUNA;}
+{OR} 						{imprime("OR");COLUNA;}
+{PLUS} 						{imprime("PLUS");COLUNA;}
+{RBRACE} 					{imprime("RBRACE");COLUNA;}
+{RPAR} 						{imprime("RPAR");COLUNA;}
+{SEMI} 						{imprime("SEMI");COLUNA;}
 
-{ID}						{imprime_com_conteudo("ID", yytext);}
+{RESERVED}					{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
 
-
-{SPACE}						;
-{NEWLINE}					;
-{TAB}						;
-{CARRIAGERETURN}			;
-{FORMFEED}					;
-
+{SPACE}						{COLUNA;}
+{NEWLINE}					{LINHA;}
+{TAB}						{COLUNA;}
+{LINETERMINATOR}			{LINHA;}
+.							{COLUNA;}
 
 %%
 
 void imprime(char* msg){
 	if(flag == 1){
+
 		printf("%s\n",msg);
 	}
 }
