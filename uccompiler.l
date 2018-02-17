@@ -1,4 +1,8 @@
 %{
+	/*
+	João Pedro Costa Ferreiro 2014197760
+	Guilherme Cardoso Gomes da Silva 2014226354
+	*/
 	#include <stdio.h>
 	#include <string.h>
 	
@@ -7,120 +11,128 @@
 	
 	int flag = 0;
 	int coluna = 1, linha = 1;
+	int linha_aux = 0, coluna_aux = 0;
 	
 	void imprime(char* msg);
 	void imprime_com_conteudo(char* msg, char* conteudo);
 
 %}
 
-SINGLECOMMENT				"//"
-STARTCOMMENT 				"/*"
-FINISHCOMMENT 				"*/"
+%X MULTIPLECOM_ST CHAR_ST
 
-ID							([a-zA-Z]|"_")([a-zA-Z0-9]|"_")*
+SINGLECOMMENT					"//"
+STARTCOMMENT 					"/*"
+FINISHCOMMENT 					"*/"
 
-DOT							"."
-EXPONENTIAL					("E"|"e")("+"|"-")?{INTLIT}
+RESERVED						"++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary"
 
-INTLIT						[0-9]+
-REALLIT						("+"|"-")?(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
-CHRLIT						"'"([^\n\']|\\t|\\[0-7]{1,3})"'"
+CHAR 							"char"
+ELSE 							"else"
+WHILE 							"while"
+IF 								"if"
+INT 							"int"
+SHORT 							"short"
+DOUBLE							"double"
+RETURN 							"return"
+VOID 							"void"
+BITWISEAND 						"&"
+BITWISEOR 						"|"
+BITWISEXOR 						"^"
+AND 							"&&"
+ASSIGN 							"="
+MUL 							"*"
+COMMA 							","
+DIV 							"/"
+EQ 								"=="
+GE 								">="
+GT 								">"
+LBRACE 							"{"
+LE 								"<="
+LPAR 							"("
+LT 								"<"
+MINUS 							"-"
+MOD 							"%"
+NE 								"!="
+NOT 							"!"
+OR 								"||"
+PLUS 							"+"
+RBRACE 							"}"
+RPAR 							")"
+SEMI 							";"
 
-CHAR 						"char"
-ELSE 						"else"
-WHILE 						"while"
-IF 							"if"
-INT 						"int"
-SHORT 						"short"
-DOUBLE						"double"
-RETURN 						"return"
-VOID 						"void"
-BITWISEAND 					"&"
-BITWISEOR 					"|"
-BITWISEXOR 					"^"
-AND 						"&&"
-ASSIGN 						"="
-MUL 						"*"
-COMMA 						","
-DIV 						"/"
-EQ 							"=="
-GE 							">="
-GT 							">"
-LBRACE 						"{"
-LE 							"<="
-LPAR 						"("
-LT 							"<"
-MINUS 						"-"
-MOD 						"%"
-NE 							"!="
-NOT 						"!"
-OR 							"||"
-PLUS 						"+"
-RBRACE 						"}"
-RPAR 						")"
-SEMI 						";"
+ID								([a-zA-Z]|"_")([a-zA-Z0-9]|"_")*
 
-RESERVED					"++"|"--"|"["|"]"|"auto"|"break"|"case"|"const"|"continue"|"default"|"do"|"enum"|"extern"|"float"|"for"|"goto"|"inline"|"long"|"register"|"restrict"|"signed"|"sizeof"|"static"|"struct"|"switch"|"typedef"|"union"|"unsigned"|"volatile"|"_Bool"|"_Complex"|"_Imaginary"
+DOT								"."
+EXPONENTIAL						("E"|"e")("+"|"-")?{INTLIT}
 
-SPACE						" "
-NEWLINE						"\n"
-TAB							"\t"
-CARRIAGERETURN		 		"\r"
-LINETERMINATOR				"\n"|"\r\n"
+INTLIT							[0-9]+
+REALLIT							(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
+CHRLIT							"'"([^\n\']|\\t|\\[0-7]{1,3})"'"
+
+SPACE							" "
+NEWLINE							"\n"
+TAB								"\t"
+CARRIAGERETURN		 			"\r"
+LINETERMINATOR					"\n"|"\r\n"
 
 %%
+{SINGLECOMMENT}.*				;
 
-{SINGLECOMMENT}				;
-{STARTCOMMENT}				;
-{FINISHCOMMENT}				;
+{STARTCOMMENT}					{BEGIN MULTIPLECOM_ST; linha_aux = linha; coluna_aux = coluna; COLUNA;}
+<MULTIPLECOM_ST>.				{COLUNA;}
+<MULTIPLECOM_ST>{LINETERMINATOR}	{LINHA;}
+<MULTIPLECOM_ST><<EOF>>			{BEGIN 0;printf("Line %d, col %d: unterminated comment\n",linha_aux,coluna_aux);COLUNA;}
+<MULTIPLECOM_ST>{FINISHCOMMENT}	{BEGIN 0;COLUNA;}
 
-{ID}						{imprime_com_conteudo("ID", yytext);COLUNA;}
+{RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
 
-("+"|"-")?{INTLIT}			{imprime_com_conteudo("INTLIT",yytext);COLUNA;}
-{REALLIT}					{imprime_com_conteudo("REALLIT",yytext);COLUNA;}
-{CHRLIT}					{imprime_com_conteudo("CHRLIT",yytext);COLUNA;}
+{CHAR} 							{imprime("CHAR");COLUNA;}
+{ELSE} 							{imprime("ELSE");COLUNA;}
+{WHILE} 						{imprime("WHILE");COLUNA;}
+{IF} 							{imprime("IF");COLUNA;}
+{INT}							{imprime("INT");COLUNA;}
+{SHORT} 						{imprime("SHORT");COLUNA;}
+{DOUBLE}						{imprime("DOUBLE");COLUNA;}
+{RETURN} 						{imprime("RETURN");COLUNA;}
+{VOID} 							{imprime("VOID");COLUNA;}
+{BITWISEAND} 					{imprime("BITWISEAND");COLUNA;}
+{BITWISEOR} 					{imprime("BITWISEOR");COLUNA;}
+{BITWISEXOR} 					{imprime("BITWISEXOR");COLUNA;}
+{AND} 							{imprime("AND");COLUNA;}
+{ASSIGN} 						{imprime("ASSIGN");COLUNA;}
+{MUL} 							{imprime("MUL");COLUNA;}
+{COMMA} 						{imprime("COMMA");COLUNA;}
+{DIV} 							{imprime("DIV");COLUNA;}
+{EQ} 							{imprime("EQ");COLUNA;}
+{GE} 							{imprime("GE");COLUNA;}
+{GT} 							{imprime("GT");COLUNA;}
+{LBRACE} 						{imprime("LBRACE");COLUNA;}
+{LE} 							{imprime("LE");COLUNA;}
+{LPAR} 							{imprime("LPAR");COLUNA;}
+{LT} 							{imprime("LT");COLUNA;}
+{MINUS} 						{imprime("MINUS");COLUNA;}
+{MOD} 							{imprime("MOD");COLUNA;}
+{NE} 							{imprime("NE");COLUNA;}
+{NOT} 							{imprime("NOT");COLUNA;}
+{OR} 							{imprime("OR");COLUNA;}
+{PLUS} 							{imprime("PLUS");COLUNA;}
+{RBRACE} 						{imprime("RBRACE");COLUNA;}
+{RPAR} 							{imprime("RPAR");COLUNA;}
+{SEMI} 							{imprime("SEMI");COLUNA;}
 
-{CHAR} 						{imprime("CHAR");COLUNA;}
-{ELSE} 						{imprime("ELSE");COLUNA;}
-{WHILE} 					{imprime("WHILE");COLUNA;}
-{IF} 						{imprime("IF");COLUNA;}
-{INT}						{imprime("INT");COLUNA;}
-{SHORT} 					{imprime("SHORT");COLUNA;}
-{DOUBLE}					{imprime("DOUBLE");COLUNA;}
-{RETURN} 					{imprime("RETURN");COLUNA;}
-{VOID} 						{imprime("VOID");COLUNA;}
-{BITWISEAND} 				{imprime("BITWISEAND");COLUNA;}
-{BITWISEOR} 				{imprime("BITWISEOR");COLUNA;}
-{BITWISEXOR} 				{imprime("BITWISEXOR");COLUNA;}
-{AND} 						{imprime("AND");COLUNA;}
-{ASSIGN} 					{imprime("ASSIGN");COLUNA;}
-{MUL} 						{imprime("MUL");COLUNA;}
-{COMMA} 					{imprime("COMMA");COLUNA;}
-{DIV} 						{imprime("DIV");COLUNA;}
-{EQ} 						{imprime("EQ");COLUNA;}
-{GE} 						{imprime("GE");COLUNA;}
-{GT} 						{imprime("GT");COLUNA;}
-{LBRACE} 					{imprime("LBRACE");COLUNA;}
-{LE} 						{imprime("LE");COLUNA;}
-{LPAR} 						{imprime("LPAR");COLUNA;}
-{LT} 						{imprime("LT");COLUNA;}
-{MINUS} 					{imprime("MINUS");COLUNA;}
-{MOD} 						{imprime("MOD");COLUNA;}
-{NE} 						{imprime("NE");COLUNA;}
-{NOT} 						{imprime("NOT");COLUNA;}
-{OR} 						{imprime("OR");COLUNA;}
-{PLUS} 						{imprime("PLUS");COLUNA;}
-{RBRACE} 					{imprime("RBRACE");COLUNA;}
-{RPAR} 						{imprime("RPAR");COLUNA;}
-{SEMI} 						{imprime("SEMI");COLUNA;}
+{ID}							{imprime_com_conteudo("ID", yytext);COLUNA;}
 
-{RESERVED}					{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
+{INTLIT}						{imprime_com_conteudo("INTLIT",yytext);COLUNA;}
+{REALLIT}						{imprime_com_conteudo("REALLIT",yytext);COLUNA;}
+{CHRLIT}						{imprime_com_conteudo("CHRLIT",yytext); COLUNA;}
 
-{SPACE}						{COLUNA;}
-{NEWLINE}					{LINHA;}
-{TAB}						{COLUNA;}
-{LINETERMINATOR}			{LINHA;}
-.							{COLUNA;}
+{SPACE}							{COLUNA;}
+{NEWLINE}						{LINHA;}
+{TAB}							{COLUNA;}
+{CARRIAGERETURN}				{COLUNA;}
+{LINETERMINATOR}				{LINHA;}
+
+.								{printf("Line %d, col %d: illegal character (%s)\n",linha,coluna,yytext);COLUNA;}
 
 %%
 
