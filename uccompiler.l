@@ -5,20 +5,14 @@
 	*/
 	#include <stdio.h>
 	#include <string.h>
-	
 	#define LINHA linha++; coluna=1;
 	#define COLUNA coluna+=yyleng;
-	
-	int flag = 0;
-	int coluna = 1, linha = 1;
-	int linha_aux = 0, coluna_aux = 0;
-
+	int flag = 0, coluna = 1, linha = 1, linha_aux = 0, coluna_aux = 0;
 	void imprime(char* msg);
 	void imprime_com_conteudo(char* msg, char* conteudo);
-
 %}
 
-%X MULTIPLECOM_ST
+%X MULTIPCOM_ST
 
 SINGLECOMMENT					"//"
 STARTCOMMENT 					"/*"
@@ -79,11 +73,11 @@ LINETERMINATOR					"\n"|"\r\n"
 %%
 {SINGLECOMMENT}.*				;
 
-{STARTCOMMENT}					{BEGIN MULTIPLECOM_ST; linha_aux = linha; coluna_aux = coluna; COLUNA;}
-<MULTIPLECOM_ST>.				{COLUNA;}
-<MULTIPLECOM_ST>{LINETERMINATOR} {LINHA;}
-<MULTIPLECOM_ST><<EOF>>			{BEGIN 0;printf("Line %d, col %d: unterminated comment\n",linha_aux,coluna_aux);COLUNA;}
-<MULTIPLECOM_ST>{FINISHCOMMENT}	{BEGIN 0;COLUNA;}
+{STARTCOMMENT}					{BEGIN MULTIPCOM_ST; linha_aux = linha; coluna_aux = coluna; COLUNA;}
+<MULTIPCOM_ST>.					{COLUNA;}
+<MULTIPCOM_ST>{LINETERMINATOR}	{LINHA;}
+<MULTIPCOM_ST><<EOF>>			{BEGIN 0;printf("Line %d, col %d: unterminated comment\n",linha_aux,coluna_aux);COLUNA;}
+<MULTIPCOM_ST>{FINISHCOMMENT}	{BEGIN 0;COLUNA;}
 
 {RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
 
@@ -126,8 +120,8 @@ LINETERMINATOR					"\n"|"\r\n"
 {INTLIT}						{imprime_com_conteudo("INTLIT",yytext);COLUNA;}
 {REALLIT}						{imprime_com_conteudo("REALLIT",yytext);COLUNA;}
 {ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext); COLUNA;}
-{ASP}({CHRLIT}|\\.)*\\?			{if(flag == 1) printf("Line %d, col %d: unterminated char constant\n",linha,coluna); COLUNA;}
-{ASP}([^\n\\'\\]|\\.)*{ASP} 	{if(flag == 1) printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
+{ASP}({CHRLIT}|\\.)*{ASP} 		{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
+{ASP}({CHRLIT}|\\.)*\\?			{printf("Line %d, col %d: unterminated char constant\n",linha,coluna);}
 
 {SPACE}							{COLUNA;}
 {NEWLINE}						{LINHA;}
