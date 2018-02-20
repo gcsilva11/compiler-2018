@@ -13,14 +13,12 @@
 	int coluna = 1, linha = 1;
 	int linha_aux = 0, coluna_aux = 0;
 
-	char string[1024];
-	
 	void imprime(char* msg);
 	void imprime_com_conteudo(char* msg, char* conteudo);
 
 %}
 
-%X MULTIPLECOM_ST CHAR_ST
+%X MULTIPLECOM_ST
 
 SINGLECOMMENT					"//"
 STARTCOMMENT 					"/*"
@@ -67,18 +65,16 @@ ID								([a-zA-Z]|"_")([a-zA-Z0-9]|"_")*
 DOT								"."
 EXPONENTIAL						("E"|"e")("+"|"-")?{INTLIT}
 ASP								"'"
-ESCAPE							\\n|\\t|\\\\|\\'|\\\"|\\[0-7]{1,3}
 
 INTLIT							[0-9]+
 REALLIT							(({INTLIT}{DOT}{INTLIT}?{EXPONENTIAL}?)|({DOT}{INTLIT}{EXPONENTIAL}?)|({INTLIT}{EXPONENTIAL}))
-CHRLIT							[^\n\']|{ESCAPE}
+CHRLIT							[^\n\'\\]|\\n|\\t|\\\\|\\'|\\\"|\\[0-7]{1,3}
 
 SPACE							" "
 NEWLINE							"\n"
 TAB								"\t"
 CARRIAGERETURN		 			"\r"
 LINETERMINATOR					"\n"|"\r\n"
-EOF								<<EOF>>
 
 %%
 {SINGLECOMMENT}.*				;
@@ -129,12 +125,9 @@ EOF								<<EOF>>
 
 {INTLIT}						{imprime_com_conteudo("INTLIT",yytext);COLUNA;}
 {REALLIT}						{imprime_com_conteudo("REALLIT",yytext);COLUNA;}
-
-{ASP}							{BEGIN CHAR_ST; strcat(string,yytext); COLUNA;}
-<CHAR_ST>{CHRLIT}{ASP}			{BEGIN 0; strcat(string,yytext); imprime_com_conteudo("CHRLIT",string); memset(string,0,sizeof(string)); COLUNA;}
-<CHAR_ST>{LINETERMINATOR}		{BEGIN 0; if(flag == 1) printf("Line %d, col %d: unterminated char constant\n",linha,coluna); memset(string,0,sizeof(string)); LINHA;}
-<CHAR_ST><<EOF>>				{BEGIN 0; if(flag == 1) printf("Line %d, col %d: unterminated char constant\n",linha,coluna); memset(string,0,sizeof(string));}
-<CHAR_ST>.*						{BEGIN 0; strcat(string,yytext); if(flag == 1) printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,string); memset(string,0,sizeof(string)); COLUNA;}
+{ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext); COLUNA;}
+{ASP}({CHRLIT}|\\.)*\\?			{if(flag == 1) printf("Line %d, col %d: unterminated char constant\n",linha,coluna); COLUNA;}
+{ASP}([^\n\\'\\]|\\.)*{ASP} 	{if(flag == 1) printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
 
 {SPACE}							{COLUNA;}
 {NEWLINE}						{LINHA;}
