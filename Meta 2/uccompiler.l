@@ -82,7 +82,7 @@ LINETERMINATOR					"\n"|"\r\n"
 <MULTIPCOM_ST><<EOF>>			{BEGIN 0;printf("Line %d, col %d: unterminated comment\n",linha_aux,coluna_aux);COLUNA;}
 <MULTIPCOM_ST>{FINISHCOMMENT}	{BEGIN 0;COLUNA;}
 
-{RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
+{RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA; return RESERVED;}
 
 {CHAR} 							{imprime("CHAR"); COLUNA; if(flag==0) return CHAR;}
 {ELSE} 							{imprime("ELSE"); COLUNA; if(flag==0) return ELSE;}

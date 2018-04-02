@@ -927,7 +927,7 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 85 "uccompiler.l"
-{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
+{imprime_com_conteudo("RESERVED", yytext);COLUNA; return RESERVED;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP

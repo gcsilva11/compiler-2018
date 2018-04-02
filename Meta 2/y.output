@@ -1,3 +1,8 @@
+Terminals which are not used
+
+   RESERVED
+
+
 Grammar
 
     0 $accept: Program $end
@@ -7,56 +12,56 @@ Grammar
     2 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition
     3                         | FunctionsAndDeclarations FunctionDeclaration
     4                         | FunctionsAndDeclarations Declaration
-    5                         | FunctionDefinition
-    6                         | FunctionDeclaration
-    7                         | Declaration
+    5                         | FunctionsAndDeclarations error SEMI
+    6                         | FunctionDefinition
+    7                         | FunctionDeclaration
+    8                         | Declaration
+    9                         | error SEMI
 
-    8 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody
+   10 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody
 
-    9 FunctionBody: LBRACE RBRACE
-   10             | LBRACE DeclarationAndStatements RBRACE
+   11 FunctionBody: LBRACE RBRACE
+   12             | LBRACE DeclarationAndStatements RBRACE
 
-   11 DeclarationAndStatements: Statement DeclarationAndStatements
-   12                         | Declaration DeclarationAndStatements
-   13                         | Statement
-   14                         | Declaration
+   13 DeclarationAndStatements: Statement DeclarationAndStatements
+   14                         | Declaration DeclarationAndStatements
+   15                         | Statement
+   16                         | Declaration
 
-   15 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI
+   17 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI
 
-   16 FunctionDeclarator: ID LPAR ParameterList RPAR
+   18 FunctionDeclarator: ID LPAR ParameterList RPAR
 
-   17 ParameterList: /* empty */
-   18              | ParameterDeclaration
-   19              | ParameterList COMMA ParameterDeclaration
+   19 ParameterList: ParameterDeclaration
+   20              | ParameterList COMMA ParameterDeclaration
 
-   20 ParameterDeclaration: TypeSpec
-   21                     | TypeSpec ID
+   21 ParameterDeclaration: TypeSpec
+   22                     | TypeSpec ID
 
-   22 Declaration: TypeSpec DeclarationAux SEMI
-   23            | error SEMI
+   23 Declaration: DeclarationAux SEMI
 
-   24 DeclarationAux: /* empty */
-   25               | Declarator
-   26               | DeclarationAux COMMA Declarator
+   24 DeclarationAux: TypeSpec Declarator
+   25               | DeclarationAux COMMA Declarator
 
-   27 TypeSpec: CHAR
-   28         | INT
-   29         | VOID
-   30         | SHORT
-   31         | DOUBLE
+   26 TypeSpec: CHAR
+   27         | INT
+   28         | VOID
+   29         | SHORT
+   30         | DOUBLE
 
-   32 Declarator: ID
-   33           | ID ASSIGN Expr
+   31 Declarator: ID
+   32           | ID ASSIGN Expr
 
-   34 Statement: SEMI
-   35          | Expr SEMI
-   36          | LBRACE RBRACE
-   37          | LBRACE StatementAux RBRACE
-   38          | IF LPAR Expr RPAR Statement
-   39          | IF LPAR Expr RPAR Statement ELSE Statement
-   40          | WHILE LPAR Expr RPAR Statement
-   41          | RETURN SEMI
-   42          | RETURN Expr SEMI
+   33 Statement: SEMI
+   34          | Expr SEMI
+   35          | LBRACE RBRACE
+   36          | LBRACE StatementAux RBRACE
+   37          | IF LPAR Expr RPAR Statement
+   38          | IF LPAR Expr RPAR Statement ELSE Statement
+   39          | WHILE LPAR Expr RPAR Statement
+   40          | RETURN SEMI
+   41          | RETURN Expr SEMI
+   42          | error SEMI
    43          | LBRACE error RBRACE
 
    44 StatementAux: Statement
@@ -90,38 +95,37 @@ Grammar
    71     | CHRLIT
    72     | REALLIT
    73     | LPAR Expr RPAR
-   74     | LPAR Expr COMMA Expr RPAR
-   75     | ID LPAR error RPAR
-   76     | LPAR error RPAR
+   74     | ID LPAR error RPAR
+   75     | LPAR error RPAR
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
-error (256) 23 43 75 76
-CHAR (258) 27
-ELSE (259) 39
-WHILE (260) 40
-IF (261) 38 39
-SHORT (262) 30
-INT (263) 28
-DOUBLE (264) 31
-RETURN (265) 41 42
-VOID (266) 29
+error (256) 5 9 42 43 74 75
+CHAR (258) 26
+ELSE (259) 38
+WHILE (260) 39
+IF (261) 37 38
+SHORT (262) 29
+INT (263) 27
+DOUBLE (264) 30
+RETURN (265) 40 41
+VOID (266) 28
 BITWISEOR (267) 62
 BITWISEAND (268) 61
 BITWISEXOR (269) 63
 AND (270) 60
-ASSIGN (271) 33 46
+ASSIGN (271) 32 46
 MUL (272) 56
-COMMA (273) 19 26 47 74
+COMMA (273) 20 25 47
 DIV (274) 57
 EQ (275) 48
 GE (276) 51
 GT (277) 53
-LBRACE (278) 9 10 36 37 43
+LBRACE (278) 11 12 35 36 43
 LE (279) 50
-LPAR (280) 16 38 39 40 67 68 73 74 75 76
+LPAR (280) 18 37 38 39 67 68 73 74 75
 LT (281) 52
 MINUS (282) 55 65
 MOD (283) 58
@@ -129,56 +133,57 @@ NE (284) 49
 NOT (285) 66
 OR (286) 59
 PLUS (287) 54 64
-RBRACE (288) 9 10 36 37 43
-RPAR (289) 16 38 39 40 67 68 73 74 75 76
-SEMI (290) 15 22 23 34 35 41 42
+RBRACE (288) 11 12 35 36 43
+RPAR (289) 18 37 38 39 67 68 73 74 75
+SEMI (290) 5 9 17 23 33 34 40 41 42
 REALLIT (291) 72
 CHRLIT (292) 71
 INTLIT (293) 70
-ID (294) 16 21 32 33 67 68 69 75
-LOWER_THAN_ELSE (295)
+ID (294) 18 22 31 32 67 68 69 74
+RESERVED (295)
+LOWER_THAN_ELSE (296)
 
 
 Nonterminals, with rules where they appear
 
-$accept (41)
+$accept (42)
     on left: 0
-Program (42)
+Program (43)
     on left: 1, on right: 0
-FunctionsAndDeclarations (43)
-    on left: 2 3 4 5 6 7, on right: 1 2 3 4
-FunctionDefinition (44)
-    on left: 8, on right: 2 5
-FunctionBody (45)
-    on left: 9 10, on right: 8
-DeclarationAndStatements (46)
-    on left: 11 12 13 14, on right: 10 11 12
-FunctionDeclaration (47)
-    on left: 15, on right: 3 6
-FunctionDeclarator (48)
-    on left: 16, on right: 8 15
-ParameterList (49)
-    on left: 17 18 19, on right: 16 19
-ParameterDeclaration (50)
-    on left: 20 21, on right: 18 19
-Declaration (51)
-    on left: 22 23, on right: 4 7 12 14
-DeclarationAux (52)
-    on left: 24 25 26, on right: 22 26
-TypeSpec (53)
-    on left: 27 28 29 30 31, on right: 8 15 20 21 22
-Declarator (54)
-    on left: 32 33, on right: 25 26
-Statement (55)
-    on left: 34 35 36 37 38 39 40 41 42 43, on right: 11 13 38 39 40
-    44 45
-StatementAux (56)
-    on left: 44 45, on right: 37 45
-Expr (57)
+FunctionsAndDeclarations (44)
+    on left: 2 3 4 5 6 7 8 9, on right: 1 2 3 4 5
+FunctionDefinition (45)
+    on left: 10, on right: 2 6
+FunctionBody (46)
+    on left: 11 12, on right: 10
+DeclarationAndStatements (47)
+    on left: 13 14 15 16, on right: 12 13 14
+FunctionDeclaration (48)
+    on left: 17, on right: 3 7
+FunctionDeclarator (49)
+    on left: 18, on right: 10 17
+ParameterList (50)
+    on left: 19 20, on right: 18 20
+ParameterDeclaration (51)
+    on left: 21 22, on right: 19 20
+Declaration (52)
+    on left: 23, on right: 4 8 14 16
+DeclarationAux (53)
+    on left: 24 25, on right: 23 25
+TypeSpec (54)
+    on left: 26 27 28 29 30, on right: 10 17 21 22 24
+Declarator (55)
+    on left: 31 32, on right: 24 25
+Statement (56)
+    on left: 33 34 35 36 37 38 39 40 41 42 43, on right: 13 15 37 38
+    39 44 45
+StatementAux (57)
+    on left: 44 45, on right: 36 45
+Expr (58)
     on left: 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63
-    64 65 66 67 68 69 70 71 72 73 74 75 76, on right: 33 35 38 39 40
-    42 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65
-    66 68 73 74
+    64 65 66 67 68 69 70 71 72 73 74 75, on right: 32 34 37 38 39 41
+    46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66
+    68 73
 
 
 state 0
@@ -197,56 +202,57 @@ state 0
     FunctionDefinition        go to state 9
     FunctionDeclaration       go to state 10
     Declaration               go to state 11
-    TypeSpec                  go to state 12
+    DeclarationAux            go to state 12
+    TypeSpec                  go to state 13
 
 
 state 1
 
-   23 Declaration: error . SEMI
+    9 FunctionsAndDeclarations: error . SEMI
 
-    SEMI  shift, and go to state 13
+    SEMI  shift, and go to state 14
 
 
 state 2
 
-   27 TypeSpec: CHAR .
+   26 TypeSpec: CHAR .
 
-    $default  reduce using rule 27 (TypeSpec)
+    $default  reduce using rule 26 (TypeSpec)
 
 
 state 3
 
-   30 TypeSpec: SHORT .
+   29 TypeSpec: SHORT .
 
-    $default  reduce using rule 30 (TypeSpec)
+    $default  reduce using rule 29 (TypeSpec)
 
 
 state 4
 
-   28 TypeSpec: INT .
+   27 TypeSpec: INT .
 
-    $default  reduce using rule 28 (TypeSpec)
+    $default  reduce using rule 27 (TypeSpec)
 
 
 state 5
 
-   31 TypeSpec: DOUBLE .
+   30 TypeSpec: DOUBLE .
 
-    $default  reduce using rule 31 (TypeSpec)
+    $default  reduce using rule 30 (TypeSpec)
 
 
 state 6
 
-   29 TypeSpec: VOID .
+   28 TypeSpec: VOID .
 
-    $default  reduce using rule 29 (TypeSpec)
+    $default  reduce using rule 28 (TypeSpec)
 
 
 state 7
 
     0 $accept: Program . $end
 
-    $end  shift, and go to state 14
+    $end  shift, and go to state 15
 
 
 state 8
@@ -255,8 +261,9 @@ state 8
     2 FunctionsAndDeclarations: FunctionsAndDeclarations . FunctionDefinition
     3                         | FunctionsAndDeclarations . FunctionDeclaration
     4                         | FunctionsAndDeclarations . Declaration
+    5                         | FunctionsAndDeclarations . error SEMI
 
-    error   shift, and go to state 1
+    error   shift, and go to state 16
     CHAR    shift, and go to state 2
     SHORT   shift, and go to state 3
     INT     shift, and go to state 4
@@ -265,141 +272,186 @@ state 8
 
     $end  reduce using rule 1 (Program)
 
-    FunctionDefinition   go to state 15
-    FunctionDeclaration  go to state 16
-    Declaration          go to state 17
-    TypeSpec             go to state 12
+    FunctionDefinition   go to state 17
+    FunctionDeclaration  go to state 18
+    Declaration          go to state 19
+    DeclarationAux       go to state 12
+    TypeSpec             go to state 13
 
 
 state 9
 
-    5 FunctionsAndDeclarations: FunctionDefinition .
-
-    $default  reduce using rule 5 (FunctionsAndDeclarations)
-
-
-state 10
-
-    6 FunctionsAndDeclarations: FunctionDeclaration .
+    6 FunctionsAndDeclarations: FunctionDefinition .
 
     $default  reduce using rule 6 (FunctionsAndDeclarations)
 
 
-state 11
+state 10
 
-    7 FunctionsAndDeclarations: Declaration .
+    7 FunctionsAndDeclarations: FunctionDeclaration .
 
     $default  reduce using rule 7 (FunctionsAndDeclarations)
 
 
+state 11
+
+    8 FunctionsAndDeclarations: Declaration .
+
+    $default  reduce using rule 8 (FunctionsAndDeclarations)
+
+
 state 12
 
-    8 FunctionDefinition: TypeSpec . FunctionDeclarator FunctionBody
-   15 FunctionDeclaration: TypeSpec . FunctionDeclarator SEMI
-   22 Declaration: TypeSpec . DeclarationAux SEMI
+   23 Declaration: DeclarationAux . SEMI
+   25 DeclarationAux: DeclarationAux . COMMA Declarator
 
-    ID  shift, and go to state 18
-
-    $default  reduce using rule 24 (DeclarationAux)
-
-    FunctionDeclarator  go to state 19
-    DeclarationAux      go to state 20
-    Declarator          go to state 21
+    COMMA  shift, and go to state 20
+    SEMI   shift, and go to state 21
 
 
 state 13
 
-   23 Declaration: error SEMI .
+   10 FunctionDefinition: TypeSpec . FunctionDeclarator FunctionBody
+   17 FunctionDeclaration: TypeSpec . FunctionDeclarator SEMI
+   24 DeclarationAux: TypeSpec . Declarator
 
-    $default  reduce using rule 23 (Declaration)
+    ID  shift, and go to state 22
+
+    FunctionDeclarator  go to state 23
+    Declarator          go to state 24
 
 
 state 14
+
+    9 FunctionsAndDeclarations: error SEMI .
+
+    $default  reduce using rule 9 (FunctionsAndDeclarations)
+
+
+state 15
 
     0 $accept: Program $end .
 
     $default  accept
 
 
-state 15
+state 16
+
+    5 FunctionsAndDeclarations: FunctionsAndDeclarations error . SEMI
+
+    SEMI  shift, and go to state 25
+
+
+state 17
 
     2 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDefinition .
 
     $default  reduce using rule 2 (FunctionsAndDeclarations)
 
 
-state 16
+state 18
 
     3 FunctionsAndDeclarations: FunctionsAndDeclarations FunctionDeclaration .
 
     $default  reduce using rule 3 (FunctionsAndDeclarations)
 
 
-state 17
+state 19
 
     4 FunctionsAndDeclarations: FunctionsAndDeclarations Declaration .
 
     $default  reduce using rule 4 (FunctionsAndDeclarations)
 
 
-state 18
-
-   16 FunctionDeclarator: ID . LPAR ParameterList RPAR
-   32 Declarator: ID .
-   33           | ID . ASSIGN Expr
-
-    ASSIGN  shift, and go to state 22
-    LPAR    shift, and go to state 23
-
-    $default  reduce using rule 32 (Declarator)
-
-
-state 19
-
-    8 FunctionDefinition: TypeSpec FunctionDeclarator . FunctionBody
-   15 FunctionDeclaration: TypeSpec FunctionDeclarator . SEMI
-
-    LBRACE  shift, and go to state 24
-    SEMI    shift, and go to state 25
-
-    FunctionBody  go to state 26
-
-
 state 20
 
-   22 Declaration: TypeSpec DeclarationAux . SEMI
-   26 DeclarationAux: DeclarationAux . COMMA Declarator
+   25 DeclarationAux: DeclarationAux COMMA . Declarator
 
-    COMMA  shift, and go to state 27
-    SEMI   shift, and go to state 28
+    ID  shift, and go to state 26
+
+    Declarator  go to state 27
 
 
 state 21
 
-   25 DeclarationAux: Declarator .
+   23 Declaration: DeclarationAux SEMI .
 
-    $default  reduce using rule 25 (DeclarationAux)
+    $default  reduce using rule 23 (Declaration)
 
 
 state 22
 
-   33 Declarator: ID ASSIGN . Expr
+   18 FunctionDeclarator: ID . LPAR ParameterList RPAR
+   31 Declarator: ID .
+   32           | ID . ASSIGN Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    ASSIGN  shift, and go to state 28
+    LPAR    shift, and go to state 29
 
-    Expr  go to state 37
+    $default  reduce using rule 31 (Declarator)
 
 
 state 23
 
-   16 FunctionDeclarator: ID LPAR . ParameterList RPAR
+   10 FunctionDefinition: TypeSpec FunctionDeclarator . FunctionBody
+   17 FunctionDeclaration: TypeSpec FunctionDeclarator . SEMI
+
+    LBRACE  shift, and go to state 30
+    SEMI    shift, and go to state 31
+
+    FunctionBody  go to state 32
+
+
+state 24
+
+   24 DeclarationAux: TypeSpec Declarator .
+
+    $default  reduce using rule 24 (DeclarationAux)
+
+
+state 25
+
+    5 FunctionsAndDeclarations: FunctionsAndDeclarations error SEMI .
+
+    $default  reduce using rule 5 (FunctionsAndDeclarations)
+
+
+state 26
+
+   31 Declarator: ID .
+   32           | ID . ASSIGN Expr
+
+    ASSIGN  shift, and go to state 28
+
+    $default  reduce using rule 31 (Declarator)
+
+
+state 27
+
+   25 DeclarationAux: DeclarationAux COMMA Declarator .
+
+    $default  reduce using rule 25 (DeclarationAux)
+
+
+state 28
+
+   32 Declarator: ID ASSIGN . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 41
+
+
+state 29
+
+   18 FunctionDeclarator: ID LPAR . ParameterList RPAR
 
     CHAR    shift, and go to state 2
     SHORT   shift, and go to state 3
@@ -407,409 +459,161 @@ state 23
     DOUBLE  shift, and go to state 5
     VOID    shift, and go to state 6
 
-    $default  reduce using rule 17 (ParameterList)
-
-    ParameterList         go to state 38
-    ParameterDeclaration  go to state 39
-    TypeSpec              go to state 40
-
-
-state 24
-
-    9 FunctionBody: LBRACE . RBRACE
-   10             | LBRACE . DeclarationAndStatements RBRACE
-
-    error    shift, and go to state 1
-    CHAR     shift, and go to state 2
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    SHORT    shift, and go to state 3
-    INT      shift, and go to state 4
-    DOUBLE   shift, and go to state 5
-    RETURN   shift, and go to state 43
-    VOID     shift, and go to state 6
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    RBRACE   shift, and go to state 45
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    DeclarationAndStatements  go to state 47
-    Declaration               go to state 48
-    TypeSpec                  go to state 49
-    Statement                 go to state 50
-    Expr                      go to state 51
-
-
-state 25
-
-   15 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI .
-
-    $default  reduce using rule 15 (FunctionDeclaration)
-
-
-state 26
-
-    8 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody .
-
-    $default  reduce using rule 8 (FunctionDefinition)
-
-
-state 27
-
-   26 DeclarationAux: DeclarationAux COMMA . Declarator
-
-    ID  shift, and go to state 52
-
-    Declarator  go to state 53
-
-
-state 28
-
-   22 Declaration: TypeSpec DeclarationAux SEMI .
-
-    $default  reduce using rule 22 (Declaration)
-
-
-state 29
-
-   73 Expr: LPAR . Expr RPAR
-   74     | LPAR . Expr COMMA Expr RPAR
-   76     | LPAR . error RPAR
-
-    error    shift, and go to state 54
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 55
+    ParameterList         go to state 42
+    ParameterDeclaration  go to state 43
+    TypeSpec              go to state 44
 
 
 state 30
 
-   65 Expr: MINUS . Expr
+   11 FunctionBody: LBRACE . RBRACE
+   12             | LBRACE . DeclarationAndStatements RBRACE
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    error    shift, and go to state 45
+    CHAR     shift, and go to state 2
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    SHORT    shift, and go to state 3
+    INT      shift, and go to state 4
+    DOUBLE   shift, and go to state 5
+    RETURN   shift, and go to state 48
+    VOID     shift, and go to state 6
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    RBRACE   shift, and go to state 50
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
-    Expr  go to state 56
+    DeclarationAndStatements  go to state 52
+    Declaration               go to state 53
+    DeclarationAux            go to state 12
+    TypeSpec                  go to state 54
+    Statement                 go to state 55
+    Expr                      go to state 56
 
 
 state 31
 
-   66 Expr: NOT . Expr
+   17 FunctionDeclaration: TypeSpec FunctionDeclarator SEMI .
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 57
+    $default  reduce using rule 17 (FunctionDeclaration)
 
 
 state 32
 
-   64 Expr: PLUS . Expr
+   10 FunctionDefinition: TypeSpec FunctionDeclarator FunctionBody .
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    $default  reduce using rule 10 (FunctionDefinition)
+
+
+state 33
+
+   73 Expr: LPAR . Expr RPAR
+   75     | LPAR . error RPAR
+
+    error    shift, and go to state 57
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 58
 
 
-state 33
+state 34
+
+   65 Expr: MINUS . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 59
+
+
+state 35
+
+   66 Expr: NOT . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 60
+
+
+state 36
+
+   64 Expr: PLUS . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 61
+
+
+state 37
 
    72 Expr: REALLIT .
 
     $default  reduce using rule 72 (Expr)
 
 
-state 34
+state 38
 
    71 Expr: CHRLIT .
 
     $default  reduce using rule 71 (Expr)
 
 
-state 35
+state 39
 
    70 Expr: INTLIT .
 
     $default  reduce using rule 70 (Expr)
 
 
-state 36
+state 40
 
    67 Expr: ID . LPAR RPAR
    68     | ID . LPAR Expr RPAR
    69     | ID .
-   75     | ID . LPAR error RPAR
+   74     | ID . LPAR error RPAR
 
-    LPAR  shift, and go to state 59
+    LPAR  shift, and go to state 62
 
     $default  reduce using rule 69 (Expr)
 
 
-state 37
-
-   33 Declarator: ID ASSIGN Expr .
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
-
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-
-    $default  reduce using rule 33 (Declarator)
-
-
-state 38
-
-   16 FunctionDeclarator: ID LPAR ParameterList . RPAR
-   19 ParameterList: ParameterList . COMMA ParameterDeclaration
-
-    COMMA  shift, and go to state 78
-    RPAR   shift, and go to state 79
-
-
-state 39
-
-   18 ParameterList: ParameterDeclaration .
-
-    $default  reduce using rule 18 (ParameterList)
-
-
-state 40
-
-   20 ParameterDeclaration: TypeSpec .
-   21                     | TypeSpec . ID
-
-    ID  shift, and go to state 80
-
-    $default  reduce using rule 20 (ParameterDeclaration)
-
-
 state 41
 
-   40 Statement: WHILE . LPAR Expr RPAR Statement
-
-    LPAR  shift, and go to state 81
-
-
-state 42
-
-   38 Statement: IF . LPAR Expr RPAR Statement
-   39          | IF . LPAR Expr RPAR Statement ELSE Statement
-
-    LPAR  shift, and go to state 82
-
-
-state 43
-
-   41 Statement: RETURN . SEMI
-   42          | RETURN . Expr SEMI
-
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 83
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 84
-
-
-state 44
-
-   36 Statement: LBRACE . RBRACE
-   37          | LBRACE . StatementAux RBRACE
-   43          | LBRACE . error RBRACE
-
-    error    shift, and go to state 85
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    RETURN   shift, and go to state 43
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    RBRACE   shift, and go to state 86
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Statement     go to state 87
-    StatementAux  go to state 88
-    Expr          go to state 51
-
-
-state 45
-
-    9 FunctionBody: LBRACE RBRACE .
-
-    $default  reduce using rule 9 (FunctionBody)
-
-
-state 46
-
-   34 Statement: SEMI .
-
-    $default  reduce using rule 34 (Statement)
-
-
-state 47
-
-   10 FunctionBody: LBRACE DeclarationAndStatements . RBRACE
-
-    RBRACE  shift, and go to state 89
-
-
-state 48
-
-   12 DeclarationAndStatements: Declaration . DeclarationAndStatements
-   14                         | Declaration .
-
-    error    shift, and go to state 1
-    CHAR     shift, and go to state 2
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    SHORT    shift, and go to state 3
-    INT      shift, and go to state 4
-    DOUBLE   shift, and go to state 5
-    RETURN   shift, and go to state 43
-    VOID     shift, and go to state 6
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    RBRACE  reduce using rule 14 (DeclarationAndStatements)
-
-    DeclarationAndStatements  go to state 90
-    Declaration               go to state 48
-    TypeSpec                  go to state 49
-    Statement                 go to state 50
-    Expr                      go to state 51
-
-
-state 49
-
-   22 Declaration: TypeSpec . DeclarationAux SEMI
-
-    ID  shift, and go to state 52
-
-    $default  reduce using rule 24 (DeclarationAux)
-
-    DeclarationAux  go to state 20
-    Declarator      go to state 21
-
-
-state 50
-
-   11 DeclarationAndStatements: Statement . DeclarationAndStatements
-   13                         | Statement .
-
-    error    shift, and go to state 1
-    CHAR     shift, and go to state 2
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    SHORT    shift, and go to state 3
-    INT      shift, and go to state 4
-    DOUBLE   shift, and go to state 5
-    RETURN   shift, and go to state 43
-    VOID     shift, and go to state 6
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    RBRACE  reduce using rule 13 (DeclarationAndStatements)
-
-    DeclarationAndStatements  go to state 91
-    Declaration               go to state 48
-    TypeSpec                  go to state 49
-    Statement                 go to state 50
-    Expr                      go to state 51
-
-
-state 51
-
-   35 Statement: Expr . SEMI
+   32 Declarator: ID ASSIGN Expr .
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
    48     | Expr . EQ Expr
@@ -829,52 +633,271 @@ state 51
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 66
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    SEMI        shift, and go to state 92
-
-
-state 52
-
-   32 Declarator: ID .
-   33           | ID . ASSIGN Expr
-
-    ASSIGN  shift, and go to state 22
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 32 (Declarator)
 
 
+state 42
+
+   18 FunctionDeclarator: ID LPAR ParameterList . RPAR
+   20 ParameterList: ParameterList . COMMA ParameterDeclaration
+
+    COMMA  shift, and go to state 81
+    RPAR   shift, and go to state 82
+
+
+state 43
+
+   19 ParameterList: ParameterDeclaration .
+
+    $default  reduce using rule 19 (ParameterList)
+
+
+state 44
+
+   21 ParameterDeclaration: TypeSpec .
+   22                     | TypeSpec . ID
+
+    ID  shift, and go to state 83
+
+    $default  reduce using rule 21 (ParameterDeclaration)
+
+
+state 45
+
+   42 Statement: error . SEMI
+
+    SEMI  shift, and go to state 84
+
+
+state 46
+
+   39 Statement: WHILE . LPAR Expr RPAR Statement
+
+    LPAR  shift, and go to state 85
+
+
+state 47
+
+   37 Statement: IF . LPAR Expr RPAR Statement
+   38          | IF . LPAR Expr RPAR Statement ELSE Statement
+
+    LPAR  shift, and go to state 86
+
+
+state 48
+
+   40 Statement: RETURN . SEMI
+   41          | RETURN . Expr SEMI
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 87
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 88
+
+
+state 49
+
+   35 Statement: LBRACE . RBRACE
+   36          | LBRACE . StatementAux RBRACE
+   43          | LBRACE . error RBRACE
+
+    error    shift, and go to state 89
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    RETURN   shift, and go to state 48
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    RBRACE   shift, and go to state 90
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Statement     go to state 91
+    StatementAux  go to state 92
+    Expr          go to state 56
+
+
+state 50
+
+   11 FunctionBody: LBRACE RBRACE .
+
+    $default  reduce using rule 11 (FunctionBody)
+
+
+state 51
+
+   33 Statement: SEMI .
+
+    $default  reduce using rule 33 (Statement)
+
+
+state 52
+
+   12 FunctionBody: LBRACE DeclarationAndStatements . RBRACE
+
+    RBRACE  shift, and go to state 93
+
+
 state 53
 
-   26 DeclarationAux: DeclarationAux COMMA Declarator .
+   14 DeclarationAndStatements: Declaration . DeclarationAndStatements
+   16                         | Declaration .
 
-    $default  reduce using rule 26 (DeclarationAux)
+    error    shift, and go to state 45
+    CHAR     shift, and go to state 2
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    SHORT    shift, and go to state 3
+    INT      shift, and go to state 4
+    DOUBLE   shift, and go to state 5
+    RETURN   shift, and go to state 48
+    VOID     shift, and go to state 6
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    RBRACE  reduce using rule 16 (DeclarationAndStatements)
+
+    DeclarationAndStatements  go to state 94
+    Declaration               go to state 53
+    DeclarationAux            go to state 12
+    TypeSpec                  go to state 54
+    Statement                 go to state 55
+    Expr                      go to state 56
 
 
 state 54
 
-   76 Expr: LPAR error . RPAR
+   24 DeclarationAux: TypeSpec . Declarator
 
-    RPAR  shift, and go to state 93
+    ID  shift, and go to state 26
+
+    Declarator  go to state 24
 
 
 state 55
+
+   13 DeclarationAndStatements: Statement . DeclarationAndStatements
+   15                         | Statement .
+
+    error    shift, and go to state 45
+    CHAR     shift, and go to state 2
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    SHORT    shift, and go to state 3
+    INT      shift, and go to state 4
+    DOUBLE   shift, and go to state 5
+    RETURN   shift, and go to state 48
+    VOID     shift, and go to state 6
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    RBRACE  reduce using rule 15 (DeclarationAndStatements)
+
+    DeclarationAndStatements  go to state 95
+    Declaration               go to state 53
+    DeclarationAux            go to state 12
+    TypeSpec                  go to state 54
+    Statement                 go to state 55
+    Expr                      go to state 56
+
+
+state 56
+
+   34 Statement: Expr . SEMI
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   62     | Expr . BITWISEOR Expr
+   63     | Expr . BITWISEXOR Expr
+
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    SEMI        shift, and go to state 96
+
+
+state 57
+
+   75 Expr: LPAR error . RPAR
+
+    RPAR  shift, and go to state 97
+
+
+state 58
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -895,30 +918,29 @@ state 55
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
    73     | LPAR Expr . RPAR
-   74     | LPAR Expr . COMMA Expr RPAR
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 94
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    RPAR        shift, and go to state 95
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    RPAR        shift, and go to state 98
 
 
-state 56
+state 59
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -940,14 +962,14 @@ state 56
    63     | Expr . BITWISEXOR Expr
    65     | MINUS Expr .
 
-    MUL  shift, and go to state 65
-    DIV  shift, and go to state 67
-    MOD  shift, and go to state 74
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 70
+    MOD  shift, and go to state 77
 
     $default  reduce using rule 65 (Expr)
 
 
-state 57
+state 60
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -972,7 +994,7 @@ state 57
     $default  reduce using rule 66 (Expr)
 
 
-state 58
+state 61
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -994,324 +1016,324 @@ state 58
    63     | Expr . BITWISEXOR Expr
    64     | PLUS Expr .
 
-    MUL  shift, and go to state 65
-    DIV  shift, and go to state 67
-    MOD  shift, and go to state 74
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 70
+    MOD  shift, and go to state 77
 
     $default  reduce using rule 64 (Expr)
 
 
-state 59
+state 62
 
    67 Expr: ID LPAR . RPAR
    68     | ID LPAR . Expr RPAR
-   75     | ID LPAR . error RPAR
+   74     | ID LPAR . error RPAR
 
-    error    shift, and go to state 96
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    RPAR     shift, and go to state 97
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 98
-
-
-state 60
-
-   62 Expr: Expr BITWISEOR . Expr
-
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 99
-
-
-state 61
-
-   61 Expr: Expr BITWISEAND . Expr
-
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 100
-
-
-state 62
-
-   63 Expr: Expr BITWISEXOR . Expr
-
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    error    shift, and go to state 99
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    RPAR     shift, and go to state 100
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 101
 
 
 state 63
 
-   60 Expr: Expr AND . Expr
+   62 Expr: Expr BITWISEOR . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 102
 
 
 state 64
 
-   46 Expr: Expr ASSIGN . Expr
+   61 Expr: Expr BITWISEAND . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 103
 
 
 state 65
 
-   56 Expr: Expr MUL . Expr
+   63 Expr: Expr BITWISEXOR . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 104
 
 
 state 66
 
-   47 Expr: Expr COMMA . Expr
+   60 Expr: Expr AND . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 105
 
 
 state 67
 
-   57 Expr: Expr DIV . Expr
+   46 Expr: Expr ASSIGN . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 106
 
 
 state 68
 
-   48 Expr: Expr EQ . Expr
+   56 Expr: Expr MUL . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 107
 
 
 state 69
 
-   51 Expr: Expr GE . Expr
+   47 Expr: Expr COMMA . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 108
 
 
 state 70
 
-   53 Expr: Expr GT . Expr
+   57 Expr: Expr DIV . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 109
 
 
 state 71
 
-   50 Expr: Expr LE . Expr
+   48 Expr: Expr EQ . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 110
 
 
 state 72
 
-   52 Expr: Expr LT . Expr
+   51 Expr: Expr GE . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 111
 
 
 state 73
 
-   55 Expr: Expr MINUS . Expr
+   53 Expr: Expr GT . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 112
 
 
 state 74
 
-   58 Expr: Expr MOD . Expr
+   50 Expr: Expr LE . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 113
 
 
 state 75
 
-   49 Expr: Expr NE . Expr
+   52 Expr: Expr LT . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 114
 
 
 state 76
 
-   59 Expr: Expr OR . Expr
+   55 Expr: Expr MINUS . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 115
 
 
 state 77
 
-   54 Expr: Expr PLUS . Expr
+   58 Expr: Expr MOD . Expr
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
 
     Expr  go to state 116
 
 
 state 78
 
-   19 ParameterList: ParameterList COMMA . ParameterDeclaration
+   49 Expr: Expr NE . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 117
+
+
+state 79
+
+   59 Expr: Expr OR . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 118
+
+
+state 80
+
+   54 Expr: Expr PLUS . Expr
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 119
+
+
+state 81
+
+   20 ParameterList: ParameterList COMMA . ParameterDeclaration
 
     CHAR    shift, and go to state 2
     SHORT   shift, and go to state 3
@@ -1319,67 +1341,74 @@ state 78
     DOUBLE  shift, and go to state 5
     VOID    shift, and go to state 6
 
-    ParameterDeclaration  go to state 117
-    TypeSpec              go to state 40
-
-
-state 79
-
-   16 FunctionDeclarator: ID LPAR ParameterList RPAR .
-
-    $default  reduce using rule 16 (FunctionDeclarator)
-
-
-state 80
-
-   21 ParameterDeclaration: TypeSpec ID .
-
-    $default  reduce using rule 21 (ParameterDeclaration)
-
-
-state 81
-
-   40 Statement: WHILE LPAR . Expr RPAR Statement
-
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 118
+    ParameterDeclaration  go to state 120
+    TypeSpec              go to state 44
 
 
 state 82
 
-   38 Statement: IF LPAR . Expr RPAR Statement
-   39          | IF LPAR . Expr RPAR Statement ELSE Statement
+   18 FunctionDeclarator: ID LPAR ParameterList RPAR .
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 119
+    $default  reduce using rule 18 (FunctionDeclarator)
 
 
 state 83
 
-   41 Statement: RETURN SEMI .
+   22 ParameterDeclaration: TypeSpec ID .
 
-    $default  reduce using rule 41 (Statement)
+    $default  reduce using rule 22 (ParameterDeclaration)
 
 
 state 84
 
-   42 Statement: RETURN Expr . SEMI
+   42 Statement: error SEMI .
+
+    $default  reduce using rule 42 (Statement)
+
+
+state 85
+
+   39 Statement: WHILE LPAR . Expr RPAR Statement
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 121
+
+
+state 86
+
+   37 Statement: IF LPAR . Expr RPAR Statement
+   38          | IF LPAR . Expr RPAR Statement ELSE Statement
+
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Expr  go to state 122
+
+
+state 87
+
+   40 Statement: RETURN SEMI .
+
+    $default  reduce using rule 40 (Statement)
+
+
+state 88
+
+   41 Statement: RETURN Expr . SEMI
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
    48     | Expr . EQ Expr
@@ -1399,262 +1428,129 @@ state 84
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 66
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    SEMI        shift, and go to state 120
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    SEMI        shift, and go to state 123
 
 
-state 85
+state 89
 
-   43 Statement: LBRACE error . RBRACE
+   42 Statement: error . SEMI
+   43          | LBRACE error . RBRACE
 
-    RBRACE  shift, and go to state 121
-
-
-state 86
-
-   36 Statement: LBRACE RBRACE .
-
-    $default  reduce using rule 36 (Statement)
+    RBRACE  shift, and go to state 124
+    SEMI    shift, and go to state 84
 
 
-state 87
+state 90
+
+   35 Statement: LBRACE RBRACE .
+
+    $default  reduce using rule 35 (Statement)
+
+
+state 91
 
    44 StatementAux: Statement .
 
     $default  reduce using rule 44 (StatementAux)
 
 
-state 88
-
-   37 Statement: LBRACE StatementAux . RBRACE
-   45 StatementAux: StatementAux . Statement
-
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    RETURN   shift, and go to state 43
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    RBRACE   shift, and go to state 122
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Statement  go to state 123
-    Expr       go to state 51
-
-
-state 89
-
-   10 FunctionBody: LBRACE DeclarationAndStatements RBRACE .
-
-    $default  reduce using rule 10 (FunctionBody)
-
-
-state 90
-
-   12 DeclarationAndStatements: Declaration DeclarationAndStatements .
-
-    $default  reduce using rule 12 (DeclarationAndStatements)
-
-
-state 91
-
-   11 DeclarationAndStatements: Statement DeclarationAndStatements .
-
-    $default  reduce using rule 11 (DeclarationAndStatements)
-
-
 state 92
 
-   35 Statement: Expr SEMI .
+   36 Statement: LBRACE StatementAux . RBRACE
+   45 StatementAux: StatementAux . Statement
 
-    $default  reduce using rule 35 (Statement)
+    error    shift, and go to state 45
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    RETURN   shift, and go to state 48
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    RBRACE   shift, and go to state 125
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Statement  go to state 126
+    Expr       go to state 56
 
 
 state 93
 
-   76 Expr: LPAR error RPAR .
+   12 FunctionBody: LBRACE DeclarationAndStatements RBRACE .
 
-    $default  reduce using rule 76 (Expr)
+    $default  reduce using rule 12 (FunctionBody)
 
 
 state 94
 
-   47 Expr: Expr COMMA . Expr
-   74     | LPAR Expr COMMA . Expr RPAR
+   14 DeclarationAndStatements: Declaration DeclarationAndStatements .
 
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Expr  go to state 124
+    $default  reduce using rule 14 (DeclarationAndStatements)
 
 
 state 95
+
+   13 DeclarationAndStatements: Statement DeclarationAndStatements .
+
+    $default  reduce using rule 13 (DeclarationAndStatements)
+
+
+state 96
+
+   34 Statement: Expr SEMI .
+
+    $default  reduce using rule 34 (Statement)
+
+
+state 97
+
+   75 Expr: LPAR error RPAR .
+
+    $default  reduce using rule 75 (Expr)
+
+
+state 98
 
    73 Expr: LPAR Expr RPAR .
 
     $default  reduce using rule 73 (Expr)
 
 
-state 96
-
-   75 Expr: ID LPAR error . RPAR
-
-    RPAR  shift, and go to state 125
-
-
-state 97
-
-   67 Expr: ID LPAR RPAR .
-
-    $default  reduce using rule 67 (Expr)
-
-
-state 98
-
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
-   68     | ID LPAR Expr . RPAR
-
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 66
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    RPAR        shift, and go to state 126
-
-
 state 99
 
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   62     | Expr BITWISEOR Expr .
-   63     | Expr . BITWISEXOR Expr
+   74 Expr: ID LPAR error . RPAR
 
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    PLUS        shift, and go to state 77
-
-    $default  reduce using rule 62 (Expr)
+    RPAR  shift, and go to state 127
 
 
 state 100
 
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   61     | Expr BITWISEAND Expr .
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
+   67 Expr: ID LPAR RPAR .
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    EQ     shift, and go to state 68
-    GE     shift, and go to state 69
-    GT     shift, and go to state 70
-    LE     shift, and go to state 71
-    LT     shift, and go to state 72
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    NE     shift, and go to state 75
-    PLUS   shift, and go to state 77
-
-    $default  reduce using rule 61 (Expr)
+    $default  reduce using rule 67 (Expr)
 
 
 state 101
@@ -1677,25 +1573,144 @@ state 101
    61     | Expr . BITWISEAND Expr
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
+   68     | ID LPAR Expr . RPAR
+
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    RPAR        shift, and go to state 128
+
+
+state 102
+
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   62     | Expr . BITWISEOR Expr
+   62     | Expr BITWISEOR Expr .
+   63     | Expr . BITWISEXOR Expr
+
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    PLUS        shift, and go to state 80
+
+    $default  reduce using rule 62 (Expr)
+
+
+state 103
+
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   61     | Expr BITWISEAND Expr .
+   62     | Expr . BITWISEOR Expr
+   63     | Expr . BITWISEXOR Expr
+
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    EQ     shift, and go to state 71
+    GE     shift, and go to state 72
+    GT     shift, and go to state 73
+    LE     shift, and go to state 74
+    LT     shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    NE     shift, and go to state 78
+    PLUS   shift, and go to state 80
+
+    $default  reduce using rule 61 (Expr)
+
+
+state 104
+
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   62     | Expr . BITWISEOR Expr
+   63     | Expr . BITWISEXOR Expr
    63     | Expr BITWISEXOR Expr .
 
-    BITWISEAND  shift, and go to state 61
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    PLUS        shift, and go to state 77
+    BITWISEAND  shift, and go to state 64
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 63 (Expr)
 
 
-state 102
+state 105
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1717,25 +1732,25 @@ state 102
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    PLUS        shift, and go to state 77
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 60 (Expr)
 
 
-state 103
+state 106
 
    46 Expr: Expr . ASSIGN Expr
    46     | Expr ASSIGN Expr .
@@ -1757,28 +1772,28 @@ state 103
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 46 (Expr)
 
 
-state 104
+state 107
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1803,7 +1818,7 @@ state 104
     $default  reduce using rule 56 (Expr)
 
 
-state 105
+state 108
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1825,28 +1840,28 @@ state 105
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 47 (Expr)
 
 
-state 106
+state 109
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1871,7 +1886,7 @@ state 106
     $default  reduce using rule 57 (Expr)
 
 
-state 107
+state 110
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1893,20 +1908,20 @@ state 107
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    GE     shift, and go to state 69
-    GT     shift, and go to state 70
-    LE     shift, and go to state 71
-    LT     shift, and go to state 72
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    GE     shift, and go to state 72
+    GT     shift, and go to state 73
+    LE     shift, and go to state 74
+    LT     shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 48 (Expr)
 
 
-state 108
+state 111
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1928,16 +1943,16 @@ state 108
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 51 (Expr)
 
 
-state 109
+state 112
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1959,16 +1974,16 @@ state 109
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 53 (Expr)
 
 
-state 110
+state 113
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -1990,16 +2005,16 @@ state 110
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 50 (Expr)
 
 
-state 111
+state 114
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2021,16 +2036,16 @@ state 111
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 52 (Expr)
 
 
-state 112
+state 115
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2052,14 +2067,14 @@ state 112
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL  shift, and go to state 65
-    DIV  shift, and go to state 67
-    MOD  shift, and go to state 74
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 70
+    MOD  shift, and go to state 77
 
     $default  reduce using rule 55 (Expr)
 
 
-state 113
+state 116
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2084,7 +2099,7 @@ state 113
     $default  reduce using rule 58 (Expr)
 
 
-state 114
+state 117
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2106,20 +2121,20 @@ state 114
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL    shift, and go to state 65
-    DIV    shift, and go to state 67
-    GE     shift, and go to state 69
-    GT     shift, and go to state 70
-    LE     shift, and go to state 71
-    LT     shift, and go to state 72
-    MINUS  shift, and go to state 73
-    MOD    shift, and go to state 74
-    PLUS   shift, and go to state 77
+    MUL    shift, and go to state 68
+    DIV    shift, and go to state 70
+    GE     shift, and go to state 72
+    GT     shift, and go to state 73
+    LE     shift, and go to state 74
+    LT     shift, and go to state 75
+    MINUS  shift, and go to state 76
+    MOD    shift, and go to state 77
+    PLUS   shift, and go to state 80
 
     $default  reduce using rule 49 (Expr)
 
 
-state 115
+state 118
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2141,26 +2156,26 @@ state 115
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    PLUS        shift, and go to state 77
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    MUL         shift, and go to state 68
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    PLUS        shift, and go to state 80
 
     $default  reduce using rule 59 (Expr)
 
 
-state 116
+state 119
 
    46 Expr: Expr . ASSIGN Expr
    47     | Expr . COMMA Expr
@@ -2182,287 +2197,238 @@ state 116
    62     | Expr . BITWISEOR Expr
    63     | Expr . BITWISEXOR Expr
 
-    MUL  shift, and go to state 65
-    DIV  shift, and go to state 67
-    MOD  shift, and go to state 74
+    MUL  shift, and go to state 68
+    DIV  shift, and go to state 70
+    MOD  shift, and go to state 77
 
     $default  reduce using rule 54 (Expr)
 
 
-state 117
-
-   19 ParameterList: ParameterList COMMA ParameterDeclaration .
-
-    $default  reduce using rule 19 (ParameterList)
-
-
-state 118
-
-   40 Statement: WHILE LPAR Expr . RPAR Statement
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
-
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 66
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    RPAR        shift, and go to state 127
-
-
-state 119
-
-   38 Statement: IF LPAR Expr . RPAR Statement
-   39          | IF LPAR Expr . RPAR Statement ELSE Statement
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
-
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    COMMA       shift, and go to state 66
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    RPAR        shift, and go to state 128
-
-
 state 120
 
-   42 Statement: RETURN Expr SEMI .
+   20 ParameterList: ParameterList COMMA ParameterDeclaration .
 
-    $default  reduce using rule 42 (Statement)
+    $default  reduce using rule 20 (ParameterList)
 
 
 state 121
+
+   39 Statement: WHILE LPAR Expr . RPAR Statement
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   62     | Expr . BITWISEOR Expr
+   63     | Expr . BITWISEXOR Expr
+
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    RPAR        shift, and go to state 129
+
+
+state 122
+
+   37 Statement: IF LPAR Expr . RPAR Statement
+   38          | IF LPAR Expr . RPAR Statement ELSE Statement
+   46 Expr: Expr . ASSIGN Expr
+   47     | Expr . COMMA Expr
+   48     | Expr . EQ Expr
+   49     | Expr . NE Expr
+   50     | Expr . LE Expr
+   51     | Expr . GE Expr
+   52     | Expr . LT Expr
+   53     | Expr . GT Expr
+   54     | Expr . PLUS Expr
+   55     | Expr . MINUS Expr
+   56     | Expr . MUL Expr
+   57     | Expr . DIV Expr
+   58     | Expr . MOD Expr
+   59     | Expr . OR Expr
+   60     | Expr . AND Expr
+   61     | Expr . BITWISEAND Expr
+   62     | Expr . BITWISEOR Expr
+   63     | Expr . BITWISEXOR Expr
+
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
+    RPAR        shift, and go to state 130
+
+
+state 123
+
+   41 Statement: RETURN Expr SEMI .
+
+    $default  reduce using rule 41 (Statement)
+
+
+state 124
 
    43 Statement: LBRACE error RBRACE .
 
     $default  reduce using rule 43 (Statement)
 
 
-state 122
+state 125
 
-   37 Statement: LBRACE StatementAux RBRACE .
+   36 Statement: LBRACE StatementAux RBRACE .
 
-    $default  reduce using rule 37 (Statement)
+    $default  reduce using rule 36 (Statement)
 
 
-state 123
+state 126
 
    45 StatementAux: StatementAux Statement .
 
     $default  reduce using rule 45 (StatementAux)
 
 
-state 124
+state 127
 
-   46 Expr: Expr . ASSIGN Expr
-   47     | Expr . COMMA Expr
-   47     | Expr COMMA Expr .
-   48     | Expr . EQ Expr
-   49     | Expr . NE Expr
-   50     | Expr . LE Expr
-   51     | Expr . GE Expr
-   52     | Expr . LT Expr
-   53     | Expr . GT Expr
-   54     | Expr . PLUS Expr
-   55     | Expr . MINUS Expr
-   56     | Expr . MUL Expr
-   57     | Expr . DIV Expr
-   58     | Expr . MOD Expr
-   59     | Expr . OR Expr
-   60     | Expr . AND Expr
-   61     | Expr . BITWISEAND Expr
-   62     | Expr . BITWISEOR Expr
-   63     | Expr . BITWISEXOR Expr
-   74     | LPAR Expr COMMA Expr . RPAR
+   74 Expr: ID LPAR error RPAR .
 
-    BITWISEOR   shift, and go to state 60
-    BITWISEAND  shift, and go to state 61
-    BITWISEXOR  shift, and go to state 62
-    AND         shift, and go to state 63
-    ASSIGN      shift, and go to state 64
-    MUL         shift, and go to state 65
-    DIV         shift, and go to state 67
-    EQ          shift, and go to state 68
-    GE          shift, and go to state 69
-    GT          shift, and go to state 70
-    LE          shift, and go to state 71
-    LT          shift, and go to state 72
-    MINUS       shift, and go to state 73
-    MOD         shift, and go to state 74
-    NE          shift, and go to state 75
-    OR          shift, and go to state 76
-    PLUS        shift, and go to state 77
-    RPAR        shift, and go to state 129
-
-    $default  reduce using rule 47 (Expr)
+    $default  reduce using rule 74 (Expr)
 
 
-state 125
-
-   75 Expr: ID LPAR error RPAR .
-
-    $default  reduce using rule 75 (Expr)
-
-
-state 126
+state 128
 
    68 Expr: ID LPAR Expr RPAR .
 
     $default  reduce using rule 68 (Expr)
 
 
-state 127
-
-   40 Statement: WHILE LPAR Expr RPAR . Statement
-
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    RETURN   shift, and go to state 43
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Statement  go to state 130
-    Expr       go to state 51
-
-
-state 128
-
-   38 Statement: IF LPAR Expr RPAR . Statement
-   39          | IF LPAR Expr RPAR . Statement ELSE Statement
-
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    RETURN   shift, and go to state 43
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
-
-    Statement  go to state 131
-    Expr       go to state 51
-
-
 state 129
 
-   74 Expr: LPAR Expr COMMA Expr RPAR .
+   39 Statement: WHILE LPAR Expr RPAR . Statement
 
-    $default  reduce using rule 74 (Expr)
+    error    shift, and go to state 45
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    RETURN   shift, and go to state 48
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Statement  go to state 131
+    Expr       go to state 56
 
 
 state 130
 
-   40 Statement: WHILE LPAR Expr RPAR Statement .
+   37 Statement: IF LPAR Expr RPAR . Statement
+   38          | IF LPAR Expr RPAR . Statement ELSE Statement
 
-    $default  reduce using rule 40 (Statement)
+    error    shift, and go to state 45
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    RETURN   shift, and go to state 48
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Statement  go to state 132
+    Expr       go to state 56
 
 
 state 131
 
-   38 Statement: IF LPAR Expr RPAR Statement .
-   39          | IF LPAR Expr RPAR Statement . ELSE Statement
+   39 Statement: WHILE LPAR Expr RPAR Statement .
 
-    ELSE  shift, and go to state 132
-
-    $default  reduce using rule 38 (Statement)
+    $default  reduce using rule 39 (Statement)
 
 
 state 132
 
-   39 Statement: IF LPAR Expr RPAR Statement ELSE . Statement
+   37 Statement: IF LPAR Expr RPAR Statement .
+   38          | IF LPAR Expr RPAR Statement . ELSE Statement
 
-    WHILE    shift, and go to state 41
-    IF       shift, and go to state 42
-    RETURN   shift, and go to state 43
-    LBRACE   shift, and go to state 44
-    LPAR     shift, and go to state 29
-    MINUS    shift, and go to state 30
-    NOT      shift, and go to state 31
-    PLUS     shift, and go to state 32
-    SEMI     shift, and go to state 46
-    REALLIT  shift, and go to state 33
-    CHRLIT   shift, and go to state 34
-    INTLIT   shift, and go to state 35
-    ID       shift, and go to state 36
+    ELSE  shift, and go to state 133
 
-    Statement  go to state 133
-    Expr       go to state 51
+    $default  reduce using rule 37 (Statement)
 
 
 state 133
 
-   39 Statement: IF LPAR Expr RPAR Statement ELSE Statement .
+   38 Statement: IF LPAR Expr RPAR Statement ELSE . Statement
 
-    $default  reduce using rule 39 (Statement)
+    error    shift, and go to state 45
+    WHILE    shift, and go to state 46
+    IF       shift, and go to state 47
+    RETURN   shift, and go to state 48
+    LBRACE   shift, and go to state 49
+    LPAR     shift, and go to state 33
+    MINUS    shift, and go to state 34
+    NOT      shift, and go to state 35
+    PLUS     shift, and go to state 36
+    SEMI     shift, and go to state 51
+    REALLIT  shift, and go to state 37
+    CHRLIT   shift, and go to state 38
+    INTLIT   shift, and go to state 39
+    ID       shift, and go to state 40
+
+    Statement  go to state 134
+    Expr       go to state 56
+
+
+state 134
+
+   38 Statement: IF LPAR Expr RPAR Statement ELSE Statement .
+
+    $default  reduce using rule 38 (Statement)

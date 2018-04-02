@@ -76,7 +76,8 @@
      CHRLIT = 292,
      INTLIT = 293,
      ID = 294,
-     LOWER_THAN_ELSE = 295
+     RESERVED = 295,
+     LOWER_THAN_ELSE = 296
    };
 #endif
 /* Tokens.  */
@@ -117,7 +118,8 @@
 #define CHRLIT 292
 #define INTLIT 293
 #define ID 294
-#define LOWER_THAN_ELSE 295
+#define RESERVED 295
+#define LOWER_THAN_ELSE 296
 
 
 
@@ -130,7 +132,7 @@ typedef union YYSTYPE
 	char* string;
 }
 /* Line 1529 of yacc.c.  */
-#line 134 "y.tab.h"
+#line 136 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

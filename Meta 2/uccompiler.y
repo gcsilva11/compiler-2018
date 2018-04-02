@@ -13,7 +13,7 @@
 }
 
 %token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
-%token <string> REALLIT CHRLIT INTLIT ID
+%token <string> REALLIT CHRLIT INTLIT ID RESERVED
 
 %left COMMA
 %right ASSIGN
@@ -27,23 +27,25 @@
 %left PLUS MINUS
 %left MUL DIV MOD
 %right NOT
-%left RPAR LPAR RBRACE LBRACE
+%left LPAR
 %nonassoc LOWER_THAN_ELSE
 %nonassoc ELSE
 
 %%
 
 Program:
-	FunctionsAndDeclarations
+	FunctionsAndDeclarations							{}
 	;
 
 FunctionsAndDeclarations: 
 	FunctionsAndDeclarations FunctionDefinition			{}
 	| FunctionsAndDeclarations FunctionDeclaration 		{}
 	| FunctionsAndDeclarations Declaration 				{}
+	| FunctionsAndDeclarations error SEMI 				{}
 	| FunctionDefinition 								{}
 	| FunctionDeclaration 								{}
 	| Declaration 										{}
+	| error SEMI										{}
 	;
 
 FunctionDefinition: 
@@ -71,7 +73,7 @@ FunctionDeclarator:
 	;
 
 ParameterList: 
-	| ParameterDeclaration 								{}
+	ParameterDeclaration 								{}
 	| ParameterList COMMA ParameterDeclaration 			{}
 	;
 
@@ -81,13 +83,11 @@ ParameterDeclaration:
 	;
 
 Declaration: 
-	TypeSpec DeclarationAux SEMI 						{}
-	
-	| error SEMI 										{}
+	DeclarationAux SEMI 								{}
 	;
 
 DeclarationAux:
-	| Declarator 										{}
+	TypeSpec Declarator 								{}
 	| DeclarationAux COMMA Declarator 					{}
 	;
 
@@ -119,7 +119,7 @@ Statement:
 	| RETURN SEMI 										{}
 	| RETURN Expr SEMI 									{}
 
-
+	| error SEMI 										{}
 	| LBRACE error RBRACE 								{}
 	;
 
@@ -164,8 +164,8 @@ Expr:
 	| REALLIT 											{}
 	| LPAR Expr RPAR 									{}
 
-	| LPAR Expr COMMA Expr RPAR 						{}
 	| ID LPAR error RPAR 								{}
 	| LPAR error RPAR 									{}
 	; 
+
 %%
