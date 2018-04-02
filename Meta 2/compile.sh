@@ -3,10 +3,10 @@
 #Meta 1
 #flex uccompiler.l
 #clang-3.8 -o uccompiler lex.yy.c
-#zip -r $2.zip $1
+#zip -r uccompiler.zip uccompiler.l
 
 #Meta 2
 flex uccompiler.l
 yacc -d -v uccompiler.y
 clang-3.8 -o uccompiler -Wall -Wno-unused-function *.c
-zip -r uccompiler.zip uccompiler.l uccompiler.y compile.sh
+zip -r uccompiler.zip uccompiler.l uccompiler.y tree.c tree.h

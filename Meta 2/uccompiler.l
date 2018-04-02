@@ -155,16 +155,22 @@ int yywrap(){
 }
 
 void yyerror (const char *s) { 
-     printf ("Line %d, col %d: %s: %s\n", linha, (int)(coluna-strlen(yytext)), s, yytext);
+	printf ("Line %d, col %d: %s: %s\n", linha, (int)(coluna-strlen(yytext)), s, yytext);
 }
 
 int main(int argc, char *argv[]){
-    if(argc > 1){
-        if(strcmp(argv[1],"-l") == 0){
-            flag=1;
-            yylex();
-        }
-    }
-    yyparse();
-    return 0;
+	if(argc > 1){
+		if(strcmp(argv[1],"-l") == 0){
+			flag=1;
+			yylex();
+		}
+		if(strcmp(argv[1],"-t") == 0){
+			flag=2;
+			yyparse();
+			yylex_destroy();
+		}
+	}
+	yyparse();
+	yylex_destroy();
+	return 0;
 }

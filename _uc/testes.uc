@@ -5,8 +5,6 @@ int main(void, char) {
 
 double main(char in,int,void,double, int); 
 
-int int();
-
 int main(int x, int y, int z) { 
     int x = 1, y = 2, z; 
     int a,b,c,d,e; 

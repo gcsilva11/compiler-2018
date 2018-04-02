@@ -1,7 +1,12 @@
 %{
+	/*
+	João Pedro Costa Ferreiro 2014197760
+	Guilherme Cardoso Gomes da Silva 2014226354
+	*/
 	#include <stdio.h>
 	#include <stdio.h>
 	#include <string.h>
+	#include "tree.h"
 
 	int yylex(void);
 	void yyerror (const char *s);
@@ -10,10 +15,13 @@
 %union{
 	int inteiro;
 	char* string;
+	struct AST* ast;
 }
 
 %token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
 %token <string> REALLIT CHRLIT INTLIT ID RESERVED
+
+%type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux Expr
 
 %left COMMA
 %right ASSIGN
@@ -28,13 +36,13 @@
 %left MUL DIV MOD
 %right NOT
 %left LPAR
-%nonassoc LOWER_THAN_ELSE
+%nonassoc ELSE_PRIORITY
 %nonassoc ELSE
 
 %%
 
 Program:
-	FunctionsAndDeclarations							{}
+	FunctionsAndDeclarations 							{}
 	;
 
 FunctionsAndDeclarations: 
@@ -111,7 +119,7 @@ Statement:
 	| LBRACE RBRACE 									{}
 	| LBRACE StatementAux RBRACE 						{}
 
-	| IF LPAR Expr RPAR Statement %prec LOWER_THAN_ELSE {}
+	| IF LPAR Expr RPAR Statement %prec ELSE_PRIORITY 	{}
 	| IF LPAR Expr RPAR Statement ELSE Statement 		{}
 
 	| WHILE LPAR Expr RPAR Statement 					{}
