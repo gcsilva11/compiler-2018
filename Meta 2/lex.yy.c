@@ -932,187 +932,187 @@ YY_RULE_SETUP
 case 7:
 YY_RULE_SETUP
 #line 87 "uccompiler.l"
-{imprime("CHAR");if(flag==0) return CHAR;COLUNA;}
+{imprime("CHAR"); COLUNA; if(flag==0) return CHAR;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 88 "uccompiler.l"
-{imprime("ELSE");if(flag==0) return ELSE;COLUNA;}
+{imprime("ELSE"); COLUNA; if(flag==0) return ELSE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 89 "uccompiler.l"
-{imprime("WHILE");if(flag==0) return WHILE;COLUNA;}
+{imprime("WHILE"); COLUNA; if(flag==0) return WHILE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 90 "uccompiler.l"
-{imprime("IF");if(flag==0) return IF;COLUNA;}
+{imprime("IF"); COLUNA; if(flag==0) return IF;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 91 "uccompiler.l"
-{imprime("INT");if(flag==0) return INT;COLUNA;}
+{imprime("INT"); COLUNA; if(flag==0) return INT;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 92 "uccompiler.l"
-{imprime("SHORT");if(flag==0) return SHORT;COLUNA;}
+{imprime("SHORT"); COLUNA; if(flag==0) return SHORT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 93 "uccompiler.l"
-{imprime("DOUBLE");if(flag==0) return DOUBLE;COLUNA;}
+{imprime("DOUBLE"); COLUNA; if(flag==0) return DOUBLE;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 94 "uccompiler.l"
-{imprime("RETURN");if(flag==0) return RETURN;COLUNA;}
+{imprime("RETURN"); COLUNA; if(flag==0) return RETURN;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 95 "uccompiler.l"
-{imprime("VOID");if(flag==0) return VOID;COLUNA;}
+{imprime("VOID"); COLUNA; if(flag==0) return VOID;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 96 "uccompiler.l"
-{imprime("BITWISEAND");if(flag==0) return BITWISEAND;COLUNA;}
+{imprime("BITWISEAND"); COLUNA; if(flag==0) return BITWISEAND;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 97 "uccompiler.l"
-{imprime("BITWISEOR");if(flag==0) return BITWISEOR;COLUNA;}
+{imprime("BITWISEOR"); COLUNA; if(flag==0) return BITWISEOR;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 98 "uccompiler.l"
-{imprime("BITWISEXOR");if(flag==0) return BITWISEXOR;COLUNA;}
+{imprime("BITWISEXOR"); COLUNA; if(flag==0) return BITWISEXOR;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 99 "uccompiler.l"
-{imprime("AND");if(flag==0) return AND;COLUNA;}
+{imprime("AND"); COLUNA; if(flag==0) return AND;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 100 "uccompiler.l"
-{imprime("ASSIGN");if(flag==0) return ASSIGN;COLUNA;}
+{imprime("ASSIGN"); COLUNA; if(flag==0) return ASSIGN;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 101 "uccompiler.l"
-{imprime("MUL");if(flag==0) return MUL;COLUNA;}
+{imprime("MUL"); COLUNA; if(flag==0) return MUL;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 102 "uccompiler.l"
-{imprime("COMMA");if(flag==0) return COMMA;COLUNA;}
+{imprime("COMMA"); COLUNA; if(flag==0) return COMMA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 103 "uccompiler.l"
-{imprime("DIV");if(flag==0) return DIV;COLUNA;}
+{imprime("DIV"); COLUNA; if(flag==0) return DIV;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 104 "uccompiler.l"
-{imprime("EQ");if(flag==0) return EQ;COLUNA;}
+{imprime("EQ"); COLUNA; if(flag==0) return EQ;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 105 "uccompiler.l"
-{imprime("GE");if(flag==0) return GE;COLUNA;}
+{imprime("GE"); COLUNA; if(flag==0) return GE;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 106 "uccompiler.l"
-{imprime("GT");if(flag==0) return GT;COLUNA;}
+{imprime("GT"); COLUNA; if(flag==0) return GT;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 107 "uccompiler.l"
-{imprime("LBRACE");if(flag==0) return LBRACE;COLUNA;}
+{imprime("LBRACE"); COLUNA; if(flag==0) return LBRACE;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 108 "uccompiler.l"
-{imprime("LE");if(flag==0) return LE;COLUNA;}
+{imprime("LE"); COLUNA; if(flag==0) return LE;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 109 "uccompiler.l"
-{imprime("LPAR");if(flag==0) return LPAR;COLUNA;}
+{imprime("LPAR"); COLUNA; if(flag==0) return LPAR;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 110 "uccompiler.l"
-{imprime("LT");if(flag==0) return LT;COLUNA;}
+{imprime("LT"); COLUNA; if(flag==0) return LT;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 111 "uccompiler.l"
-{imprime("MINUS");if(flag==0) return MINUS;COLUNA;}
+{imprime("MINUS"); COLUNA; if(flag==0) return MINUS;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 112 "uccompiler.l"
-{imprime("MOD");if(flag==0) return MOD;COLUNA;}
+{imprime("MOD"); COLUNA; if(flag==0) return MOD;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 113 "uccompiler.l"
-{imprime("NE");if(flag==0) return NE;COLUNA;}
+{imprime("NE"); COLUNA; if(flag==0) return NE;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 114 "uccompiler.l"
-{imprime("NOT");if(flag==0) return NOT;COLUNA;}
+{imprime("NOT"); COLUNA; if(flag==0) return NOT;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 115 "uccompiler.l"
-{imprime("OR");if(flag==0) return OR;COLUNA;}
+{imprime("OR"); COLUNA; if(flag==0) return OR;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 116 "uccompiler.l"
-{imprime("PLUS");if(flag==0) return PLUS;COLUNA;}
+{imprime("PLUS"); COLUNA; if(flag==0) return PLUS;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 117 "uccompiler.l"
-{imprime("RBRACE");if(flag==0) return RBRACE;COLUNA;}
+{imprime("RBRACE"); COLUNA; if(flag==0) return RBRACE;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 118 "uccompiler.l"
-{imprime("RPAR");if(flag==0) return RPAR;COLUNA;}
+{imprime("RPAR"); COLUNA; if(flag==0) return RPAR;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 119 "uccompiler.l"
-{imprime("SEMI");if(flag==0) return SEMI;COLUNA;}
+{imprime("SEMI"); COLUNA; if(flag==0) return SEMI;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 121 "uccompiler.l"
-{imprime_com_conteudo("ID", yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return ID;}COLUNA;}
+{imprime_com_conteudo("ID", yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return ID;}}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 123 "uccompiler.l"
-{imprime_com_conteudo("INTLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return INTLIT;}COLUNA;}
+{imprime_com_conteudo("INTLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return INTLIT;}}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 124 "uccompiler.l"
-{imprime_com_conteudo("REALLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return REALLIT;}COLUNA;}
+{imprime_com_conteudo("REALLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return REALLIT;}}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 125 "uccompiler.l"
-{imprime_com_conteudo("CHRLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return CHRLIT;}COLUNA;}
+{imprime_com_conteudo("CHRLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
@@ -2181,7 +2181,7 @@ int yywrap(){
 }
 
 void yyerror (const char *s) { 
-     printf ("Line %d, col %d: %s: %s\n",linha,(int)(coluna-strlen(yytext)), s, yytext);
+     printf ("Line %d, col %d: %s: %s\n", linha, (int)(coluna-strlen(yytext)), s, yytext);
 }
 
 int main(int argc, char *argv[]){

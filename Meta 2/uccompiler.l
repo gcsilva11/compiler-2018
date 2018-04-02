@@ -84,45 +84,45 @@ LINETERMINATOR					"\n"|"\r\n"
 
 {RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA;}
 
-{CHAR} 							{imprime("CHAR");if(flag==0) return CHAR;COLUNA;}
-{ELSE} 							{imprime("ELSE");if(flag==0) return ELSE;COLUNA;}
-{WHILE} 						{imprime("WHILE");if(flag==0) return WHILE;COLUNA;}
-{IF} 							{imprime("IF");if(flag==0) return IF;COLUNA;}
-{INT}							{imprime("INT");if(flag==0) return INT;COLUNA;}
-{SHORT} 						{imprime("SHORT");if(flag==0) return SHORT;COLUNA;}
-{DOUBLE}						{imprime("DOUBLE");if(flag==0) return DOUBLE;COLUNA;}
-{RETURN} 						{imprime("RETURN");if(flag==0) return RETURN;COLUNA;}
-{VOID} 							{imprime("VOID");if(flag==0) return VOID;COLUNA;}
-{BITWISEAND} 					{imprime("BITWISEAND");if(flag==0) return BITWISEAND;COLUNA;}
-{BITWISEOR} 					{imprime("BITWISEOR");if(flag==0) return BITWISEOR;COLUNA;}
-{BITWISEXOR} 					{imprime("BITWISEXOR");if(flag==0) return BITWISEXOR;COLUNA;}
-{AND} 							{imprime("AND");if(flag==0) return AND;COLUNA;}
-{ASSIGN} 						{imprime("ASSIGN");if(flag==0) return ASSIGN;COLUNA;}
-{MUL} 							{imprime("MUL");if(flag==0) return MUL;COLUNA;}
-{COMMA} 						{imprime("COMMA");if(flag==0) return COMMA;COLUNA;}
-{DIV} 							{imprime("DIV");if(flag==0) return DIV;COLUNA;}
-{EQ} 							{imprime("EQ");if(flag==0) return EQ;COLUNA;}
-{GE} 							{imprime("GE");if(flag==0) return GE;COLUNA;}
-{GT} 							{imprime("GT");if(flag==0) return GT;COLUNA;}
-{LBRACE} 						{imprime("LBRACE");if(flag==0) return LBRACE;COLUNA;}
-{LE} 							{imprime("LE");if(flag==0) return LE;COLUNA;}
-{LPAR} 							{imprime("LPAR");if(flag==0) return LPAR;COLUNA;}
-{LT} 							{imprime("LT");if(flag==0) return LT;COLUNA;}
-{MINUS} 						{imprime("MINUS");if(flag==0) return MINUS;COLUNA;}
-{MOD} 							{imprime("MOD");if(flag==0) return MOD;COLUNA;}
-{NE} 							{imprime("NE");if(flag==0) return NE;COLUNA;}
-{NOT} 							{imprime("NOT");if(flag==0) return NOT;COLUNA;}
-{OR} 							{imprime("OR");if(flag==0) return OR;COLUNA;}
-{PLUS} 							{imprime("PLUS");if(flag==0) return PLUS;COLUNA;}
-{RBRACE} 						{imprime("RBRACE");if(flag==0) return RBRACE;COLUNA;}
-{RPAR} 							{imprime("RPAR");if(flag==0) return RPAR;COLUNA;}
-{SEMI} 							{imprime("SEMI");if(flag==0) return SEMI;COLUNA;}
+{CHAR} 							{imprime("CHAR"); COLUNA; if(flag==0) return CHAR;}
+{ELSE} 							{imprime("ELSE"); COLUNA; if(flag==0) return ELSE;}
+{WHILE} 						{imprime("WHILE"); COLUNA; if(flag==0) return WHILE;}
+{IF} 							{imprime("IF"); COLUNA; if(flag==0) return IF;}
+{INT}							{imprime("INT"); COLUNA; if(flag==0) return INT;}
+{SHORT} 						{imprime("SHORT"); COLUNA; if(flag==0) return SHORT;}
+{DOUBLE}						{imprime("DOUBLE"); COLUNA; if(flag==0) return DOUBLE;}
+{RETURN} 						{imprime("RETURN"); COLUNA; if(flag==0) return RETURN;}
+{VOID} 							{imprime("VOID"); COLUNA; if(flag==0) return VOID;}
+{BITWISEAND} 					{imprime("BITWISEAND"); COLUNA; if(flag==0) return BITWISEAND;}
+{BITWISEOR} 					{imprime("BITWISEOR"); COLUNA; if(flag==0) return BITWISEOR;}
+{BITWISEXOR} 					{imprime("BITWISEXOR"); COLUNA; if(flag==0) return BITWISEXOR;}
+{AND} 							{imprime("AND"); COLUNA; if(flag==0) return AND;}
+{ASSIGN} 						{imprime("ASSIGN"); COLUNA; if(flag==0) return ASSIGN;}
+{MUL} 							{imprime("MUL"); COLUNA; if(flag==0) return MUL;}
+{COMMA} 						{imprime("COMMA"); COLUNA; if(flag==0) return COMMA;}
+{DIV} 							{imprime("DIV"); COLUNA; if(flag==0) return DIV;}
+{EQ} 							{imprime("EQ"); COLUNA; if(flag==0) return EQ;}
+{GE} 							{imprime("GE"); COLUNA; if(flag==0) return GE;}
+{GT} 							{imprime("GT"); COLUNA; if(flag==0) return GT;}
+{LBRACE} 						{imprime("LBRACE"); COLUNA; if(flag==0) return LBRACE;}
+{LE} 							{imprime("LE"); COLUNA; if(flag==0) return LE;}
+{LPAR} 							{imprime("LPAR"); COLUNA; if(flag==0) return LPAR;}
+{LT} 							{imprime("LT"); COLUNA; if(flag==0) return LT;}
+{MINUS} 						{imprime("MINUS"); COLUNA; if(flag==0) return MINUS;}
+{MOD} 							{imprime("MOD"); COLUNA; if(flag==0) return MOD;}
+{NE} 							{imprime("NE"); COLUNA; if(flag==0) return NE;}
+{NOT} 							{imprime("NOT"); COLUNA; if(flag==0) return NOT;}
+{OR} 							{imprime("OR"); COLUNA; if(flag==0) return OR;}
+{PLUS} 							{imprime("PLUS"); COLUNA; if(flag==0) return PLUS;}
+{RBRACE} 						{imprime("RBRACE"); COLUNA; if(flag==0) return RBRACE;}
+{RPAR} 							{imprime("RPAR"); COLUNA; if(flag==0) return RPAR;}
+{SEMI} 							{imprime("SEMI"); COLUNA; if(flag==0) return SEMI;}
 
-{ID}							{imprime_com_conteudo("ID", yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return ID;}COLUNA;}
+{ID}							{imprime_com_conteudo("ID", yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return ID;}}
 
-{INTLIT}						{imprime_com_conteudo("INTLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return INTLIT;}COLUNA;}
-{REALLIT}						{imprime_com_conteudo("REALLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return REALLIT;}COLUNA;}
-{ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); return CHRLIT;}COLUNA;}
+{INTLIT}						{imprime_com_conteudo("INTLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return INTLIT;}}
+{REALLIT}						{imprime_com_conteudo("REALLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return REALLIT;}}
+{ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
 {ASP}({CHRLIT}|\\.)*{ASP} 		{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
 {ASP}({CHRLIT}|\\.)*\\?			{printf("Line %d, col %d: unterminated char constant\n",linha,coluna);}
 
@@ -155,7 +155,7 @@ int yywrap(){
 }
 
 void yyerror (const char *s) { 
-     printf ("Line %d, col %d: %s: %s\n",linha,(int)(coluna-strlen(yytext)), s, yytext);
+     printf ("Line %d, col %d: %s: %s\n", linha, (int)(coluna-strlen(yytext)), s, yytext);
 }
 
 int main(int argc, char *argv[]){

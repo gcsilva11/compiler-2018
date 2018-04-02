@@ -75,7 +75,8 @@
      REALLIT = 291,
      CHRLIT = 292,
      INTLIT = 293,
-     ID = 294
+     ID = 294,
+     LOWER_THAN_ELSE = 295
    };
 #endif
 /* Tokens.  */
@@ -116,6 +117,7 @@
 #define CHRLIT 292
 #define INTLIT 293
 #define ID 294
+#define LOWER_THAN_ELSE 295
 
 
 
@@ -124,12 +126,11 @@
 typedef union YYSTYPE
 #line 10 "uccompiler.y"
 {
-    int inteiro;
-    char* string;
-    //Statement: error SEMI;
+	int inteiro;
+	char* string;
 }
 /* Line 1529 of yacc.c.  */
-#line 133 "y.tab.h"
+#line 134 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

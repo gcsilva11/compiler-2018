@@ -1,16 +1,15 @@
 %{
-    #include <stdio.h>
-    #include <stdio.h>
-    #include <string.h>
+	#include <stdio.h>
+	#include <stdio.h>
+	#include <string.h>
 
-    int yylex(void);
-    void yyerror (const char *s);
+	int yylex(void);
+	void yyerror (const char *s);
 %}
 
 %union{
-    int inteiro;
-    char* string;
-    //Statement: error SEMI;
+	int inteiro;
+	char* string;
 }
 
 %token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
@@ -29,136 +28,144 @@
 %left MUL DIV MOD
 %right NOT
 %left RPAR LPAR RBRACE LBRACE
+%nonassoc LOWER_THAN_ELSE
 %nonassoc ELSE
-
 
 %%
 
+Program:
+	FunctionsAndDeclarations
+	;
+
 FunctionsAndDeclarations: 
-    FunctionDefinition 
-    | FunctionDeclaration 
-    | Declaration
-    | FunctionDeclaration FunctionDeclaration
-    ;
+	FunctionsAndDeclarations FunctionDefinition			{}
+	| FunctionsAndDeclarations FunctionDeclaration 		{}
+	| FunctionsAndDeclarations Declaration 				{}
+	| FunctionDefinition 								{}
+	| FunctionDeclaration 								{}
+	| Declaration 										{}
+	;
 
 FunctionDefinition: 
-    TypeSpec FunctionDeclarator FunctionBody
-    ;
+	TypeSpec FunctionDeclarator FunctionBody 			{}
+	;
 
 FunctionBody: 
-    LBRACE RBRACE
-    | LBRACE DeclarationAndStatements RBRACE
-    ;
+	LBRACE RBRACE										{}
+	| LBRACE DeclarationAndStatements RBRACE 			{}
+	;
 
 DeclarationAndStatements: 
-    Statement DeclarationAndStatements
-    | Declaration DeclarationAndStatements 
-    | Statement 
-    | Declaration
-    ;
+	Statement DeclarationAndStatements 					{}
+	| Declaration DeclarationAndStatements 				{}
+	| Statement 										{}
+	| Declaration 										{}
+	;
 
 FunctionDeclaration: 
-    TypeSpec FunctionDeclarator SEMI
-    ;
+	TypeSpec FunctionDeclarator SEMI 					{}
+	;
 
 FunctionDeclarator: 
-    ID LPAR ParameterList RPAR
-    ;
+	ID LPAR ParameterList RPAR 							{}
+	;
 
 ParameterList: 
-    ParameterDeclaration 
-    |ParameterDeclaration COMMA ParameterDeclaration
-    ;
+	| ParameterDeclaration 								{}
+	| ParameterList COMMA ParameterDeclaration 			{}
+	;
 
 ParameterDeclaration: 
-    TypeSpec
-    |TypeSpec ID
-    ;
+	TypeSpec 											{}
+	| TypeSpec ID 										{}
+	;
 
 Declaration: 
-    TypeSpec Declarator SEMI
-    |TypeSpec Declarator COMMA Declarator SEMI
-    ;
+	TypeSpec DeclarationAux SEMI 						{}
+	
+	| error SEMI 										{}
+	;
 
-TypeSpec:   CHAR
-    |       INT
-    |       VOID
-    |       SHORT
-    |       DOUBLE
-    ;
+DeclarationAux:
+	| Declarator 										{}
+	| DeclarationAux COMMA Declarator 					{}
+	;
 
-Declarator: ID
-    | ID ASSIGN Expr
-    ;
+TypeSpec:
+	CHAR 												{}
+	| INT 												{}
+	| VOID 												{}
+	| SHORT 											{}
+	| DOUBLE 											{}
+	;
 
-Statement: SEMI
-    | Expr SEMI
-    ;
+Declarator:
+	ID 													{}
+	| ID ASSIGN Expr 									{}
+	;
 
-Statement: LBRACE RBRACE
-    | LBRACE Statement RBRACE
-    ;
+Statement:
+	SEMI 												{}
+	| Expr SEMI											{}
 
-Statement: IF LPAR Expr RPAR Statement
-    | IF LPAR Expr RPAR Statement ELSE Statement
-    ;
+	| LBRACE RBRACE 									{}
+	| LBRACE StatementAux RBRACE 						{}
 
-Statement: WHILE LPAR Expr RPAR Statement
+	| IF LPAR Expr RPAR Statement %prec LOWER_THAN_ELSE {}
+	| IF LPAR Expr RPAR Statement ELSE Statement 		{}
 
-Statement: RETURN SEMI
-    | RETURN Expr SEMI
-    ;
+	| WHILE LPAR Expr RPAR Statement 					{}
 
-Expr: Expr ASSIGN Expr
-    | Expr COMMA Expr
-    ;
-
-Expr: Expr EQ Expr
-    | Expr NE Expr
-    | Expr LE Expr
-    | Expr GE Expr
-    | Expr LT Expr
-    | Expr GT Expr  
-
-Expr: Expr PLUS Expr
-    | Expr MINUS Expr
-    | Expr MUL Expr
-    | Expr DIV Expr
-    | Expr MOD Expr
-    ;
-
-Expr: Expr OR Expr
-    | Expr AND Expr
-    | Expr BITWISEAND Expr
-    | Expr BITWISEOR Expr
-    | Expr BITWISEXOR Expr
-    ;
-
-Expr: PLUS Expr
-    | MINUS Expr
-    | NOT Expr
-    ;
-
-Expr: ID LPAR RPAR
-    | ID LPAR Expr RPAR
-    ;
-
-Expr: 
-    ID
-    | INTLIT
-    | CHRLIT
-    | REALLIT
-    | LPAR Expr RPAR
-    | LPAR Expr COMMA Expr RPAR
-    ; 
+	| RETURN SEMI 										{}
+	| RETURN Expr SEMI 									{}
 
 
-Declaration: error SEMI;
+	| LBRACE error RBRACE 								{}
+	;
 
-Statement: LBRACE error RBRACE;
+StatementAux:
+	Statement 											{}
+	| StatementAux Statement 							{}
+	;
 
-Expr: ID LPAR error RPAR;
+Expr:
+	Expr ASSIGN Expr 									{}
+	| Expr COMMA Expr 									{}
 
-Expr: LPAR error RPAR;
+	| Expr EQ Expr 										{}
+	| Expr NE Expr 										{}
+	| Expr LE Expr 										{}
+	| Expr GE Expr 										{}
+	| Expr LT Expr 										{}
+	| Expr GT Expr 										{}
 
+	| Expr PLUS Expr 									{}
+	| Expr MINUS Expr 									{}
+	| Expr MUL Expr 									{}
+	| Expr DIV Expr 									{}
+	| Expr MOD Expr 									{}
+
+	| Expr OR Expr 										{}
+	| Expr AND Expr 									{}
+	| Expr BITWISEAND Expr 								{}
+	| Expr BITWISEOR Expr 								{}
+	| Expr BITWISEXOR Expr 								{}
+
+	| PLUS Expr 										{}
+	| MINUS Expr 										{}
+	| NOT Expr 											{}
+
+	| ID LPAR RPAR 										{}
+	| ID LPAR Expr RPAR 								{}
+
+	| ID 												{}
+	| INTLIT 											{}
+	| CHRLIT 											{}
+	| REALLIT 											{}
+	| LPAR Expr RPAR 									{}
+
+	| LPAR Expr COMMA Expr RPAR 						{}
+	| ID LPAR error RPAR 								{}
+	| LPAR error RPAR 									{}
+	; 
 %%
