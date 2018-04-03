@@ -67,13 +67,13 @@ FunctionsAndDeclarations:
 															print_flag = 0;
 														}
 	| FunctionDefinition 								{
-															//
+															$$ = $1;
 														}
 	| FunctionDeclaration 								{
-															//
+															$$ = $1:
 														}
 	| Declaration 										{
-															//
+															$$ = $1;
 														}
 	| error SEMI										{
 															$$ = NULL;
@@ -83,52 +83,75 @@ FunctionsAndDeclarations:
 
 FunctionDefinition: 
 	TypeSpec FunctionDeclarator FunctionBody 			{
-															$$ = cria_no("FunctionDefinition","");
+															$$ = cria_no("FuncDefinition","");
+															adicionar_filho($$,$1);
+															adicionar_filho($1,$2);
+															adicionar_filho($1,$3);
 														}
 	;
 
 FunctionBody: 
 	LBRACE RBRACE										{
-															//
+															$$ = cria_no("FuncBody","");
 														}
 	| LBRACE DeclarationAndStatements RBRACE 			{
-															//
+															$$ = cria_no("FuncBody","");
+															if($2!=NULL){
+																adicionar_filho($2,$$);
+															}
 														}
 	;
 
 DeclarationAndStatements: 
 	Statement DeclarationAndStatements 					{
-															//
+															if($2!=NULL){
+																adicionar_irmao($2,$1);
+															}
+															$$ = $1;
 														}
 	| Declaration DeclarationAndStatements 				{
-															//
+															if($1 != NULL && $2 != NULL){
+																adicionar_irmao($2, $1);
+																$$ = $1;
+															}
+															else if($1 != NULL && $2 == NULL){
+																$$ = $1;
+															}
+															else{					
+																$$ = $2;
+															}
 														}
 	| Statement 										{
-															//
+															$$=$1;
 														}
 	| Declaration 										{
-															//
+															$$=$1;
 														}
 	;
 
 FunctionDeclaration: 
 	TypeSpec FunctionDeclarator SEMI 					{
-															$$ = cria_no("FunctionDeclaration","");
+															$$ = cria_no("FunctDeclaration","");
+															adicionar_filho($$,$1);
+															adicionar_filho($1,$2);
 														}
 	;
 
 FunctionDeclarator: 
 	ID LPAR ParameterList RPAR 							{
-															//
+															$$ = cria_no("Id",$1);
+															adicionar_irmao($$,$3);
 														}
 	;
 
 ParameterList: 
 	ParameterDeclaration 								{
-															//
+															$$ = cria_no("ParamList","");
+															adicionar_filho($1,$$);
 														}
 	| ParameterList COMMA ParameterDeclaration 			{
-															//
+															adicionar_filho($3,$1);
+															$$=$1;
 														}
 	;
 
@@ -138,7 +161,8 @@ ParameterDeclaration:
 														}
 	| TypeSpec ID 										{
 															$$ = $1;
-															adicionar_irmao($$,$2);
+															aux = cria_no("Id",$2);
+															adicionar_irmao($$,aux);
 														}
 	;
 
@@ -160,19 +184,19 @@ DeclarationAux:
 
 TypeSpec:
 	CHAR 												{
-															$$ = cria_no("Char");
+															$$ = cria_no("Char","");
 														}
 	| INT 												{
-															$$ = cria_no("Int");
+															$$ = cria_no("Int","");
 														}
 	| VOID 												{
-															$$ = cria_no("Void");
+															$$ = cria_no("Void","");
 														}
 	| SHORT 											{
-															$$ = cria_no("Short");
+															$$ = cria_no("Short","");
 														}
 	| DOUBLE 											{
-															$$ = cria_no("Double");
+															$$ = cria_no("Double","");
 														}
 	;
 
