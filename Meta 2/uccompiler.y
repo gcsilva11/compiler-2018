@@ -67,13 +67,13 @@ FunctionsAndDeclarations:
 															print_flag = 0;
 														}
 	| FunctionDefinition 								{
-															
+															//
 														}
 	| FunctionDeclaration 								{
-															
+															//
 														}
 	| Declaration 										{
-															
+															//
 														}
 	| error SEMI										{
 															$$ = NULL;
@@ -89,25 +89,25 @@ FunctionDefinition:
 
 FunctionBody: 
 	LBRACE RBRACE										{
-															
+															//
 														}
 	| LBRACE DeclarationAndStatements RBRACE 			{
-															
+															//
 														}
 	;
 
 DeclarationAndStatements: 
 	Statement DeclarationAndStatements 					{
-															
+															//
 														}
 	| Declaration DeclarationAndStatements 				{
-															
+															//
 														}
 	| Statement 										{
-															
+															//
 														}
 	| Declaration 										{
-															
+															//
 														}
 	;
 
@@ -119,16 +119,16 @@ FunctionDeclaration:
 
 FunctionDeclarator: 
 	ID LPAR ParameterList RPAR 							{
-															
+															//
 														}
 	;
 
 ParameterList: 
 	ParameterDeclaration 								{
-															
+															//
 														}
 	| ParameterList COMMA ParameterDeclaration 			{
-															
+															//
 														}
 	;
 
@@ -150,10 +150,11 @@ Declaration:
 
 DeclarationAux:
 	TypeSpec Declarator 								{
-															$$ 
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$2);
 														}
 	| DeclarationAux COMMA Declarator 					{
-															
+															$$ = $1;
 														}
 	;
 
