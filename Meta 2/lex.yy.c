@@ -617,14 +617,14 @@ char *yytext;
 	*/
 	#include <stdio.h>
 	#include <string.h>
+	#include "arvore.h"
 	#include "y.tab.h"
 
 	#define LINHA linha++; coluna=1;
 	#define COLUNA coluna+=yyleng;
+
 	int flag = 0, coluna = 1, linha = 1, linha_aux = 0, coluna_aux = 0;
-	void imprime(char* msg);
-	void imprime_com_conteudo(char* msg, char* conteudo);
-	int yyparse();
+	AST_struct root = NULL;
 
 #line 630 "lex.yy.c"
 
@@ -2194,8 +2194,10 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
+			imprime_arvore(root,0);
 		}
 	}
+	flag=2;
 	yyparse();
 	yylex_destroy();
 	return 0;

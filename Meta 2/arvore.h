@@ -14,3 +14,11 @@ typedef struct AST {
 	char* valor;
 	char* tipo;
 }AST;
+
+void imprime(char* msg);
+void imprime_com_conteudo(char* msg, char* conteudo);
+int yyparse();
+AST_struct cria_no(char*, char*);
+void adicionar_filho(AST_struct, AST_struct);
+void adicionar_irmao(AST_struct, AST_struct);
+void imprime_arvore(AST_struct, int);
