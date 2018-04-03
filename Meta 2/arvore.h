@@ -10,7 +10,6 @@ typedef struct AST {
 	AST_struct pai;
 	AST_struct filho;
 	AST_struct irmao;
-	int no_filhos;
 	char* valor;
 	char* tipo;
 }AST;

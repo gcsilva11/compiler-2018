@@ -7,18 +7,31 @@
 #include <string.h>
 #include "arvore.h"
 
-AST_struct cria_no(char* tipo, char* valor) {
+AST_struct cria_no(char tipo[], char valor[]) {
+	
+	printf("%s   %s\n",valor,tipo);
 	AST_struct novo_no = malloc(sizeof(AST_struct));
+	
 
-	novo_no->pai = NULL;
-	novo_no->filho = NULL;
-	novo_no->irmao = NULL;
-	novo_no->no_filhos = 0;
-
-	novo_no->valor = (char*)malloc(strlen(valor)*sizeof(char)+1); // +1 para contar com '\0'
-	novo_no->tipo = (char*)malloc(strlen(tipo)*sizeof(char)+1); // +1 para contar com '\0'
-	strcpy(novo_no->valor,valor);
+	//printf("\nTipo:%s , Malloc ha de ser:%lu\n",tipo,strlen(tipo)*sizeof(char*)+1);
+	novo_no->tipo = malloc(strlen(tipo)*sizeof(char)+1); // +1 para contar com '\0'
 	strcpy(novo_no->tipo,tipo);
+	//printf("\nMalloc tipo\n");
+
+	//printf("\nValor:%s , Malloc ha de ser:%lu\n",valor,strlen(valor)*sizeof(char)+1);
+	novo_no->valor = malloc(strlen(valor)*sizeof(char)+1); // +1 para contar com '\0'
+	strcpy(novo_no->valor,valor);
+	//printf("\nMalloc valor\n");
+
+	//printf("\nCriou novo no\n");
+	novo_no->pai = NULL;
+	//printf("\nPai null\n");
+	novo_no->filho = NULL;
+	//printf("\nFilho null\n");
+	novo_no->irmao = NULL;
+	//printf("\nBro null\n");
+
+	//printf("\n'cabou\n");
 
 	return novo_no;
 }
@@ -26,7 +39,6 @@ AST_struct cria_no(char* tipo, char* valor) {
 void adicionar_filho(AST_struct pai, AST_struct novo_no){
 	if (novo_no != NULL){
 		pai->filho = novo_no;
-		pai->no_filhos++;
 		novo_no->pai = pai;
 	}
 	return;
@@ -45,7 +57,6 @@ void adicionar_irmao(AST_struct existente, AST_struct novo_no){
 
 		if(novo_no->pai != NULL){
 			novo_no->pai = aux->pai;
-			novo_no->pai->no_filhos++;
 		}
 	}
 	return;
