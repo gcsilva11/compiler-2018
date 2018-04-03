@@ -14,8 +14,8 @@ int main(int x, int y, int z) {
         } 
     } 
     else { 
-        return 0; 
-    } 
+        return 0;
+    }
 }
 
 int expressions(void) { 
