@@ -134,10 +134,11 @@ ParameterList:
 
 ParameterDeclaration: 
 	TypeSpec 											{
-															
+															$$ = $1;
 														}
 	| TypeSpec ID 										{
-															
+															$$ = $1;
+															adicionar_irmao($$,$2);
 														}
 	;
 
@@ -149,7 +150,7 @@ Declaration:
 
 DeclarationAux:
 	TypeSpec Declarator 								{
-															
+															$$ 
 														}
 	| DeclarationAux COMMA Declarator 					{
 															
@@ -158,28 +159,29 @@ DeclarationAux:
 
 TypeSpec:
 	CHAR 												{
-															
+															$$ = cria_no("Char");
 														}
 	| INT 												{
-															
+															$$ = cria_no("Int");
 														}
 	| VOID 												{
-															
+															$$ = cria_no("Void");
 														}
 	| SHORT 											{
-															
+															$$ = cria_no("Short");
 														}
 	| DOUBLE 											{
-															
+															$$ = cria_no("Double");
 														}
 	;
 
 Declarator:
 	ID 													{
-															
+															$$ = cria_no("Id",$1);
 														}
 	| ID ASSIGN Expr 									{
-															
+															$$ = cria_no("Id",$1);
+															adicionar_filho($$,$3);
 														}
 	;
 
@@ -199,21 +201,37 @@ Statement:
 														}
 
 	| IF LPAR Expr RPAR Statement %prec ELSE_PRIORITY 	{
-															
+															$$ = cria_no("If","");
+															adicionar_filho($$,$3);
+															if($5 != NULL){
+																adicionar_irmao($3,$5);
+															}
 														}
 	| IF LPAR Expr RPAR Statement ELSE Statement 		{
-															
+															$$ = cria_no("If","");
+															adicionar_filho($$,$3);
+															if($5 != NULL){
+																adicionar_irmao($3,$5);
+															}
+															if($7 != NULL){
+																adicionar_irmao($5,$7);
+															}
 														}
 
 	| WHILE LPAR Expr RPAR Statement 					{
-															
+															$$ = cria_no("While","");
+															adicionar_filho($$,$3);
+															if($5 != NULL){
+																adicionar_irmao($3,$5);
+															}
 														}
 
 	| RETURN SEMI 										{
-															
+															$$ = cria_no("Return","");
 														}
 	| RETURN Expr SEMI 									{
-															
+															$$ = cria_no("Return","");
+															adicionar_filho($$,$2);
 														}
 
 	| error SEMI 										{
@@ -230,9 +248,19 @@ StatementAux:
 	Statement 											{
 															$$ = $1;
 														}
+	;
 	| StatementAux Statement 							{
-															$$ = cria_no("StatList","");
-															adicionar_filho($$,$2);
+															if($1 == NULL && $2 != NULL){
+																$$ = $2;
+															}
+															if($2 == NULL && $1 != NULL){
+																$$ = $1;
+															}
+															else{
+																$$ = cria_no("StatList","");
+																adicionar_filho($$,$1);
+																adicionar_irmao($1,$2);
+															}
 														}
 	;
 

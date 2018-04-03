@@ -51,6 +51,19 @@ void adicionar_irmao(AST_struct existente, AST_struct novo_no){
 	return;
 }
 
+int conta_irmaos(AST_struct raiz){
+	AST_struct aux;
+	int soma = 0;
+	
+	aux = raiz;
+	
+	while(aux != NULL){
+		aux = aux->irmao;
+		soma++;
+	}
+	return soma;
+}
+
 void imprime_arvore(AST_struct no, int profundidade){
 	if (no != NULL){
 

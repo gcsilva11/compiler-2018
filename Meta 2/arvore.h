@@ -25,4 +25,5 @@ int yyparse();
 AST_struct cria_no(char*, char*);
 void adicionar_filho(AST_struct, AST_struct);
 void adicionar_irmao(AST_struct, AST_struct);
+int conta_irmaos(AST_struct);
 void imprime_arvore(AST_struct, int);
