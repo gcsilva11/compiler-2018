@@ -6,14 +6,13 @@
 	#include <stdio.h>
 	#include <stdio.h>
 	#include <string.h>
-	#include "tree.h"
+	#include "arvore.h"
 
 	int yylex(void);
 	void yyerror (const char *s);
 %}
 
 %union{
-	int inteiro;
 	char* string;
 	struct AST* ast;
 }

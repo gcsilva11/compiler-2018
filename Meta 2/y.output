@@ -141,7 +141,7 @@ CHRLIT (292) 71
 INTLIT (293) 70
 ID (294) 18 22 31 32 67 68 69 74
 RESERVED (295)
-ELSEIF (296)
+ELSE_PRIORITY (296)
 
 
 Nonterminals, with rules where they appear

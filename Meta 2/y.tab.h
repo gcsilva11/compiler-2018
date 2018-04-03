@@ -77,7 +77,7 @@
      INTLIT = 293,
      ID = 294,
      RESERVED = 295,
-     ELSEIF = 296
+     ELSE_PRIORITY = 296
    };
 #endif
 /* Tokens.  */
@@ -119,7 +119,7 @@
 #define INTLIT 293
 #define ID 294
 #define RESERVED 295
-#define ELSEIF 296
+#define ELSE_PRIORITY 296
 
 
 
@@ -128,12 +128,11 @@
 typedef union YYSTYPE
 #line 15 "uccompiler.y"
 {
-	int inteiro;
 	char* string;
 	struct AST* ast;
 }
 /* Line 1529 of yacc.c.  */
-#line 137 "y.tab.h"
+#line 136 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
