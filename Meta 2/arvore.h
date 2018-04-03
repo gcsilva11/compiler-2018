@@ -16,14 +16,10 @@ typedef struct AST {
 }AST;
 
 //Lex
-void imprime(char* msg);
-void imprime_com_conteudo(char* msg, char* conteudo);
-int yyparse();
-
-//Yacc
 int yylex(void);
 void yyerror (const char *s);
 int yylex_destroy();
+int yyparse();
 
 //AST
 AST_struct cria_no(char*, char*);

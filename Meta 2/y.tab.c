@@ -163,8 +163,8 @@
 	#include <string.h>
 	#include "arvore.h"
 
-	AST_struct root = NULL;
-	int flag;
+	AST_struct root = NULL, aux = NULL;
+	int flag = 0, print_flag = 1;
 
 
 /* Enabling traces.  */
@@ -521,16 +521,16 @@ static const yytype_int8 yyrhs[] =
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
-       0,    44,    44,    48,    49,    50,    51,    52,    53,    54,
-      55,    59,    63,    64,    68,    69,    70,    71,    75,    79,
-      83,    84,    88,    89,    93,    97,    98,   102,   103,   104,
-     105,   106,   110,   111,   115,   116,   118,   119,   121,   122,
-     124,   126,   127,   129,   130,   134,   135,   139,   140,   142,
-     143,   144,   145,   146,   147,   149,   150,   151,   152,   153,
-     155,   156,   157,   158,   159,   161,   162,   163,   165,   166,
-     168,   169,   170,   171,   172,   174,   175
+       0,    44,    44,    53,    57,    61,    65,    68,    71,    74,
+      77,    83,    89,    92,    98,   101,   104,   107,   113,   119,
+     125,   128,   134,   137,   143,   149,   152,   158,   161,   164,
+     167,   170,   176,   179,   185,   188,   192,   195,   199,   202,
+     206,   210,   213,   217,   220,   226,   229,   235,   240,   246,
+     251,   256,   261,   266,   271,   277,   282,   287,   292,   297,
+     303,   308,   313,   318,   323,   329,   333,   337,   342,   345,
+     350,   353,   356,   359,   362,   366,   370
 };
 #endif
 
@@ -1605,382 +1605,580 @@ yyreduce:
     {
         case 2:
 #line 44 "uccompiler.y"
-    {}
+    {
+															root = cria_no("Program","");
+															aux = cria_no("FunctionsAndDeclarations","");
+															adicionar_filho(root,aux);
+															(yyval.ast) = root;
+														}
     break;
 
   case 3:
-#line 48 "uccompiler.y"
-    {}
+#line 53 "uccompiler.y"
+    {
+															(yyval.ast)=(yyvsp[(2) - (2)].ast);
+															adicionar_irmao((yyval.ast),(yyvsp[(1) - (2)].ast));
+														}
     break;
 
   case 4:
-#line 49 "uccompiler.y"
-    {}
+#line 57 "uccompiler.y"
+    {
+															(yyval.ast)=(yyvsp[(2) - (2)].ast);
+															adicionar_irmao((yyval.ast),(yyvsp[(1) - (2)].ast));
+														}
     break;
 
   case 5:
-#line 50 "uccompiler.y"
-    {}
+#line 61 "uccompiler.y"
+    {
+															(yyval.ast)=(yyvsp[(2) - (2)].ast);
+															adicionar_irmao((yyval.ast),(yyvsp[(1) - (2)].ast));
+														}
     break;
 
   case 6:
-#line 51 "uccompiler.y"
-    {}
+#line 65 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 7:
-#line 52 "uccompiler.y"
-    {}
+#line 68 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 8:
-#line 53 "uccompiler.y"
-    {}
+#line 71 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 9:
-#line 54 "uccompiler.y"
-    {}
+#line 74 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 10:
-#line 55 "uccompiler.y"
-    {}
+#line 77 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 11:
-#line 59 "uccompiler.y"
-    {}
+#line 83 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("FunctionDefinition","");
+														}
     break;
 
   case 12:
-#line 63 "uccompiler.y"
-    {}
+#line 89 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 13:
-#line 64 "uccompiler.y"
-    {}
+#line 92 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 14:
-#line 68 "uccompiler.y"
-    {}
+#line 98 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 15:
-#line 69 "uccompiler.y"
-    {}
+#line 101 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 16:
-#line 70 "uccompiler.y"
-    {}
+#line 104 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 17:
-#line 71 "uccompiler.y"
-    {}
+#line 107 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 18:
-#line 75 "uccompiler.y"
-    {}
+#line 113 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("FunctionDeclaration","");
+														}
     break;
 
   case 19:
-#line 79 "uccompiler.y"
-    {}
+#line 119 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 20:
-#line 83 "uccompiler.y"
-    {}
+#line 125 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 21:
-#line 84 "uccompiler.y"
-    {}
+#line 128 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 22:
-#line 88 "uccompiler.y"
-    {}
+#line 134 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 23:
-#line 89 "uccompiler.y"
-    {}
+#line 137 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 24:
-#line 93 "uccompiler.y"
-    {}
+#line 143 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Declaration","");
+														}
     break;
 
   case 25:
-#line 97 "uccompiler.y"
-    {}
+#line 149 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 26:
-#line 98 "uccompiler.y"
-    {}
+#line 152 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 27:
-#line 102 "uccompiler.y"
-    {}
+#line 158 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 28:
-#line 103 "uccompiler.y"
-    {}
+#line 161 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 29:
-#line 104 "uccompiler.y"
-    {}
+#line 164 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 30:
-#line 105 "uccompiler.y"
-    {}
+#line 167 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 31:
-#line 106 "uccompiler.y"
-    {}
+#line 170 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 32:
-#line 110 "uccompiler.y"
-    {}
+#line 176 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 33:
-#line 111 "uccompiler.y"
-    {}
+#line 179 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 34:
-#line 115 "uccompiler.y"
-    {}
+#line 185 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 35:
-#line 116 "uccompiler.y"
-    {}
+#line 188 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 36:
-#line 118 "uccompiler.y"
-    {}
+#line 192 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 37:
-#line 119 "uccompiler.y"
-    {}
+#line 195 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 38:
-#line 121 "uccompiler.y"
-    {}
+#line 199 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 39:
-#line 122 "uccompiler.y"
-    {}
+#line 202 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 40:
-#line 124 "uccompiler.y"
-    {}
+#line 206 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 41:
-#line 126 "uccompiler.y"
-    {}
+#line 210 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 42:
-#line 127 "uccompiler.y"
-    {}
+#line 213 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 43:
-#line 129 "uccompiler.y"
-    {}
+#line 217 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 44:
-#line 130 "uccompiler.y"
-    {}
+#line 220 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 45:
-#line 134 "uccompiler.y"
-    {}
+#line 226 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 46:
-#line 135 "uccompiler.y"
-    {}
+#line 229 "uccompiler.y"
+    {
+															
+														}
     break;
 
   case 47:
-#line 139 "uccompiler.y"
-    {}
+#line 235 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Store","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 48:
-#line 140 "uccompiler.y"
-    {}
+#line 240 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Comma","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 49:
-#line 142 "uccompiler.y"
-    {}
+#line 246 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Eq","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 50:
-#line 143 "uccompiler.y"
-    {}
+#line 251 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Ne","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 51:
-#line 144 "uccompiler.y"
-    {}
+#line 256 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Le","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 52:
-#line 145 "uccompiler.y"
-    {}
+#line 261 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Ge","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 53:
-#line 146 "uccompiler.y"
-    {}
+#line 266 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Lt","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 54:
-#line 147 "uccompiler.y"
-    {}
+#line 271 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Gt","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 55:
-#line 149 "uccompiler.y"
-    {}
+#line 277 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Plus","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));	
+														}
     break;
 
   case 56:
-#line 150 "uccompiler.y"
-    {}
+#line 282 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Minus","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 57:
-#line 151 "uccompiler.y"
-    {}
+#line 287 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Mul","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));	
+														}
     break;
 
   case 58:
-#line 152 "uccompiler.y"
-    {}
+#line 292 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Div","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));	
+														}
     break;
 
   case 59:
-#line 153 "uccompiler.y"
-    {}
+#line 297 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Mod","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 60:
-#line 155 "uccompiler.y"
-    {}
+#line 303 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Or","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 61:
-#line 156 "uccompiler.y"
-    {}
+#line 308 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("And","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 62:
-#line 157 "uccompiler.y"
-    {}
+#line 313 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("BitWiseAnd","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 63:
-#line 158 "uccompiler.y"
-    {}
+#line 318 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("BitWiseOr","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 64:
-#line 159 "uccompiler.y"
-    {}
+#line 323 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("BitWiseXor","");
+															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
+															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
+														}
     break;
 
   case 65:
-#line 161 "uccompiler.y"
-    {}
+#line 329 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Plus","");
+															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
+														}
     break;
 
   case 66:
-#line 162 "uccompiler.y"
-    {}
+#line 333 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Minus","");
+															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
+														}
     break;
 
   case 67:
-#line 163 "uccompiler.y"
-    {}
+#line 337 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Not","");
+															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
+														}
     break;
 
   case 68:
-#line 165 "uccompiler.y"
-    {}
+#line 342 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (3)].string));
+														}
     break;
 
   case 69:
-#line 166 "uccompiler.y"
-    {}
+#line 345 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (4)].string));
+															adicionar_filho((yyval.ast),(yyvsp[(3) - (4)].ast));
+														}
     break;
 
   case 70:
-#line 168 "uccompiler.y"
-    {}
+#line 350 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (1)].string));
+														}
     break;
 
   case 71:
-#line 169 "uccompiler.y"
-    {}
+#line 353 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("IntLit",(yyvsp[(1) - (1)].string));
+														}
     break;
 
   case 72:
-#line 170 "uccompiler.y"
-    {}
+#line 356 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("ChrLit",(yyvsp[(1) - (1)].string));
+														}
     break;
 
   case 73:
-#line 171 "uccompiler.y"
-    {}
+#line 359 "uccompiler.y"
+    {
+															(yyval.ast) = cria_no("RealLit",(yyvsp[(1) - (1)].string));
+														}
     break;
 
   case 74:
-#line 172 "uccompiler.y"
-    {}
+#line 362 "uccompiler.y"
+    {
+															(yyval.ast) = (yyvsp[(2) - (3)].ast);
+														}
     break;
 
   case 75:
-#line 174 "uccompiler.y"
-    {}
+#line 366 "uccompiler.y"
+    {
+															(yyval.ast) = NULL;
+															print_flag = 0;
+														}
     break;
 
   case 76:
-#line 175 "uccompiler.y"
-    {}
+#line 370 "uccompiler.y"
+    {
+															(yyval.ast) = NULL;
+															print_flag = 0;
+														}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1984 "y.tab.c"
+#line 2182 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2194,7 +2392,7 @@ yyreturn:
 }
 
 
-#line 178 "uccompiler.y"
+#line 376 "uccompiler.y"
 
 
 int main(int argc, char *argv[]){
@@ -2207,11 +2405,14 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			imprime_arvore(root,0);
+			if(print_flag == 1)
+				imprime_arvore(root,0);
 		}
 	}
-	flag=2;
-	yyparse();
-	yylex_destroy();
-	return 0;
+	else{
+		flag=2;
+		yyparse();
+		yylex_destroy();
+		return 0;
+	}
 }

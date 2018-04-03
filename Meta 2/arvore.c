@@ -7,7 +7,7 @@
 #include <string.h>
 #include "arvore.h"
 
-AST_struct cria_no(char* valor, char* tipo) {
+AST_struct cria_no(char* tipo, char* valor) {
 	AST_struct novo_no = malloc(sizeof(AST_struct));
 
 	novo_no->pai = NULL;

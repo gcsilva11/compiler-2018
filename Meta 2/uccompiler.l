@@ -8,6 +8,9 @@
 	#include "arvore.h"
 	#include "y.tab.h"
 
+	void imprime(char* msg);
+	void imprime_com_conteudo(char* msg, char* conteudo);
+
 	#define LINHA linha++; coluna=1;
 	#define COLUNA coluna+=yyleng;
 
