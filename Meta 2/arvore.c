@@ -7,19 +7,19 @@
 #include <string.h>
 #include "arvore.h"
 
-AST_struct cria_no(char tipo[], char valor[]) {
+AST_struct cria_no(char* tipo, char* valor) {
 	
-	printf("%s   %s\n",valor,tipo);
-	AST_struct novo_no = malloc(sizeof(AST_struct));
+	//printf("%s   %s\n",valor,tipo);
+	AST_struct novo_no = (AST_struct)malloc(sizeof(AST));
 	
 
 	//printf("\nTipo:%s , Malloc ha de ser:%lu\n",tipo,strlen(tipo)*sizeof(char*)+1);
-	novo_no->tipo = malloc(strlen(tipo)*sizeof(char)+1); // +1 para contar com '\0'
+	novo_no->tipo = (char*)malloc(strlen(tipo)*sizeof(char)+1); // +1 para contar com '\0'
 	strcpy(novo_no->tipo,tipo);
 	//printf("\nMalloc tipo\n");
 
 	//printf("\nValor:%s , Malloc ha de ser:%lu\n",valor,strlen(valor)*sizeof(char)+1);
-	novo_no->valor = malloc(strlen(valor)*sizeof(char)+1); // +1 para contar com '\0'
+	novo_no->valor = (char*)malloc(strlen(valor)*sizeof(char)+1); // +1 para contar com '\0'
 	strcpy(novo_no->valor,valor);
 	//printf("\nMalloc valor\n");
 
