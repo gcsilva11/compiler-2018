@@ -11,8 +11,7 @@
 	#define LINHA linha++; coluna=1;
 	#define COLUNA coluna+=yyleng;
 
-	int flag = 0, coluna = 1, linha = 1, linha_aux = 0, coluna_aux = 0;
-	AST_struct root = NULL;
+	int flag, coluna = 1, linha = 1, linha_aux = 0, coluna_aux = 0;
 %}
 
 %X MULTIPCOM_ST
@@ -84,45 +83,45 @@ LINETERMINATOR					"\n"|"\r\n"
 
 {RESERVED}						{imprime_com_conteudo("RESERVED", yytext);COLUNA; return RESERVED;}
 
-{CHAR} 							{imprime("CHAR"); COLUNA; if(flag==0) return CHAR;}
-{ELSE} 							{imprime("ELSE"); COLUNA; if(flag==0) return ELSE;}
-{WHILE} 						{imprime("WHILE"); COLUNA; if(flag==0) return WHILE;}
-{IF} 							{imprime("IF"); COLUNA; if(flag==0) return IF;}
-{INT}							{imprime("INT"); COLUNA; if(flag==0) return INT;}
-{SHORT} 						{imprime("SHORT"); COLUNA; if(flag==0) return SHORT;}
-{DOUBLE}						{imprime("DOUBLE"); COLUNA; if(flag==0) return DOUBLE;}
-{RETURN} 						{imprime("RETURN"); COLUNA; if(flag==0) return RETURN;}
-{VOID} 							{imprime("VOID"); COLUNA; if(flag==0) return VOID;}
-{BITWISEAND} 					{imprime("BITWISEAND"); COLUNA; if(flag==0) return BITWISEAND;}
-{BITWISEOR} 					{imprime("BITWISEOR"); COLUNA; if(flag==0) return BITWISEOR;}
-{BITWISEXOR} 					{imprime("BITWISEXOR"); COLUNA; if(flag==0) return BITWISEXOR;}
-{AND} 							{imprime("AND"); COLUNA; if(flag==0) return AND;}
-{ASSIGN} 						{imprime("ASSIGN"); COLUNA; if(flag==0) return ASSIGN;}
-{MUL} 							{imprime("MUL"); COLUNA; if(flag==0) return MUL;}
-{COMMA} 						{imprime("COMMA"); COLUNA; if(flag==0) return COMMA;}
-{DIV} 							{imprime("DIV"); COLUNA; if(flag==0) return DIV;}
-{EQ} 							{imprime("EQ"); COLUNA; if(flag==0) return EQ;}
-{GE} 							{imprime("GE"); COLUNA; if(flag==0) return GE;}
-{GT} 							{imprime("GT"); COLUNA; if(flag==0) return GT;}
-{LBRACE} 						{imprime("LBRACE"); COLUNA; if(flag==0) return LBRACE;}
-{LE} 							{imprime("LE"); COLUNA; if(flag==0) return LE;}
-{LPAR} 							{imprime("LPAR"); COLUNA; if(flag==0) return LPAR;}
-{LT} 							{imprime("LT"); COLUNA; if(flag==0) return LT;}
-{MINUS} 						{imprime("MINUS"); COLUNA; if(flag==0) return MINUS;}
-{MOD} 							{imprime("MOD"); COLUNA; if(flag==0) return MOD;}
-{NE} 							{imprime("NE"); COLUNA; if(flag==0) return NE;}
-{NOT} 							{imprime("NOT"); COLUNA; if(flag==0) return NOT;}
-{OR} 							{imprime("OR"); COLUNA; if(flag==0) return OR;}
-{PLUS} 							{imprime("PLUS"); COLUNA; if(flag==0) return PLUS;}
-{RBRACE} 						{imprime("RBRACE"); COLUNA; if(flag==0) return RBRACE;}
-{RPAR} 							{imprime("RPAR"); COLUNA; if(flag==0) return RPAR;}
-{SEMI} 							{imprime("SEMI"); COLUNA; if(flag==0) return SEMI;}
+{CHAR} 							{imprime("CHAR"); COLUNA; if(flag==2) return CHAR;}
+{ELSE} 							{imprime("ELSE"); COLUNA; if(flag==2) return ELSE;}
+{WHILE} 						{imprime("WHILE"); COLUNA; if(flag==2) return WHILE;}
+{IF} 							{imprime("IF"); COLUNA; if(flag==2) return IF;}
+{INT}							{imprime("INT"); COLUNA; if(flag==2) return INT;}
+{SHORT} 						{imprime("SHORT"); COLUNA; if(flag==2) return SHORT;}
+{DOUBLE}						{imprime("DOUBLE"); COLUNA; if(flag==2) return DOUBLE;}
+{RETURN} 						{imprime("RETURN"); COLUNA; if(flag==2) return RETURN;}
+{VOID} 							{imprime("VOID"); COLUNA; if(flag==2) return VOID;}
+{BITWISEAND} 					{imprime("BITWISEAND"); COLUNA; if(flag==2) return BITWISEAND;}
+{BITWISEOR} 					{imprime("BITWISEOR"); COLUNA; if(flag==2) return BITWISEOR;}
+{BITWISEXOR} 					{imprime("BITWISEXOR"); COLUNA; if(flag==2) return BITWISEXOR;}
+{AND} 							{imprime("AND"); COLUNA; if(flag==2) return AND;}
+{ASSIGN} 						{imprime("ASSIGN"); COLUNA; if(flag==2) return ASSIGN;}
+{MUL} 							{imprime("MUL"); COLUNA; if(flag==2) return MUL;}
+{COMMA} 						{imprime("COMMA"); COLUNA; if(flag==2) return COMMA;}
+{DIV} 							{imprime("DIV"); COLUNA; if(flag==2) return DIV;}
+{EQ} 							{imprime("EQ"); COLUNA; if(flag==2) return EQ;}
+{GE} 							{imprime("GE"); COLUNA; if(flag==2) return GE;}
+{GT} 							{imprime("GT"); COLUNA; if(flag==2) return GT;}
+{LBRACE} 						{imprime("LBRACE"); COLUNA; if(flag==2) return LBRACE;}
+{LE} 							{imprime("LE"); COLUNA; if(flag==2) return LE;}
+{LPAR} 							{imprime("LPAR"); COLUNA; if(flag==2) return LPAR;}
+{LT} 							{imprime("LT"); COLUNA; if(flag==2) return LT;}
+{MINUS} 						{imprime("MINUS"); COLUNA; if(flag==2) return MINUS;}
+{MOD} 							{imprime("MOD"); COLUNA; if(flag==2) return MOD;}
+{NE} 							{imprime("NE"); COLUNA; if(flag==2) return NE;}
+{NOT} 							{imprime("NOT"); COLUNA; if(flag==2) return NOT;}
+{OR} 							{imprime("OR"); COLUNA; if(flag==2) return OR;}
+{PLUS} 							{imprime("PLUS"); COLUNA; if(flag==2) return PLUS;}
+{RBRACE} 						{imprime("RBRACE"); COLUNA; if(flag==2) return RBRACE;}
+{RPAR} 							{imprime("RPAR"); COLUNA; if(flag==2) return RPAR;}
+{SEMI} 							{imprime("SEMI"); COLUNA; if(flag==2) return SEMI;}
 
-{ID}							{imprime_com_conteudo("ID", yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return ID;}}
+{ID}							{imprime_com_conteudo("ID", yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return ID;}}
 
-{INTLIT}						{imprime_com_conteudo("INTLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return INTLIT;}}
-{REALLIT}						{imprime_com_conteudo("REALLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return REALLIT;}}
-{ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext);if(flag==0){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
+{INTLIT}						{imprime_com_conteudo("INTLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return INTLIT;}}
+{REALLIT}						{imprime_com_conteudo("REALLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return REALLIT;}}
+{ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
 {ASP}({CHRLIT}|\\.)*{ASP} 		{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
 {ASP}({CHRLIT}|\\.)*\\?			{printf("Line %d, col %d: unterminated char constant\n",linha,coluna);}
 
@@ -156,23 +155,4 @@ int yywrap(){
 
 void yyerror (const char *s) { 
 	printf ("Line %d, col %d: %s: %s\n", linha, (int)(coluna-strlen(yytext)), s, yytext);
-}
-
-int main(int argc, char *argv[]){
-	if(argc > 1){
-		if(strcmp(argv[1],"-l") == 0){
-			flag=1;
-			yylex();
-		}
-		if(strcmp(argv[1],"-t") == 0){
-			flag=2;
-			yyparse();
-			yylex_destroy();
-			imprime_arvore(root,0);
-		}
-	}
-	flag=2;
-	yyparse();
-	yylex_destroy();
-	return 0;
 }

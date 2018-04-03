@@ -8,8 +8,8 @@
 	#include <string.h>
 	#include "arvore.h"
 
-	int yylex(void);
-	void yyerror (const char *s);
+	AST_struct root = NULL;
+	int flag;
 %}
 
 %union{
@@ -176,3 +176,22 @@ Expr:
 	; 
 
 %%
+
+int main(int argc, char *argv[]){
+	if(argc > 1){
+		if(strcmp(argv[1],"-l") == 0){
+			flag=1;
+			yylex();
+		}
+		if(strcmp(argv[1],"-t") == 0){
+			flag=2;
+			yyparse();
+			yylex_destroy();
+			imprime_arvore(root,0);
+		}
+	}
+	flag=2;
+	yyparse();
+	yylex_destroy();
+	return 0;
+}

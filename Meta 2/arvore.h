@@ -15,9 +15,17 @@ typedef struct AST {
 	char* tipo;
 }AST;
 
+//Lex
 void imprime(char* msg);
 void imprime_com_conteudo(char* msg, char* conteudo);
 int yyparse();
+
+//Yacc
+int yylex(void);
+void yyerror (const char *s);
+int yylex_destroy();
+
+//AST
 AST_struct cria_no(char*, char*);
 void adicionar_filho(AST_struct, AST_struct);
 void adicionar_irmao(AST_struct, AST_struct);
