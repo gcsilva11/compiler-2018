@@ -8,7 +8,7 @@
 	#include <string.h>
 	#include "arvore.h"
 
-	AST_struct root = NULL, aux = NULL;
+	AST_struct root = NULL, aux = NULL, aux2 = NULL;
 	int flag = 0, print_flag = 1;
 %}
 
@@ -20,7 +20,7 @@
 %token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
 %token <string> REALLIT CHRLIT INTLIT ID RESERVED
 
-%type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux Expr ParameterListAux
+%type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux Expr ParameterListAux Expr2
 
 %left COMMA
 %right ASSIGN
@@ -165,22 +165,22 @@ ParameterDeclaration:
 	;
 
 Declaration: 
-	DeclarationAux SEMI 								{
-															$$ = $1;
+	TypeSpec Declarator DeclarationAux SEMI 			{
+															$$ = cria_no("Declaration","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$2);
+															adicionar_irmao($$,$3);
 														}
 	;
 
 DeclarationAux:
-	TypeSpec Declarator 								{
-															$$ = cria_no("Declaration","");
-															adicionar_filho($$,$1);
-															adicionar_irmao($1,$2);
+														{
+															$$ = NULL;
 														}
-	| DeclarationAux COMMA Declarator 					{
+	| COMMA Declarator DeclarationAux 					{
 															$$ = cria_no("Declaration","");
-															adicionar_filho($$,$3);
-															adicionar_irmao($$,$1);
-															
+															adicionar_filho($$,$2);
+															adicionar_irmao($$,$3);
 														}
 	;
 
@@ -233,6 +233,12 @@ Statement:
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
+															else{
+																aux = cria_no("Null","");
+																adicionar_irmao($3,aux);
+															}
+															aux = cria_no("Null","");
+															adicionar_irmao($3,aux);
 														}
 	| IF LPAR Expr RPAR Statement ELSE Statement 		{
 															$$ = cria_no("If","");
@@ -240,8 +246,16 @@ Statement:
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
+															else{
+																aux = cria_no("Null","");
+																adicionar_irmao($3,aux);
+															}
 															if($7 != NULL){
 																adicionar_irmao($5,$7);
+															}
+															else{
+																aux = cria_no("Null","");
+																adicionar_irmao($3,aux);
 															}
 														}
 
@@ -251,10 +265,16 @@ Statement:
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
+															else{
+																aux = cria_no("Null","");
+																adicionar_irmao($3,aux);
+															}
 														}
 
 	| RETURN SEMI 										{
 															$$ = cria_no("Return","");
+															aux = cria_no("Null","");
+															adicionar_filho($$,aux);
 														}
 	| RETURN Expr SEMI 									{
 															$$ = cria_no("Return","");
@@ -335,12 +355,12 @@ Expr:
 														}
 
 	| Expr PLUS Expr 									{
-															$$ = cria_no("Plus","");
+															$$ = cria_no("Add","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
 														}
 	| Expr MINUS Expr 									{
-															$$ = cria_no("Minus","");
+															$$ = cria_no("Sub","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
 														}
@@ -404,7 +424,7 @@ Expr:
 															aux = cria_no("Id",$1);
 															adicionar_filho($$,aux);
 														}
-	| ID LPAR Expr RPAR 								{
+	| ID LPAR Expr2 RPAR 								{
 															$$ = cria_no("Call","");
 															aux = cria_no("Id",$1);
 															adicionar_filho($$,aux);
@@ -435,7 +455,152 @@ Expr:
 															$$ = NULL;
 															print_flag = 0;
 														}
-	; 
+	;
+
+Expr2:
+	Expr2 ASSIGN Expr2 									{
+															$$ = cria_no("Store","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 COMMA Expr2 									{
+															$$ = $1;
+															adicionar_irmao($1,$3);
+														}
+
+	| Expr2 EQ Expr2 										{
+															$$ = cria_no("Eq","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 NE Expr2 										{
+															$$ = cria_no("Ne","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 LE Expr2 										{
+															$$ = cria_no("Le","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 GE Expr2 										{
+															$$ = cria_no("Ge","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 LT Expr2 										{
+															$$ = cria_no("Lt","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 GT Expr2 										{
+															$$ = cria_no("Gt","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+
+	| Expr2 PLUS Expr2 									{
+															$$ = cria_no("Add","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 MINUS Expr2 									{
+															$$ = cria_no("Sub","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 MUL Expr2 									{
+															$$ = cria_no("Mul","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 DIV Expr2 									{
+															$$ = cria_no("Div","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 MOD Expr2 									{
+															$$ = cria_no("Mod","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+
+	| Expr2 OR Expr2 										{
+															$$ = cria_no("Or","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 AND Expr2 									{
+															$$ = cria_no("And","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 BITWISEAND Expr2 								{
+															$$ = cria_no("BitWiseAnd","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 BITWISEOR Expr2 								{
+															$$ = cria_no("BitWiseOr","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+	| Expr2 BITWISEXOR Expr2 								{
+															$$ = cria_no("BitWiseXor","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$3);
+														}
+
+	| PLUS Expr2 										{
+															$$ = cria_no("Plus","");
+															adicionar_filho($$,$2);
+														}
+	| MINUS Expr2 										{
+															$$ = cria_no("Minus","");
+															adicionar_filho($$,$2);
+														}
+	| NOT Expr2 											{
+															$$ = cria_no("Not","");
+															adicionar_filho($$,$2);
+														}
+
+	| ID LPAR RPAR 										{
+															$$ = cria_no("Call","");
+															aux = cria_no("Id",$1);
+															adicionar_filho($$,aux);
+														}
+	| ID LPAR Expr2 RPAR 								{
+															$$ = cria_no("Call","");
+															aux = cria_no("Id",$1);
+															adicionar_filho($$,aux);
+															adicionar_irmao(aux,$3);
+														}
+
+	| ID 												{
+															$$ = cria_no("Id",$1);
+														}
+	| INTLIT 											{
+															$$ = cria_no("IntLit",$1);
+														}
+	| CHRLIT 											{
+															$$ = cria_no("ChrLit",$1);
+														}
+	| REALLIT 											{
+															$$ = cria_no("RealLit",$1);
+														}
+	| LPAR Expr2 RPAR 									{
+															$$ = $2;
+														}
+
+	| ID LPAR error RPAR 								{
+															$$ = NULL;
+															print_flag = 0;
+														}
+	| LPAR error RPAR 									{
+															$$ = NULL;
+															print_flag = 0;
+														}
+	;
 
 %%
 
