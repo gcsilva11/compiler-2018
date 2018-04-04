@@ -8,30 +8,17 @@
 #include "arvore.h"
 
 AST_struct cria_no(char* tipo, char* valor) {
-	
-	//printf("%s   %s\n",valor,tipo);
 	AST_struct novo_no = (AST_struct)malloc(sizeof(AST));
-	
 
-	//printf("\nTipo:%s , Malloc ha de ser:%lu\n",tipo,strlen(tipo)*sizeof(char*)+1);
 	novo_no->tipo = (char*)malloc(strlen(tipo)*sizeof(char)+1); // +1 para contar com '\0'
 	strcpy(novo_no->tipo,tipo);
-	//printf("\nMalloc tipo\n");
 
-	//printf("\nValor:%s , Malloc ha de ser:%lu\n",valor,strlen(valor)*sizeof(char)+1);
 	novo_no->valor = (char*)malloc(strlen(valor)*sizeof(char)+1); // +1 para contar com '\0'
 	strcpy(novo_no->valor,valor);
-	//printf("\nMalloc valor\n");
 
-	//printf("\nCriou novo no\n");
 	novo_no->pai = NULL;
-	//printf("\nPai null\n");
 	novo_no->filho = NULL;
-	//printf("\nFilho null\n");
 	novo_no->irmao = NULL;
-	//printf("\nBro null\n");
-
-	//printf("\n'cabou\n");
 
 	return novo_no;
 }
@@ -77,21 +64,23 @@ int conta_irmaos(AST_struct raiz){
 
 void imprime_arvore(AST_struct no, int profundidade){
 	if (no != NULL){
-
 		int prof_aux = 0;
 		AST_struct aux;
 
-		if (strcmp(no->tipo,"Program") == 0)
+		if (strcmp(no->tipo,"Program") == 0){
 			printf("%s\n",no->tipo);
+		}
 		else {
 			while(prof_aux < profundidade){
 				printf("..");
 				prof_aux++;
 			}
-			if(strcmp(no->valor,"") == 0)
+			if(strcmp(no->valor,"") == 0){
 				printf("%s\n", no->tipo);
-			else
+			}
+			else{
 				printf("%s(%s)\n", no->tipo, no->valor);
+			}
 		}
 		aux = no->filho;
 		while(aux != NULL){

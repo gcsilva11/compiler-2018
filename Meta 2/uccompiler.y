@@ -43,24 +43,23 @@
 Program:
 	FunctionsAndDeclarations 							{
 															root = cria_no("Program","");
-															aux = cria_no("FunctionsAndDeclarations","");
-															adicionar_filho(root,aux);
+															adicionar_filho(root,$1);
 															$$ = root;
 														}
 	;
 
 FunctionsAndDeclarations: 
 	FunctionsAndDeclarations FunctionDefinition			{
-															$$=$2;
-															adicionar_irmao($$,$1);
+															adicionar_irmao($2,$1);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations FunctionDeclaration 		{
-															$$=$2;
-															adicionar_irmao($$,$1);
+															adicionar_irmao($2,$1);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations Declaration 				{
-															$$=$2;
-															adicionar_irmao($$,$1);
+															adicionar_irmao($2,$1);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations error SEMI 				{
 															$$ = NULL;
@@ -83,144 +82,121 @@ FunctionsAndDeclarations:
 
 FunctionDefinition: 
 	TypeSpec FunctionDeclarator FunctionBody 			{
-															aux = cria_no("FuncDefinition","");
-															adicionar_filho(aux,$1);
-															adicionar_filho($1,$2);
-															adicionar_filho($1,$3);
-															$$ = aux;
+															$$ = cria_no("FuncDefinition","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$2);
+															adicionar_irmao($2,$3);
 														}
 	;
 
 FunctionBody: 
 	LBRACE RBRACE										{
-															aux = cria_no("FuncBody","");
-															$$ = aux;
+															$$ = cria_no("FuncBody","");
 														}
 	| LBRACE DeclarationAndStatements RBRACE 			{
-															aux = cria_no("FuncBody","");
-															if($2!=NULL){
-																adicionar_filho($2,aux);
-															}
-															$$ = aux;
+															$$ = cria_no("FuncBody","");
+															adicionar_filho($$,$2);
 														}
 	;
 
 DeclarationAndStatements: 
 	Statement DeclarationAndStatements 					{
-															if($2!=NULL){
-																adicionar_irmao($2,$1);
-															}
-															$$ = $1;
+															adicionar_irmao($1,$2);
+															$$ = $2;
 														}
 	| Declaration DeclarationAndStatements 				{
-															if($1 != NULL && $2 != NULL){
-																adicionar_irmao($2, $1);
-																$$ = $1;
-															}
-															else if($1 != NULL && $2 == NULL){
-																$$ = $1;
-															}
-															else{					
-																$$ = $2;
-															}
+															adicionar_irmao($1,$2);
+															$$ = $2;
 														}
 	| Statement 										{
-															$$=$1;
+															$$ = $1;
 														}
 	| Declaration 										{
-															$$=$1;
+															$$ = $1;
 														}
 	;
 
 FunctionDeclaration: 
 	TypeSpec FunctionDeclarator SEMI 					{
-															aux = cria_no("FunctDeclaration","");
-															adicionar_filho(aux,$1);
-															adicionar_filho($1,$2);
-															$$ = aux;
+															$$ = cria_no("FunctDeclaration","");
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,$2);
 														}
 	;
 
 FunctionDeclarator: 
 	ID LPAR ParameterList RPAR 							{
-															aux = cria_no("Id",$1);
-															adicionar_irmao(aux,$3);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
+															adicionar_irmao($$,$3);
 														}
 	;
 
 ParameterList: 
 	ParameterDeclaration 								{
-															aux = cria_no("ParamList","");
-															adicionar_filho($1,aux);
-															$$ = aux;
+															$$ = cria_no("ParameterList","");
+															adicionar_filho($$,$1);
 														}
 	| ParameterList COMMA ParameterDeclaration 			{
-															adicionar_filho($3,$1);
-															$$=$1;
+															adicionar_irmao($1,$3);
+															$$ = $1;
 														}
 	;
 
 ParameterDeclaration: 
 	TypeSpec 											{
-															$$ = $1;
+															$$ = cria_no("ParameterDeclaration","");
+															adicionar_filho($$,$1);
 														}
 	| TypeSpec ID 										{
-															aux = cria_no("Id",$2);
-															adicionar_irmao($1,aux);
 															$$ = $1;
+															aux = cria_no("Id",$2);
+															adicionar_irmao($$,aux);
 														}
 	;
 
 Declaration: 
 	DeclarationAux SEMI 								{
-															aux = cria_no("Declaration","");
-															$$ = aux;
+															$$ = $1;
 														}
 	;
 
 DeclarationAux:
 	TypeSpec Declarator 								{
+															$$ = cria_no("Declaration","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$2);
 														}
 	| DeclarationAux COMMA Declarator 					{
+															$$ = cria_no("Declaration","");
 															$$ = $1;
 														}
 	;
 
 TypeSpec:
 	CHAR 												{
-															aux = cria_no("Char","");
-															$$ = aux;
+															$$ = cria_no("Char","");
 														}
 	| INT 												{
-															aux = cria_no("Int","");
-															$$ = aux;
+															$$ = cria_no("Int","");
 														}
 	| VOID 												{
-															aux = cria_no("Void","");
-															$$ = aux;
+															$$ = cria_no("Void","");
 														}
 	| SHORT 											{
-															aux = cria_no("Short","");
-															$$ = aux;
+															$$ = cria_no("Short","");
 														}
 	| DOUBLE 											{
-															aux = cria_no("Double","");
-															$$ = aux;
+															$$ = cria_no("Double","");
 														}
 	;
 
 Declarator:
 	ID 													{
-															aux = cria_no("Id",$1);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
 														}
 	| ID ASSIGN Expr 									{
-															aux = cria_no("Id",$1);
-															adicionar_filho(aux,$3);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
+															adicionar_filho($$,$3);
 														}
 	;
 
@@ -310,158 +286,131 @@ StatementAux:
 
 Expr:
 	Expr ASSIGN Expr 									{
-															aux = cria_no("Store","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Store","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr COMMA Expr 									{
-															aux = cria_no("Comma","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Comma","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 
 	| Expr EQ Expr 										{
-															aux = cria_no("Eq","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Eq","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr NE Expr 										{
-															aux = cria_no("Ne","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Ne","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr LE Expr 										{
-															aux = cria_no("Le","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Le","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr GE Expr 										{
-															aux = cria_no("Ge","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Ge","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr LT Expr 										{
-															aux = cria_no("Lt","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Lt","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr GT Expr 										{
-															aux = cria_no("Gt","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Gt","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 
 	| Expr PLUS Expr 									{
-															aux = cria_no("Plus","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Plus","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr MINUS Expr 									{
-															aux = cria_no("Minus","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Minus","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr MUL Expr 									{
-															aux = cria_no("Mul","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Mul","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr DIV Expr 									{
-															aux = cria_no("Div","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Div","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr MOD Expr 									{
-															aux = cria_no("Mod","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Mod","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 
 	| Expr OR Expr 										{
-															aux = cria_no("Or","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("Or","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr AND Expr 									{
-															aux = cria_no("And","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("And","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr BITWISEAND Expr 								{
-															aux = cria_no("BitWiseAnd","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("BitWiseAnd","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr BITWISEOR Expr 								{
-															aux = cria_no("BitWiseOr","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("BitWiseOr","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 	| Expr BITWISEXOR Expr 								{
-															aux = cria_no("BitWiseXor","");
-															adicionar_filho(aux,$1);
+															$$ = cria_no("BitWiseXor","");
+															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
-															$$ = aux;
 														}
 
 	| PLUS Expr 										{
-															aux = cria_no("Plus","");
-															adicionar_filho(aux,$2);
-															$$ = aux;
+															$$ = cria_no("Plus","");
+															adicionar_filho($$,$2);
 														}
 	| MINUS Expr 										{
-															aux = cria_no("Minus","");
-															adicionar_filho(aux,$2);
-															$$ = aux;
+															$$ = cria_no("Minus","");
+															adicionar_filho($$,$2);
 														}
 	| NOT Expr 											{
-															aux = cria_no("Not","");
-															adicionar_filho(aux,$2);
-															$$ = aux;
+															$$ = cria_no("Not","");
+															adicionar_filho($$,$2);
 														}
 
 	| ID LPAR RPAR 										{
-															aux = cria_no("Id",$1);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
 														}
 	| ID LPAR Expr RPAR 								{
-															aux = cria_no("Id",$1);
-															adicionar_filho(aux,$3);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
+															adicionar_irmao($$,$3);
 														}
 
 	| ID 												{
-															aux = cria_no("Id",$1);
-															$$ = aux;
+															$$ = cria_no("Id",$1);
 														}
 	| INTLIT 											{
-															aux= cria_no("IntLit",$1);
-															$$ = aux;
+															$$ = cria_no("IntLit",$1);
 														}
 	| CHRLIT 											{
-															aux = cria_no("ChrLit",$1);
-															$$ = aux;
+															$$ = cria_no("ChrLit",$1);
 														}
 	| REALLIT 											{
-															aux = cria_no("RealLit",$1);
-															$$ = aux;
+															$$ = cria_no("RealLit",$1);
 														}
 	| LPAR Expr RPAR 									{
 															$$ = $2;

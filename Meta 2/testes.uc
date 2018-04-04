@@ -1,9 +1,9 @@
-int main(void, char) {
+/*int main(void, char) {
     int a, b, c; d = 2, a = 'a';
     int a = b2 != x;
-}
+}*/
 
-/*double main(char in,int,void,double, int); 
+double main(char in,int,void,double, int); 
 
 int main(int x, int y, int z) { 
     int x = 1, y = 2, z; 
@@ -99,4 +99,4 @@ int oi(int tudo,int bem){
 int x(int x){ 
     char a = b, r = a -b;  
     putchar(x=a,a+v,c-d,!b,+a,-b); 
-}*/
+}
