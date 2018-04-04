@@ -8,7 +8,7 @@
 	#include <string.h>
 	#include "arvore.h"
 
-	AST_struct root = NULL, aux = NULL, aux2 = NULL;
+	AST_struct root = NULL, aux = NULL;
 	int flag = 0, print_flag = 1;
 %}
 
@@ -50,16 +50,16 @@ Program:
 
 FunctionsAndDeclarations: 
 	FunctionsAndDeclarations FunctionDefinition			{
-															adicionar_irmao($2,$1);
-															$$ = $2;
+															adicionar_irmao($1,$2);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations FunctionDeclaration 		{
-															adicionar_irmao($2,$1);
-															$$ = $2;
+															adicionar_irmao($1,$2);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations Declaration 				{
-															adicionar_irmao($2,$1);
-															$$ = $2;
+															adicionar_irmao($1,$2);
+															$$ = $1;
 														}
 	| FunctionsAndDeclarations error SEMI 				{
 															$$ = NULL;
@@ -118,7 +118,7 @@ DeclarationAndStatements:
 
 FunctionDeclaration: 
 	TypeSpec FunctionDeclarator SEMI 					{
-															$$ = cria_no("FunctDeclaration","");
+															$$ = cria_no("FuncDeclaration","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$2);
 														}
@@ -133,7 +133,7 @@ FunctionDeclarator:
 
 ParameterList: 
 	ParameterDeclaration ParameterListAux				{
-															$$ = cria_no("ParameterList","");
+															$$ = cria_no("ParamList","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$2);
 														}
@@ -152,14 +152,14 @@ ParameterListAux:
 
 ParameterDeclaration: 
 	TypeSpec 											{
-															$$ = cria_no("ParameterDeclaration","");
+															$$ = cria_no("ParamDeclaration","");
 															adicionar_filho($$,$1);
 														}
 	| TypeSpec ID 										{
-															$$ = cria_no("ParameterDeclaration","");
+															$$ = cria_no("ParamDeclaration","");
 															aux = cria_no("Id",$2);
-															adicionar_irmao(aux,$1);
-															adicionar_filho($$,aux);
+															adicionar_filho($$,$1);
+															adicionar_irmao($1,aux);
 															
 														}
 	;
@@ -178,8 +178,9 @@ DeclarationAux:
 														}
 	| DeclarationAux COMMA Declarator 					{
 															$$ = cria_no("Declaration","");
-															adicionar_irmao($$,$1);
 															adicionar_filho($$,$3);
+															adicionar_irmao($$,$1);
+															
 														}
 	;
 
@@ -207,7 +208,7 @@ Declarator:
 														}
 	| ID ASSIGN Expr 									{
 															$$ = cria_no("Id",$1);
-															adicionar_filho($$,$3);
+															adicionar_irmao($$,$3);
 														}
 	;
 
@@ -227,42 +228,37 @@ Statement:
 														}
 
 	| IF LPAR Expr RPAR Statement %prec ELSE_PRIORITY 	{
-															aux = cria_no("If","");
-															adicionar_filho(aux,$3);
+															$$ = cria_no("If","");
+															adicionar_filho($$,$3);
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
-															$$ = aux;
 														}
 	| IF LPAR Expr RPAR Statement ELSE Statement 		{
-															aux = cria_no("If","");
-															adicionar_filho(aux,$3);
+															$$ = cria_no("If","");
+															adicionar_filho($$,$3);
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
 															if($7 != NULL){
 																adicionar_irmao($5,$7);
 															}
-															$$ = aux;
 														}
 
 	| WHILE LPAR Expr RPAR Statement 					{
-															aux = cria_no("While","");
-															adicionar_filho(aux,$3);
+															$$ = cria_no("While","");
+															adicionar_filho($$,$3);
 															if($5 != NULL){
 																adicionar_irmao($3,$5);
 															}
-															$$ = aux;
 														}
 
 	| RETURN SEMI 										{
-															aux = cria_no("Return","");
-															$$ = aux;
+															$$ = cria_no("Return","");
 														}
 	| RETURN Expr SEMI 									{
-															aux = cria_no("Return","");
-															adicionar_filho(aux,$2);
-															$$ = aux;
+															$$ = cria_no("Return","");
+															adicionar_filho($$,$2);
 														}
 
 	| error SEMI 										{
@@ -404,11 +400,15 @@ Expr:
 														}
 
 	| ID LPAR RPAR 										{
-															$$ = cria_no("Id",$1);
+															$$ = cria_no("Call","");
+															aux = cria_no("Id",$1);
+															adicionar_filho($$,aux);
 														}
 	| ID LPAR Expr RPAR 								{
-															$$ = cria_no("Id",$1);
-															adicionar_irmao($$,$3);
+															$$ = cria_no("Call","");
+															aux = cria_no("Id",$1);
+															adicionar_filho($$,aux);
+															adicionar_irmao(aux,$3);
 														}
 
 	| ID 												{
