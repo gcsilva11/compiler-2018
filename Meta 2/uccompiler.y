@@ -232,7 +232,16 @@ Statement:
 															$$ = NULL;
 														}
 	| LBRACE StatementAux RBRACE 						{
-															$$ = $2;
+															aux = $2;
+															if(aux!=NULL && aux->irmao!=NULL){
+																aux2 = cria_no("StatList","");
+																adicionar_filho(aux2,aux);
+																$$ = aux2;
+															}
+															else if(aux!=NULL && aux->irmao==NULL){
+																$$ = aux;
+															}
+
 														}
 
 	| IF LPAR Expr RPAR Statement %prec ELSE_PRIORITY 	{
@@ -290,6 +299,7 @@ Statement:
 														}
 
 	| error SEMI 										{
+															$$ = NULL;
 															print_flag = 1;
 														}
 	| LBRACE error RBRACE 								{
@@ -301,20 +311,12 @@ Statement:
 StatementAux:
 	Statement 											{
 															$$ = $1;
+															adicionar_irmao($$,cria_no("Null",""));
 														}
 	;
 	| StatementAux Statement 							{
-															if($1 == NULL && $2 != NULL){
-																$$ = $2;
-															}
-															else if($2 == NULL && $1 != NULL){
-																$$ = $1;
-															}
-															else{
-																$$ = cria_no("StatList","");
-																adicionar_filho($$,$1);
-																adicionar_irmao($1,$2);
-															}
+															$$ = $1;
+															adicionar_irmao($$,$2);
 														}
 	;
 
