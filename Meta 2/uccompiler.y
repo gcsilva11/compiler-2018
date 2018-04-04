@@ -158,8 +158,9 @@ ParameterDeclaration:
 	| TypeSpec ID 										{
 															$$ = cria_no("ParameterDeclaration","");
 															aux = cria_no("Id",$2);
-															adicionar_filho($$,aux);
 															adicionar_irmao(aux,$1);
+															adicionar_filho($$,aux);
+															
 														}
 	;
 
