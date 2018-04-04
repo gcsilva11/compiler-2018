@@ -164,7 +164,8 @@
 	#include "arvore.h"
 
 	AST_struct root = NULL, aux = NULL, aux2 = NULL;
-	int flag = 0, print_flag = 1;
+	int flag = 0, print_flag = 0;
+	char* type_spec;
 
 
 /* Enabling traces.  */
@@ -187,13 +188,13 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "uccompiler.y"
+#line 16 "uccompiler.y"
 {
 	char* string;
 	struct AST* ast;
 }
 /* Line 193 of yacc.c.  */
-#line 197 "y.tab.c"
+#line 198 "y.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -206,7 +207,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 210 "y.tab.c"
+#line 211 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -537,17 +538,17 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    44,    44,    52,    56,    60,    64,    68,    71,    74,
-      77,    84,    93,    96,   103,   107,   111,   114,   120,   128,
-     135,   143,   146,   154,   158,   168,   177,   180,   188,   191,
-     194,   197,   200,   206,   209,   216,   219,   223,   226,   230,
-     243,   262,   274,   279,   284,   288,   295,   299,   315,   320,
-     326,   331,   336,   341,   346,   351,   357,   362,   367,   372,
-     377,   383,   388,   393,   398,   403,   409,   413,   417,   422,
-     427,   434,   437,   440,   443,   446,   450,   454,   461,   466,
-     471,   476,   481,   486,   491,   496,   502,   507,   512,   517,
-     522,   528,   533,   538,   543,   548,   554,   558,   562,   567,
-     572,   579,   582,   585,   588,   591,   595,   599
+       0,    45,    45,    53,    57,    61,    65,    69,    72,    75,
+      78,    85,    94,    97,   104,   108,   112,   115,   121,   129,
+     136,   144,   147,   155,   159,   169,   178,   181,   191,   195,
+     199,   203,   207,   214,   217,   224,   227,   231,   234,   238,
+     251,   270,   282,   287,   292,   295,   302,   306,   322,   327,
+     333,   338,   343,   348,   353,   358,   364,   369,   374,   379,
+     384,   390,   395,   400,   405,   410,   416,   420,   424,   429,
+     434,   441,   444,   447,   450,   453,   457,   461,   468,   473,
+     478,   483,   488,   493,   498,   503,   509,   514,   519,   524,
+     529,   535,   540,   545,   550,   555,   561,   565,   569,   574,
+     579,   586,   589,   592,   595,   598,   602,   606
 };
 #endif
 
@@ -1698,7 +1699,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 44 "uccompiler.y"
+#line 45 "uccompiler.y"
     {
 															root = cria_no("Program","");
 															adicionar_filho(root,(yyvsp[(1) - (1)].ast));
@@ -1707,7 +1708,7 @@ yyreduce:
     break;
 
   case 3:
-#line 52 "uccompiler.y"
+#line 53 "uccompiler.y"
     {
 															adicionar_irmao((yyvsp[(1) - (2)].ast),(yyvsp[(2) - (2)].ast));
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
@@ -1715,7 +1716,7 @@ yyreduce:
     break;
 
   case 4:
-#line 56 "uccompiler.y"
+#line 57 "uccompiler.y"
     {
 															adicionar_irmao((yyvsp[(1) - (2)].ast),(yyvsp[(2) - (2)].ast));
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
@@ -1723,7 +1724,7 @@ yyreduce:
     break;
 
   case 5:
-#line 60 "uccompiler.y"
+#line 61 "uccompiler.y"
     {
 															adicionar_irmao((yyvsp[(1) - (2)].ast),(yyvsp[(2) - (2)].ast));
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
@@ -1731,44 +1732,44 @@ yyreduce:
     break;
 
   case 6:
-#line 64 "uccompiler.y"
+#line 65 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 7:
-#line 68 "uccompiler.y"
+#line 69 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 8:
-#line 71 "uccompiler.y"
+#line 72 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 9:
-#line 74 "uccompiler.y"
+#line 75 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 10:
-#line 77 "uccompiler.y"
+#line 78 "uccompiler.y"
     {
+															print_flag = 1;
 															(yyval.ast) = NULL;
-															print_flag = 0;
 														}
     break;
 
   case 11:
-#line 84 "uccompiler.y"
+#line 85 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("FuncDefinition","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -1778,14 +1779,14 @@ yyreduce:
     break;
 
   case 12:
-#line 93 "uccompiler.y"
+#line 94 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("FuncBody","");
 														}
     break;
 
   case 13:
-#line 96 "uccompiler.y"
+#line 97 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("FuncBody","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (3)].ast));
@@ -1793,7 +1794,7 @@ yyreduce:
     break;
 
   case 14:
-#line 103 "uccompiler.y"
+#line 104 "uccompiler.y"
     {
 															adicionar_irmao((yyvsp[(1) - (2)].ast),(yyvsp[(2) - (2)].ast));
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
@@ -1801,7 +1802,7 @@ yyreduce:
     break;
 
   case 15:
-#line 107 "uccompiler.y"
+#line 108 "uccompiler.y"
     {
 															adicionar_irmao((yyvsp[(1) - (2)].ast),(yyvsp[(2) - (2)].ast));
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
@@ -1809,21 +1810,21 @@ yyreduce:
     break;
 
   case 16:
-#line 111 "uccompiler.y"
+#line 112 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 17:
-#line 114 "uccompiler.y"
+#line 115 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 18:
-#line 120 "uccompiler.y"
+#line 121 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("FuncDeclaration","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -1832,7 +1833,7 @@ yyreduce:
     break;
 
   case 19:
-#line 128 "uccompiler.y"
+#line 129 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (4)].string));
 															adicionar_irmao((yyval.ast),(yyvsp[(3) - (4)].ast));
@@ -1840,7 +1841,7 @@ yyreduce:
     break;
 
   case 20:
-#line 135 "uccompiler.y"
+#line 136 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("ParamList","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (2)].ast));
@@ -1849,14 +1850,14 @@ yyreduce:
     break;
 
   case 21:
-#line 143 "uccompiler.y"
+#line 144 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
 														}
     break;
 
   case 22:
-#line 146 "uccompiler.y"
+#line 147 "uccompiler.y"
     {
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (3)].ast));
 															adicionar_irmao((yyvsp[(2) - (3)].ast),(yyvsp[(3) - (3)].ast));
@@ -1865,7 +1866,7 @@ yyreduce:
     break;
 
   case 23:
-#line 154 "uccompiler.y"
+#line 155 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("ParamDeclaration","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (1)].ast));
@@ -1873,18 +1874,18 @@ yyreduce:
     break;
 
   case 24:
-#line 158 "uccompiler.y"
+#line 159 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("ParamDeclaration","");
 															aux = cria_no("Id",(yyvsp[(2) - (2)].string));
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (2)].ast));
 															adicionar_irmao((yyvsp[(1) - (2)].ast),aux);
-															
+
 														}
     break;
 
   case 25:
-#line 168 "uccompiler.y"
+#line 169 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Declaration","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (4)].ast));
@@ -1894,65 +1895,72 @@ yyreduce:
     break;
 
   case 26:
-#line 177 "uccompiler.y"
+#line 178 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
 														}
     break;
 
   case 27:
-#line 180 "uccompiler.y"
+#line 181 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Declaration","");
-															adicionar_filho((yyval.ast),(yyvsp[(2) - (3)].ast));
+															aux = cria_no(type_spec,"");
+															adicionar_filho((yyval.ast),aux);
+															adicionar_irmao(aux,(yyvsp[(2) - (3)].ast));
 															adicionar_irmao((yyval.ast),(yyvsp[(3) - (3)].ast));
 														}
     break;
 
   case 28:
-#line 188 "uccompiler.y"
+#line 191 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Char","");
+															type_spec = (yyval.ast)->tipo;
 														}
     break;
 
   case 29:
-#line 191 "uccompiler.y"
+#line 195 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Int","");
+															type_spec = (yyval.ast)->tipo;
 														}
     break;
 
   case 30:
-#line 194 "uccompiler.y"
+#line 199 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Void","");
+															type_spec = (yyval.ast)->tipo;
 														}
     break;
 
   case 31:
-#line 197 "uccompiler.y"
+#line 203 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Short","");
+															type_spec = (yyval.ast)->tipo;
 														}
     break;
 
   case 32:
-#line 200 "uccompiler.y"
+#line 207 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Double","");
+															type_spec = (yyval.ast)->tipo;
 														}
     break;
 
   case 33:
-#line 206 "uccompiler.y"
+#line 214 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 34:
-#line 209 "uccompiler.y"
+#line 217 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (3)].string));
 															adicionar_irmao((yyval.ast),(yyvsp[(3) - (3)].ast));
@@ -1960,35 +1968,35 @@ yyreduce:
     break;
 
   case 35:
-#line 216 "uccompiler.y"
+#line 224 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
 														}
     break;
 
   case 36:
-#line 219 "uccompiler.y"
+#line 227 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (2)].ast);
 														}
     break;
 
   case 37:
-#line 223 "uccompiler.y"
+#line 231 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
 														}
     break;
 
   case 38:
-#line 226 "uccompiler.y"
+#line 234 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(2) - (3)].ast);
 														}
     break;
 
   case 39:
-#line 230 "uccompiler.y"
+#line 238 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("If","");
 															adicionar_filho((yyval.ast),(yyvsp[(3) - (5)].ast));
@@ -2005,7 +2013,7 @@ yyreduce:
     break;
 
   case 40:
-#line 243 "uccompiler.y"
+#line 251 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("If","");
 															adicionar_filho((yyval.ast),(yyvsp[(3) - (7)].ast));
@@ -2027,7 +2035,7 @@ yyreduce:
     break;
 
   case 41:
-#line 262 "uccompiler.y"
+#line 270 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("While","");
 															adicionar_filho((yyval.ast),(yyvsp[(3) - (5)].ast));
@@ -2042,7 +2050,7 @@ yyreduce:
     break;
 
   case 42:
-#line 274 "uccompiler.y"
+#line 282 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Return","");
 															aux = cria_no("Null","");
@@ -2051,7 +2059,7 @@ yyreduce:
     break;
 
   case 43:
-#line 279 "uccompiler.y"
+#line 287 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Return","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (3)].ast));
@@ -2059,35 +2067,34 @@ yyreduce:
     break;
 
   case 44:
-#line 284 "uccompiler.y"
+#line 292 "uccompiler.y"
     {
-															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 45:
-#line 288 "uccompiler.y"
+#line 295 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 46:
-#line 295 "uccompiler.y"
+#line 302 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (1)].ast);
 														}
     break;
 
   case 47:
-#line 299 "uccompiler.y"
+#line 306 "uccompiler.y"
     {
 															if((yyvsp[(1) - (2)].ast) == NULL && (yyvsp[(2) - (2)].ast) != NULL){
 																(yyval.ast) = (yyvsp[(2) - (2)].ast);
 															}
-															if((yyvsp[(2) - (2)].ast) == NULL && (yyvsp[(1) - (2)].ast) != NULL){
+															else if((yyvsp[(2) - (2)].ast) == NULL && (yyvsp[(1) - (2)].ast) != NULL){
 																(yyval.ast) = (yyvsp[(1) - (2)].ast);
 															}
 															else{
@@ -2099,7 +2106,7 @@ yyreduce:
     break;
 
   case 48:
-#line 315 "uccompiler.y"
+#line 322 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Store","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2108,7 +2115,7 @@ yyreduce:
     break;
 
   case 49:
-#line 320 "uccompiler.y"
+#line 327 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Comma","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2117,7 +2124,7 @@ yyreduce:
     break;
 
   case 50:
-#line 326 "uccompiler.y"
+#line 333 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Eq","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2126,7 +2133,7 @@ yyreduce:
     break;
 
   case 51:
-#line 331 "uccompiler.y"
+#line 338 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Ne","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2135,7 +2142,7 @@ yyreduce:
     break;
 
   case 52:
-#line 336 "uccompiler.y"
+#line 343 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Le","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2144,7 +2151,7 @@ yyreduce:
     break;
 
   case 53:
-#line 341 "uccompiler.y"
+#line 348 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Ge","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2153,7 +2160,7 @@ yyreduce:
     break;
 
   case 54:
-#line 346 "uccompiler.y"
+#line 353 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Lt","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2162,7 +2169,7 @@ yyreduce:
     break;
 
   case 55:
-#line 351 "uccompiler.y"
+#line 358 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Gt","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2171,7 +2178,7 @@ yyreduce:
     break;
 
   case 56:
-#line 357 "uccompiler.y"
+#line 364 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Add","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2180,7 +2187,7 @@ yyreduce:
     break;
 
   case 57:
-#line 362 "uccompiler.y"
+#line 369 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Sub","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2189,7 +2196,7 @@ yyreduce:
     break;
 
   case 58:
-#line 367 "uccompiler.y"
+#line 374 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Mul","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2198,7 +2205,7 @@ yyreduce:
     break;
 
   case 59:
-#line 372 "uccompiler.y"
+#line 379 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Div","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2207,7 +2214,7 @@ yyreduce:
     break;
 
   case 60:
-#line 377 "uccompiler.y"
+#line 384 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Mod","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2216,7 +2223,7 @@ yyreduce:
     break;
 
   case 61:
-#line 383 "uccompiler.y"
+#line 390 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Or","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2225,7 +2232,7 @@ yyreduce:
     break;
 
   case 62:
-#line 388 "uccompiler.y"
+#line 395 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("And","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2234,7 +2241,7 @@ yyreduce:
     break;
 
   case 63:
-#line 393 "uccompiler.y"
+#line 400 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseAnd","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2243,7 +2250,7 @@ yyreduce:
     break;
 
   case 64:
-#line 398 "uccompiler.y"
+#line 405 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseOr","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2252,7 +2259,7 @@ yyreduce:
     break;
 
   case 65:
-#line 403 "uccompiler.y"
+#line 410 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseXor","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2261,7 +2268,7 @@ yyreduce:
     break;
 
   case 66:
-#line 409 "uccompiler.y"
+#line 416 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Plus","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2269,7 +2276,7 @@ yyreduce:
     break;
 
   case 67:
-#line 413 "uccompiler.y"
+#line 420 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Minus","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2277,7 +2284,7 @@ yyreduce:
     break;
 
   case 68:
-#line 417 "uccompiler.y"
+#line 424 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Not","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2285,7 +2292,7 @@ yyreduce:
     break;
 
   case 69:
-#line 422 "uccompiler.y"
+#line 429 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Call","");
 															aux = cria_no("Id",(yyvsp[(1) - (3)].string));
@@ -2294,7 +2301,7 @@ yyreduce:
     break;
 
   case 70:
-#line 427 "uccompiler.y"
+#line 434 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Call","");
 															aux = cria_no("Id",(yyvsp[(1) - (4)].string));
@@ -2304,58 +2311,58 @@ yyreduce:
     break;
 
   case 71:
-#line 434 "uccompiler.y"
+#line 441 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 72:
-#line 437 "uccompiler.y"
+#line 444 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("IntLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 73:
-#line 440 "uccompiler.y"
+#line 447 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("ChrLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 74:
-#line 443 "uccompiler.y"
+#line 450 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("RealLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 75:
-#line 446 "uccompiler.y"
+#line 453 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(2) - (3)].ast);
 														}
     break;
 
   case 76:
-#line 450 "uccompiler.y"
+#line 457 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 77:
-#line 454 "uccompiler.y"
+#line 461 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 78:
-#line 461 "uccompiler.y"
+#line 468 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Store","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2364,7 +2371,7 @@ yyreduce:
     break;
 
   case 79:
-#line 466 "uccompiler.y"
+#line 473 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(1) - (3)].ast);
 															adicionar_irmao((yyvsp[(1) - (3)].ast),(yyvsp[(3) - (3)].ast));
@@ -2372,7 +2379,7 @@ yyreduce:
     break;
 
   case 80:
-#line 471 "uccompiler.y"
+#line 478 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Eq","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2381,7 +2388,7 @@ yyreduce:
     break;
 
   case 81:
-#line 476 "uccompiler.y"
+#line 483 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Ne","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2390,7 +2397,7 @@ yyreduce:
     break;
 
   case 82:
-#line 481 "uccompiler.y"
+#line 488 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Le","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2399,7 +2406,7 @@ yyreduce:
     break;
 
   case 83:
-#line 486 "uccompiler.y"
+#line 493 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Ge","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2408,7 +2415,7 @@ yyreduce:
     break;
 
   case 84:
-#line 491 "uccompiler.y"
+#line 498 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Lt","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2417,7 +2424,7 @@ yyreduce:
     break;
 
   case 85:
-#line 496 "uccompiler.y"
+#line 503 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Gt","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2426,7 +2433,7 @@ yyreduce:
     break;
 
   case 86:
-#line 502 "uccompiler.y"
+#line 509 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Add","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2435,7 +2442,7 @@ yyreduce:
     break;
 
   case 87:
-#line 507 "uccompiler.y"
+#line 514 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Sub","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2444,7 +2451,7 @@ yyreduce:
     break;
 
   case 88:
-#line 512 "uccompiler.y"
+#line 519 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Mul","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2453,7 +2460,7 @@ yyreduce:
     break;
 
   case 89:
-#line 517 "uccompiler.y"
+#line 524 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Div","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2462,7 +2469,7 @@ yyreduce:
     break;
 
   case 90:
-#line 522 "uccompiler.y"
+#line 529 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Mod","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2471,7 +2478,7 @@ yyreduce:
     break;
 
   case 91:
-#line 528 "uccompiler.y"
+#line 535 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Or","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2480,7 +2487,7 @@ yyreduce:
     break;
 
   case 92:
-#line 533 "uccompiler.y"
+#line 540 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("And","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2489,7 +2496,7 @@ yyreduce:
     break;
 
   case 93:
-#line 538 "uccompiler.y"
+#line 545 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseAnd","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2498,7 +2505,7 @@ yyreduce:
     break;
 
   case 94:
-#line 543 "uccompiler.y"
+#line 550 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseOr","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2507,7 +2514,7 @@ yyreduce:
     break;
 
   case 95:
-#line 548 "uccompiler.y"
+#line 555 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("BitWiseXor","");
 															adicionar_filho((yyval.ast),(yyvsp[(1) - (3)].ast));
@@ -2516,7 +2523,7 @@ yyreduce:
     break;
 
   case 96:
-#line 554 "uccompiler.y"
+#line 561 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Plus","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2524,7 +2531,7 @@ yyreduce:
     break;
 
   case 97:
-#line 558 "uccompiler.y"
+#line 565 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Minus","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2532,7 +2539,7 @@ yyreduce:
     break;
 
   case 98:
-#line 562 "uccompiler.y"
+#line 569 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Not","");
 															adicionar_filho((yyval.ast),(yyvsp[(2) - (2)].ast));
@@ -2540,7 +2547,7 @@ yyreduce:
     break;
 
   case 99:
-#line 567 "uccompiler.y"
+#line 574 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Call","");
 															aux = cria_no("Id",(yyvsp[(1) - (3)].string));
@@ -2549,7 +2556,7 @@ yyreduce:
     break;
 
   case 100:
-#line 572 "uccompiler.y"
+#line 579 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Call","");
 															aux = cria_no("Id",(yyvsp[(1) - (4)].string));
@@ -2559,59 +2566,59 @@ yyreduce:
     break;
 
   case 101:
-#line 579 "uccompiler.y"
+#line 586 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("Id",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 102:
-#line 582 "uccompiler.y"
+#line 589 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("IntLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 103:
-#line 585 "uccompiler.y"
+#line 592 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("ChrLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 104:
-#line 588 "uccompiler.y"
+#line 595 "uccompiler.y"
     {
 															(yyval.ast) = cria_no("RealLit",(yyvsp[(1) - (1)].string));
 														}
     break;
 
   case 105:
-#line 591 "uccompiler.y"
+#line 598 "uccompiler.y"
     {
 															(yyval.ast) = (yyvsp[(2) - (3)].ast);
 														}
     break;
 
   case 106:
-#line 595 "uccompiler.y"
+#line 602 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
   case 107:
-#line 599 "uccompiler.y"
+#line 606 "uccompiler.y"
     {
 															(yyval.ast) = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 2615 "y.tab.c"
+#line 2622 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2825,7 +2832,7 @@ yyreturn:
 }
 
 
-#line 605 "uccompiler.y"
+#line 612 "uccompiler.y"
 
 
 int main(int argc, char *argv[]){
@@ -2838,8 +2845,9 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			if(print_flag == 1)
+			if(!print_flag)
 				imprime_arvore(root,0);
+
 		}
 	}
 	else{

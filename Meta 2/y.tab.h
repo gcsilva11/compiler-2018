@@ -126,7 +126,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 15 "uccompiler.y"
+#line 16 "uccompiler.y"
 {
 	char* string;
 	struct AST* ast;

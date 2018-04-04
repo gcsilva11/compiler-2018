@@ -9,7 +9,8 @@
 	#include "arvore.h"
 
 	AST_struct root = NULL, aux = NULL, aux2 = NULL;
-	int flag = 0, print_flag = 1;
+	int flag = 0, print_flag = 0;
+	char* type_spec;
 %}
 
 %union{
@@ -63,7 +64,7 @@ FunctionsAndDeclarations:
 														}
 	| FunctionsAndDeclarations error SEMI 				{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	| FunctionDefinition 								{
 															$$ = $1;
@@ -75,8 +76,8 @@ FunctionsAndDeclarations:
 															$$ = $1;
 														}
 	| error SEMI										{
+															print_flag = 1;
 															$$ = NULL;
-															print_flag = 0;
 														}
 	;
 
@@ -160,7 +161,7 @@ ParameterDeclaration:
 															aux = cria_no("Id",$2);
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,aux);
-															
+
 														}
 	;
 
@@ -179,7 +180,9 @@ DeclarationAux:
 														}
 	| COMMA Declarator DeclarationAux 					{
 															$$ = cria_no("Declaration","");
-															adicionar_filho($$,$2);
+															aux = cria_no(type_spec,"");
+															adicionar_filho($$,aux);
+															adicionar_irmao(aux,$2);
 															adicionar_irmao($$,$3);
 														}
 	;
@@ -187,18 +190,23 @@ DeclarationAux:
 TypeSpec:
 	CHAR 												{
 															$$ = cria_no("Char","");
+															type_spec = $$->tipo;
 														}
 	| INT 												{
 															$$ = cria_no("Int","");
+															type_spec = $$->tipo;
 														}
 	| VOID 												{
 															$$ = cria_no("Void","");
+															type_spec = $$->tipo;
 														}
 	| SHORT 											{
 															$$ = cria_no("Short","");
+															type_spec = $$->tipo;
 														}
 	| DOUBLE 											{
 															$$ = cria_no("Double","");
+															type_spec = $$->tipo;
 														}
 	;
 
@@ -282,12 +290,11 @@ Statement:
 														}
 
 	| error SEMI 										{
-															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	| LBRACE error RBRACE 								{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	;
 
@@ -300,7 +307,7 @@ StatementAux:
 															if($1 == NULL && $2 != NULL){
 																$$ = $2;
 															}
-															if($2 == NULL && $1 != NULL){
+															else if($2 == NULL && $1 != NULL){
 																$$ = $1;
 															}
 															else{
@@ -449,11 +456,11 @@ Expr:
 
 	| ID LPAR error RPAR 								{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	| LPAR error RPAR 									{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	;
 
@@ -594,11 +601,11 @@ Expr2:
 
 	| ID LPAR error RPAR 								{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	| LPAR error RPAR 									{
 															$$ = NULL;
-															print_flag = 0;
+															print_flag = 1;
 														}
 	;
 
@@ -614,8 +621,9 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			if(print_flag == 1)
+			if(!print_flag)
 				imprime_arvore(root,0);
+
 		}
 	}
 	else{

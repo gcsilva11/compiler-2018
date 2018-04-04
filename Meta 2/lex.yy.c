@@ -2166,7 +2166,6 @@ void yyfree (void * ptr )
 
 void imprime(char* msg){
 	if(flag == 1){
-
 		printf("%s\n",msg);
 	}
 }

@@ -140,7 +140,6 @@ LINETERMINATOR					"\n"|"\r\n"
 
 void imprime(char* msg){
 	if(flag == 1){
-
 		printf("%s\n",msg);
 	}
 }

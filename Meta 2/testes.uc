@@ -36,7 +36,8 @@ int expressions(void) {
     variable / +getchar(s); 
     !variable; 
     +variable; 
-    -variable; 
+    -variable;
+
     +variable = 2; 
     i = (!i ^ 1) = (a + b | c % d); 
     (a  = b); 
@@ -54,9 +55,16 @@ int statements(void) {
         if (x) {
             if (x) {
                 printf(x);
+                printf(x);
+                printf(x);
+                printf(x);
+
                 return 1;
             }
             if (1) {
+            printf(x);
+            printf(x);
+            printf(x);
                 printf(x);
             }
             else {
