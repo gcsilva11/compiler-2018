@@ -31,8 +31,8 @@
 %left BITWISEAND
 %left EQ NE
 %left GE GT LT LE
-%left PLUS MINUS
-%left MUL DIV MOD
+%left PLUS MINUS MOD
+%left MUL DIV 
 %right NOT
 %left LPAR
 %nonassoc ELSE_PRIORITY
