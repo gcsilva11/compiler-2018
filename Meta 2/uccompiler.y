@@ -20,7 +20,7 @@
 %token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
 %token <string> REALLIT CHRLIT INTLIT ID RESERVED
 
-%type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux Expr
+%type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux Expr ParameterListAux
 
 %left COMMA
 %right ASSIGN
@@ -51,15 +51,15 @@ Program:
 FunctionsAndDeclarations: 
 	FunctionsAndDeclarations FunctionDefinition			{
 															adicionar_irmao($2,$1);
-															$$ = $1;
+															$$ = $2;
 														}
 	| FunctionsAndDeclarations FunctionDeclaration 		{
 															adicionar_irmao($2,$1);
-															$$ = $1;
+															$$ = $2;
 														}
 	| FunctionsAndDeclarations Declaration 				{
 															adicionar_irmao($2,$1);
-															$$ = $1;
+															$$ = $2;
 														}
 	| FunctionsAndDeclarations error SEMI 				{
 															$$ = NULL;
@@ -102,11 +102,11 @@ FunctionBody:
 DeclarationAndStatements: 
 	Statement DeclarationAndStatements 					{
 															adicionar_irmao($1,$2);
-															$$ = $2;
+															$$ = $1;
 														}
 	| Declaration DeclarationAndStatements 				{
 															adicionar_irmao($1,$2);
-															$$ = $2;
+															$$ = $1;
 														}
 	| Statement 										{
 															$$ = $1;
@@ -132,13 +132,21 @@ FunctionDeclarator:
 	;
 
 ParameterList: 
-	ParameterDeclaration 								{
+	ParameterDeclaration ParameterListAux				{
 															$$ = cria_no("ParameterList","");
 															adicionar_filho($$,$1);
+															adicionar_irmao($1,$2);
 														}
-	| ParameterList COMMA ParameterDeclaration 			{
-															adicionar_irmao($1,$3);
-															$$ = $1;
+	;
+
+ParameterListAux:
+														{
+															$$ = NULL;
+														}
+	| COMMA ParameterDeclaration ParameterListAux		{
+															adicionar_filho($$,$2);
+															adicionar_irmao($2,$3);
+															$$ = $2;
 														}
 	;
 
@@ -148,9 +156,10 @@ ParameterDeclaration:
 															adicionar_filho($$,$1);
 														}
 	| TypeSpec ID 										{
-															$$ = $1;
+															$$ = cria_no("ParameterDeclaration","");
 															aux = cria_no("Id",$2);
-															adicionar_irmao($$,aux);
+															adicionar_filho($$,aux);
+															adicionar_irmao(aux,$1);
 														}
 	;
 
@@ -168,7 +177,8 @@ DeclarationAux:
 														}
 	| DeclarationAux COMMA Declarator 					{
 															$$ = cria_no("Declaration","");
-															$$ = $1;
+															adicionar_irmao($$,$1);
+															adicionar_filho($$,$3);
 														}
 	;
 
