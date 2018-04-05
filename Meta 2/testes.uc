@@ -84,7 +84,7 @@ int statements(void) {
         return 1;
     }
     if (!x) {
-        printf('\129');
+        printf('a');
     }
     else if (oi,wk){
         gets();
@@ -97,7 +97,7 @@ int statements(void) {
 
 int oi(int tudo,int bem){ 
     char a; 
-    char b, c = '\0'; 
+    char b, c = 'a'; 
     double d,e,f; 
     e = 4; 
     f = d+e; 
@@ -154,7 +154,7 @@ int main(void){
     -!a;
 
 
-    //(a+b)*a+b = b/a>(a*(c-d);
+    (a+b)*a+b = b/a>(a*(c-d));
 }
 
 int main(void){
@@ -184,6 +184,13 @@ int main(void){
         {}{}{}{};;;;;;{}{}
     }
 
+    if(a){
+        {a=0;a=0;}
+        {a=0;a=0;}
+        {a=0;a=0;}
+        {a=0;a==0;}
+    }
+
 
     while(a){{{{{
         a =0; ;;;;;;;
@@ -194,5 +201,16 @@ int main(void){
     return a;
 
     return;
+    -oio/+ioi;
+    ;;
+}
 
+int fu(void){
+    e = (a + b) * c / d;       ( 30 * 15 ) / 5;
+
+   e = ((a + b) * c) / d;     (30 * 15 ) / 5;
+
+   e = (a + b) * (c / d);    (30) * (15/5);
+
+   e = a + (b * c) / d;       20 + (150/5);
 }

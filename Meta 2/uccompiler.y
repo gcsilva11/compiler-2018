@@ -32,8 +32,9 @@
 %left BITWISEAND
 %left EQ NE
 %left GE GT LT LE
-%left PLUS MINUS MOD
-%left MUL DIV 
+%left PLUS MINUS 
+%left MOD DIV MUL
+%left SIGNAL
 %right NOT
 %left LPAR
 %nonassoc ELSE_PRIORITY
@@ -417,11 +418,11 @@ Expr:
 															adicionar_irmao($1,$3);
 														}
 
-	| PLUS Expr 										{
+	| PLUS Expr %prec SIGNAL							 {
 															$$ = cria_no("Plus","");
 															adicionar_filho($$,$2);
 														}
-	| MINUS Expr 										{
+	| MINUS Expr %prec SIGNAL							{
 															$$ = cria_no("Minus","");
 															adicionar_filho($$,$2);
 														}
@@ -575,11 +576,11 @@ Expr2:
 															adicionar_irmao($1,$3);
 														}
 
-	| PLUS Expr2 										{
+	| PLUS Expr2 %prec SIGNAL							{
 															$$ = cria_no("Plus","");
 															adicionar_filho($$,$2);
 														}
-	| MINUS Expr2 										{
+	| MINUS Expr2 %prec SIGNAL							{
 															$$ = cria_no("Minus","");
 															adicionar_filho($$,$2);
 														}
