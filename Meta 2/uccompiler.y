@@ -441,19 +441,8 @@ Expr:
 															$$ = cria_no("Call","");
 															aux = cria_no("Id",$1);
 															aux2 = $3;
-															
-															/*if(strcmp(aux2->tipo,"Comma") == 0){
-																while(strcmp(aux2->tipo,"Comma") == 0 && strcmp(aux2->filho->tipo,"Comma") == 0){
-																	adicionar_irmao(aux,aux2->filho);
-																	aux2 = aux2->filho;
-																}
-																adicionar_irmao(aux2->filho,aux2->filho->irmao);
-																adicionar_irmao(aux,aux2->filho);
-															}
-															else{*/
-																adicionar_filho($$,aux);
-																adicionar_irmao(aux,$3);
-														//	}
+															adicionar_filho($$,aux);
+															adicionar_irmao(aux,$3);
 														}
 
 	| ID 												{

@@ -75,8 +75,10 @@ int statements(void) {
             while(1) {
                 return 0;
             }
+            printf(x);
         }
         if(cona) {
+        printf(x);printf(x);printf(x);printf(x);printf(x);
             return 1;
         }
     }
@@ -87,7 +89,11 @@ int statements(void) {
         printf('a');
     }
     else if (oi,wk){
+        printf(x);
         gets();
+    }
+    else{
+        printf(x);
     }
 
     if (a) {
@@ -213,4 +219,9 @@ int fu(void){
    e = (a + b) * (c / d);    (30) * (15/5);
 
    e = a + (b * c) / d;       20 + (150/5);
+
+   printf((1,2),(3,4));
+   printf(1,(2,3));
+   printf((1,2),3);
+   printf((3,4));
 }
