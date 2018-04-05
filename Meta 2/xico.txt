@@ -1,3 +1,4 @@
+Line 2, col 29: invalid char constant ('\129')
 Program
 ..FuncDefinition
 ....Int
@@ -23,7 +24,7 @@ Program
 ..........IntLit(2)
 ........Store
 ..........Id(a)
-..........ChrLit('a')
+..........ChrLit('\129')
 ......Declaration
 ........Int
 ........Id(a)
@@ -338,7 +339,7 @@ Program
 ......Declaration
 ........Char
 ........Id(c)
-........ChrLit('d')
+........ChrLit('\0')
 ......Declaration
 ........Double
 ........Id(d)

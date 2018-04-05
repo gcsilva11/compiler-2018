@@ -84,7 +84,7 @@ int statements(void) {
         return 1;
     }
     if (!x) {
-        printf('o');
+        printf('\129');
     }
     else if (oi,wk){
         gets();
@@ -97,7 +97,7 @@ int statements(void) {
 
 int oi(int tudo,int bem){ 
     char a; 
-    char b, c = 'd'; 
+    char b, c = '\0'; 
     double d,e,f; 
     e = 4; 
     f = d+e; 

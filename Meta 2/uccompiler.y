@@ -612,7 +612,7 @@ Expr2:
 	| REALLIT 											{
 															$$ = cria_no("RealLit",$1);
 														}
-	| LPAR Expr2 RPAR 									{
+	| LPAR Expr RPAR 									{
 															$$ = $2;
 														}
 

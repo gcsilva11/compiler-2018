@@ -1,3 +1,4 @@
+Line 87, col 16: invalid char constant ('\129')
 Program
 ..FuncDefinition
 ....Int
@@ -306,7 +307,6 @@ Program
 ..........Id(x)
 ........Call
 ..........Id(printf)
-..........ChrLit('o')
 ........If
 ..........Comma
 ............Id(oi)
@@ -338,7 +338,7 @@ Program
 ......Declaration
 ........Char
 ........Id(c)
-........ChrLit('d')
+........ChrLit('\0')
 ......Declaration
 ........Double
 ........Id(d)
@@ -437,8 +437,9 @@ Program
 ....FuncBody
 ......Call
 ........Id(test)
-........IntLit(2)
-........IntLit(3)
+........Comma
+..........IntLit(2)
+..........IntLit(3)
 ........IntLit(1)
 ......If
 ........Id(b)
@@ -490,8 +491,9 @@ Program
 ........Id(b)
 ......Call
 ........Id(funcao)
-........Id(a)
-........Id(b)
+........Comma
+..........Id(a)
+..........Id(b)
 ......Not
 ........Plus
 ..........Id(a)

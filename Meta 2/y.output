@@ -127,7 +127,7 @@ Grammar
   101      | INTLIT
   102      | CHRLIT
   103      | REALLIT
-  104      | LPAR Expr2 RPAR
+  104      | LPAR Expr RPAR
   105      | ID LPAR error RPAR
   106      | LPAR error RPAR
 
@@ -218,11 +218,11 @@ Expr (59)
     on left: 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64
     65 66 67 68 69 70 71 72 73 74 75 76, on right: 33 35 38 39 40 42
     47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67
-    74 78
+    74 78 104
 Expr2 (60)
     on left: 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94
     95 96 97 98 99 100 101 102 103 104 105 106, on right: 69 77 78
-    79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99 104
+    79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 99
 
 
 state 0
@@ -1602,20 +1602,20 @@ state 101
 
 state 102
 
-  104 Expr2: LPAR . Expr2 RPAR
+  104 Expr2: LPAR . Expr RPAR
   106      | LPAR . error RPAR
 
     error    shift, and go to state 138
-    LPAR     shift, and go to state 102
-    MINUS    shift, and go to state 103
-    NOT      shift, and go to state 104
-    PLUS     shift, and go to state 105
-    REALLIT  shift, and go to state 107
-    CHRLIT   shift, and go to state 108
-    INTLIT   shift, and go to state 109
-    ID       shift, and go to state 110
+    LPAR     shift, and go to state 30
+    MINUS    shift, and go to state 31
+    NOT      shift, and go to state 32
+    PLUS     shift, and go to state 33
+    REALLIT  shift, and go to state 34
+    CHRLIT   shift, and go to state 35
+    INTLIT   shift, and go to state 36
+    ID       shift, and go to state 37
 
-    Expr2  go to state 139
+    Expr  go to state 139
 
 
 state 103
@@ -2500,44 +2500,44 @@ state 138
 
 state 139
 
-   77 Expr2: Expr2 . ASSIGN Expr2
-   78      | Expr2 . COMMA Expr
-   79      | Expr2 . EQ Expr2
-   80      | Expr2 . NE Expr2
-   81      | Expr2 . LE Expr2
-   82      | Expr2 . GE Expr2
-   83      | Expr2 . LT Expr2
-   84      | Expr2 . GT Expr2
-   85      | Expr2 . PLUS Expr2
-   86      | Expr2 . MINUS Expr2
-   87      | Expr2 . MUL Expr2
-   88      | Expr2 . DIV Expr2
-   89      | Expr2 . MOD Expr2
-   90      | Expr2 . OR Expr2
-   91      | Expr2 . AND Expr2
-   92      | Expr2 . BITWISEAND Expr2
-   93      | Expr2 . BITWISEOR Expr2
-   94      | Expr2 . BITWISEXOR Expr2
-  104      | LPAR Expr2 . RPAR
+   47 Expr: Expr . ASSIGN Expr
+   48     | Expr . COMMA Expr
+   49     | Expr . EQ Expr
+   50     | Expr . NE Expr
+   51     | Expr . LE Expr
+   52     | Expr . GE Expr
+   53     | Expr . LT Expr
+   54     | Expr . GT Expr
+   55     | Expr . PLUS Expr
+   56     | Expr . MINUS Expr
+   57     | Expr . MUL Expr
+   58     | Expr . DIV Expr
+   59     | Expr . MOD Expr
+   60     | Expr . OR Expr
+   61     | Expr . AND Expr
+   62     | Expr . BITWISEAND Expr
+   63     | Expr . BITWISEOR Expr
+   64     | Expr . BITWISEXOR Expr
+  104 Expr2: LPAR Expr . RPAR
 
-    BITWISEOR   shift, and go to state 144
-    BITWISEAND  shift, and go to state 145
-    BITWISEXOR  shift, and go to state 146
-    AND         shift, and go to state 147
-    ASSIGN      shift, and go to state 148
-    MUL         shift, and go to state 149
-    COMMA       shift, and go to state 150
-    DIV         shift, and go to state 151
-    EQ          shift, and go to state 152
-    GE          shift, and go to state 153
-    GT          shift, and go to state 154
-    LE          shift, and go to state 155
-    LT          shift, and go to state 156
-    MINUS       shift, and go to state 157
-    MOD         shift, and go to state 158
-    NE          shift, and go to state 159
-    OR          shift, and go to state 160
-    PLUS        shift, and go to state 161
+    BITWISEOR   shift, and go to state 63
+    BITWISEAND  shift, and go to state 64
+    BITWISEXOR  shift, and go to state 65
+    AND         shift, and go to state 66
+    ASSIGN      shift, and go to state 67
+    MUL         shift, and go to state 68
+    COMMA       shift, and go to state 69
+    DIV         shift, and go to state 70
+    EQ          shift, and go to state 71
+    GE          shift, and go to state 72
+    GT          shift, and go to state 73
+    LE          shift, and go to state 74
+    LT          shift, and go to state 75
+    MINUS       shift, and go to state 76
+    MOD         shift, and go to state 77
+    NE          shift, and go to state 78
+    OR          shift, and go to state 79
+    PLUS        shift, and go to state 80
     RPAR        shift, and go to state 167
 
 
@@ -3000,7 +3000,7 @@ state 166
 
 state 167
 
-  104 Expr2: LPAR Expr2 RPAR .
+  104 Expr2: LPAR Expr RPAR .
 
     $default  reduce using rule 104 (Expr2)
 
