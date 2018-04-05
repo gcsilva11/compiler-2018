@@ -1119,7 +1119,7 @@ YY_RULE_SETUP
 case 44:
 YY_RULE_SETUP
 #line 128 "uccompiler.l"
-{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
+{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP

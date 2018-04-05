@@ -9,4 +9,4 @@
 flex uccompiler.l
 yacc -d uccompiler.y
 clang -o uccompiler -Wall -Wno-unused-function *.c
-#zip -r uccompiler.zip uccompiler.l uccompiler.y arvore.c arvore.h
+zip -r uccompiler.zip uccompiler.l uccompiler.y arvore.c arvore.h
