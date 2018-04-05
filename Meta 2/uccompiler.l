@@ -125,7 +125,7 @@ LINETERMINATOR					"\n"|"\r\n"
 {INTLIT}						{imprime_com_conteudo("INTLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return INTLIT;}}
 {REALLIT}						{imprime_com_conteudo("REALLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return REALLIT;}}
 {ASP}{CHRLIT}{ASP}				{imprime_com_conteudo("CHRLIT",yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
-{ASP}({CHRLIT}|\\.)*{ASP} 		{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext); COLUNA;}
+{ASP}({CHRLIT}|\\.)*{ASP} 		{printf("Line %d, col %d: invalid char constant (%s)\n",linha,coluna,yytext);if(flag==2){yylval.string=(char*)strdup(yytext); COLUNA; return CHRLIT;}}
 {ASP}({CHRLIT}|\\.)*\\?			{printf("Line %d, col %d: unterminated char constant\n",linha,coluna);}
 
 {SPACE}							{COLUNA;}

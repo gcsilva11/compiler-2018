@@ -85,7 +85,7 @@ int statements(void) {
     if (x == 1 && x != 1){
         return 1;
     }
-    if (!x) {
+    if (!x){
         printf('a');
     }
     else if (oi,wk){
@@ -99,7 +99,15 @@ int statements(void) {
     if (a) {
         i;
     }
-}
+    while(a){
+        while(b){
+            printf(1);
+            if(c){
+                while(d){
+            }
+        }
+    }
+}}
 
 int oi(int tudo,int bem){ 
     char a; 
@@ -220,8 +228,98 @@ int fu(void){
 
    e = a + (b * c) / d;       20 + (150/5);
 
-   printf((1,2),(3,4));
+   printf(q(1,2),((3,3),4));
    printf(1,(2,3));
    printf((1,2),3);
    printf((3,4));
+}
+
+int max(int num1, int num2) {
+
+   int result;
+
+   if (num1 > num2)
+      result = num1;
+   else
+      result = num2;
+
+   return result;
+}
+
+int max(int num1, int num2);
+
+int main (void) {
+
+   int a = 100;
+   int b = 200;
+   int ret;
+
+   ret = max(a, b);
+
+   printf(a);
+
+   return 0;
+}
+
+int max(int num1, int num2) {
+
+   int result;
+
+   if (num1 > num2)
+      result = num1;
+   else
+      result = num2;
+
+   return result;
+}
+
+int main(int a)
+{
+    int firstNumber, secondNumber, sumOfTwoNumbers;
+    scanf(firstNumber,secondNumber);
+    sumOfTwoNumbers = firstNumber + secondNumber;
+    printf( firstNumber, secondNumber, sumOfTwoNumbers);
+
+    return 0;
+}
+
+int main(int a)
+{
+    int base, exponent;
+    while (exponent != 0)
+    {
+        result = result * base;
+        exponent=exponent-1;
+    }
+
+    printf(result);
+
+    return 0;
+}
+
+int a;
+
+int main(int n)
+{
+    int reversedNumber = 0, remainder;
+
+    while(n != 0)
+    {
+        remainder = n%10;
+        reversedNumber = reversedNumber*10 + remainder;
+        n =n/10;
+    }
+
+    printf(reversedNumber);
+
+    return 0;
+}
+
+int main(void)
+{
+    if(1,2){};
+    if(1&&2);
+    printf(reversedNumber);
+
+   return 0;
 }
