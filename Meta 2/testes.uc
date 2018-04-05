@@ -107,3 +107,92 @@ int x(int x){
     char a = b, r = a -b;  
     putchar(x=a,a+v,c-d,!b,+a,-b); 
 }
+
+int a;
+int main(int argc, char argv) {
+  int a, b;
+  if(a){
+    ;
+    ;
+  }
+  else{
+    if(a){
+    }
+    else{
+      a=1;
+      ;
+    }
+  }
+}
+
+void test(int a){}
+int main(int){
+
+    test((2,3),1);
+    if(b){
+        if(c){
+            a = 2;
+            ;
+        }
+        ;
+        if(b){
+            if(e){}
+        }
+    }
+}
+
+int main(void){
+
+    int a,b,c,d,e;
+
+    funcao();
+    funcao(a);
+    funcao(a,b);
+    funcao((a,b));
+    
+    !+a;
+    -!a;
+
+
+    //(a+b)*a+b = b/a>(a*(c-d);
+}
+
+int main(void){
+
+        if(a){
+        a = 0;
+    }
+
+
+    if(a){
+        a = 0;
+    }
+    else{
+        a=0;
+    }
+
+
+    if(a){
+        a = 0;a = 0;a = 0;a = 0;a = 0;a = 0;
+    }
+    else{
+        a=0;a = 0;a = 0;a = 0;a = 0;a = 0;a = 0;
+    }
+
+
+    if(a){
+        {}{}{}{};;;;;;{}{}
+    }
+
+
+    while(a){{{{{
+        a =0; ;;;;;;;
+    }}}}}
+
+    while(a){}
+
+    return a;
+
+    return;
+
+}

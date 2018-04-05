@@ -7,6 +7,6 @@
 
 #Meta 2
 flex uccompiler.l
-yacc -d uccompiler.y
+yacc -d -v uccompiler.y
 clang -o uccompiler -Wall -Wno-unused-function *.c
 zip -r uccompiler.zip uccompiler.l uccompiler.y arvore.c arvore.h

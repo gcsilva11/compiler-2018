@@ -234,14 +234,12 @@ Statement:
 	| LBRACE StatementAux RBRACE 						{
 															aux = $2;
 															if(aux!=NULL && aux->irmao!=NULL){
-																aux2 = cria_no("StatList","");
-																adicionar_filho(aux2,aux);
-																$$ = aux2;
+																$$ = cria_no("StatList","");
+																adicionar_filho($$,aux);
 															}
 															else if(aux!=NULL && aux->irmao==NULL){
 																$$ = aux;
 															}
-
 														}
 
 	| IF LPAR Expr RPAR Statement %prec ELSE_PRIORITY 	{
@@ -267,8 +265,11 @@ Statement:
 																aux = cria_no("Null","");
 																adicionar_irmao($3,aux);
 															}
-															if($7 != NULL){
+															if($7 != NULL && $5 != NULL){
 																adicionar_irmao($5,$7);
+															}
+															else if($7 != NULL && $5 == NULL){
+																adicionar_irmao($3,$7);
 															}
 															else{
 																aux = cria_no("Null","");
@@ -310,10 +311,11 @@ Statement:
 
 StatementAux:
 	Statement 											{
-															$$ = $1;
-															adicionar_irmao($$,cria_no("Null",""));
+															if($1 == NULL)
+																$$ = cria_no("Null","");
+															else
+																$$ = $1;
 														}
-	;
 	| StatementAux Statement 							{
 															$$ = $1;
 															adicionar_irmao($$,$2);
@@ -433,11 +435,24 @@ Expr:
 															aux = cria_no("Id",$1);
 															adicionar_filho($$,aux);
 														}
+
 	| ID LPAR Expr2 RPAR 								{
 															$$ = cria_no("Call","");
 															aux = cria_no("Id",$1);
-															adicionar_filho($$,aux);
-															adicionar_irmao(aux,$3);
+															aux2 = $3;
+															
+															/*if(strcmp(aux2->tipo,"Comma") == 0){
+																while(strcmp(aux2->tipo,"Comma") == 0 && strcmp(aux2->filho->tipo,"Comma") == 0){
+																	adicionar_irmao(aux,aux2->filho);
+																	aux2 = aux2->filho;
+																}
+																adicionar_irmao(aux2->filho,aux2->filho->irmao);
+																adicionar_irmao(aux,aux2->filho);
+															}
+															else{*/
+																adicionar_filho($$,aux);
+																adicionar_irmao(aux,$3);
+														//	}
 														}
 
 	| ID 												{
@@ -472,12 +487,12 @@ Expr2:
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
 														}
-	| Expr2 COMMA Expr2 									{
+	| Expr2 COMMA Expr 								{
 															$$ = $1;
 															adicionar_irmao($1,$3);
 														}
 
-	| Expr2 EQ Expr2 										{
+	| Expr2 EQ Expr2 									{
 															$$ = cria_no("Eq","");
 															adicionar_filho($$,$1);
 															adicionar_irmao($1,$3);
@@ -611,7 +626,9 @@ Expr2:
 														}
 	;
 
+
 %%
+
 
 int main(int argc, char *argv[]){
 	if(argc > 1){
