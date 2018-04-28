@@ -610,13 +610,14 @@ int main(int argc, char *argv[]){
 			yylex();
 		}
 		if(strcmp(argv[1],"-t") == 0){
+			
 			flag=2;
 			yyparse();
 			yylex_destroy();
 			if(!print_flag)
 				imprime_arvore(root,0);
-
 		}
+
 	}
 	else{
 		flag=2;
