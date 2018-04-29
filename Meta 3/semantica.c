@@ -1,14 +1,17 @@
 #include "arvore.h"
 
-void begin_table(){
+void begin_table(AST_struct raiz){
 
 
 	no_tabela_global tab_print;
 
 
-	tab_print = inicia_tabela_global();
+	if(strcmp(raiz->tipo,"Program")==0){
+		tab_print = inicia_tabela_global();
+		print_tabela(tab_print);
+	}
 
-	print_tabela(tab_print);
+	
 	
 	return;
 

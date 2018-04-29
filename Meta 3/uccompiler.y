@@ -613,7 +613,7 @@ int main(int argc, char *argv[]){
 			yylex_destroy();
 			/*if(!print_flag)
 				imprime_arvore(root,0);*/
-			begin_table();
+			begin_table(root);
 		}
 
 	}

@@ -59,5 +59,5 @@ no_tabela_global inicia_tabela_global();
 void insere_simbolo_global(char* tipo, char* nome,char* array_params);
 
 //funcs semantica
-void begin_table();
+void begin_table(AST_struct raiz);
 void print_tabela(no_tabela_global tab_print);
