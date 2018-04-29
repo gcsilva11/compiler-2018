@@ -4,9 +4,8 @@
 */
 #include "arvore.h"
 
-no_tabela_global tabela_simbolos;
 
-no_tabela_global inicia_tabela_global(){
+void inicia_tabela_global(){
 
 
 	tabela_simbolos = (no_tabela_global)malloc(sizeof(ntg));
@@ -27,7 +26,7 @@ no_tabela_global inicia_tabela_global(){
 	insere_simbolo_global("int","putchar",par_array[1]);
 	insere_simbolo_global("int","getchar",par_array[0]);
 
-	return tabela_simbolos;
+	return;
 
 }
 
