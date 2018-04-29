@@ -3,9 +3,6 @@
 	João Pedro Costa Ferreiro 2014197760
 	Guilherme Cardoso Gomes da Silva 2014226354
 	*/
-	#include <stdio.h>
-	#include <stdio.h>
-	#include <string.h>
 	#include "arvore.h"
 
 	AST_struct root = NULL, aux = NULL, aux2 = NULL;
@@ -614,8 +611,9 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			if(!print_flag)
-				imprime_arvore(root,0);
+			/*if(!print_flag)
+				imprime_arvore(root,0);*/
+			begin_table();
 		}
 
 	}

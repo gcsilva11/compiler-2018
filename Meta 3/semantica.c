@@ -1,32 +1,32 @@
 #include "arvore.h"
 
-void begin_table(AST_struct raiz){
+void begin_table(){
+
 
 	no_tabela_global tab_print;
 
 
-	printf("A ENTRAR NO IF begin_table");
-	if(strcmp(raiz->tipo, "Program")==0){
-		printf("ENTREI NO IF begin_table");
+	tab_print = inicia_tabela_global();
 
-		tab_print = inicia_tabela_global();
-
-		print_tabela(tab_print);
-	}
-	printf("SAI DO IF begin_table");
+	print_tabela(tab_print);
+	
+	return;
 
 }
 
 void print_tabela(no_tabela_global tab_print){
 
-	printf("A ENTRAR NO print_table");
 
 	while(tab_print!=NULL){
-		printf("WHILE");
-		printf("%s/t%s", tab_print->tipo,tab_print->nome);
+		if(tab_print->nome==NULL){
+			printf("%s\n", tab_print->tipo);
+		}
+		else{
+			printf("\n%s\t%s", tab_print->tipo,tab_print->nome);
+		}
 		tab_print = tab_print->next;
 	}
 
-	printf("A SAIR DO print_table");
+	return;
 
 }

@@ -68,16 +68,13 @@
 	João Pedro Costa Ferreiro 2014197760
 	Guilherme Cardoso Gomes da Silva 2014226354
 	*/
-	#include <stdio.h>
-	#include <stdio.h>
-	#include <string.h>
 	#include "arvore.h"
 
 	AST_struct root = NULL, aux = NULL, aux2 = NULL;
 	int flag = 0, print_flag = 0;
 	char* type_spec;
 
-#line 81 "y.tab.c" /* yacc.c:339  */
+#line 78 "y.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -201,12 +198,12 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "uccompiler.y" /* yacc.c:355  */
+#line 13 "uccompiler.y" /* yacc.c:355  */
 
 	char* string;
 	struct AST* ast;
 
-#line 210 "y.tab.c" /* yacc.c:355  */
+#line 207 "y.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -223,7 +220,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 227 "y.tab.c" /* yacc.c:358  */
+#line 224 "y.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -524,17 +521,17 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    46,    46,    54,    58,    62,    66,    69,    72,    78,
-      87,    90,    97,   101,   105,   108,   114,   122,   129,   137,
-     140,   148,   152,   162,   168,   175,   178,   188,   192,   196,
-     200,   204,   211,   214,   220,   223,   233,   236,   243,   246,
-     249,   252,   263,   277,   296,   308,   312,   317,   324,   329,
-     334,   339,   344,   349,   354,   359,   364,   369,   374,   379,
-     384,   389,   394,   399,   404,   409,   414,   418,   422,   426,
-     431,   438,   441,   444,   447,   450,   454,   458,   465,   470,
-     474,   479,   484,   489,   494,   499,   504,   509,   514,   519,
-     524,   529,   534,   539,   544,   549,   555,   559,   563,   567,
-     572,   578,   581,   584,   587,   590,   593,   597
+       0,    43,    43,    51,    55,    59,    63,    66,    69,    75,
+      84,    87,    94,    98,   102,   105,   111,   119,   126,   134,
+     137,   145,   149,   159,   165,   172,   175,   185,   189,   193,
+     197,   201,   208,   211,   217,   220,   230,   233,   240,   243,
+     246,   249,   260,   274,   293,   305,   309,   314,   321,   326,
+     331,   336,   341,   346,   351,   356,   361,   366,   371,   376,
+     381,   386,   391,   396,   401,   406,   411,   415,   419,   423,
+     428,   435,   438,   441,   444,   447,   451,   455,   462,   467,
+     471,   476,   481,   486,   491,   496,   501,   506,   511,   516,
+     521,   526,   531,   536,   541,   546,   552,   556,   560,   564,
+     569,   575,   578,   581,   584,   587,   590,   594
 };
 #endif
 
@@ -1550,186 +1547,186 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 46 "uccompiler.y" /* yacc.c:1646  */
+#line 43 "uccompiler.y" /* yacc.c:1646  */
     {
 																root = cria_no("Program","");
 																adicionar_filho(root,(yyvsp[0].ast));
 																(yyval.ast) = root;
 															}
-#line 1560 "y.tab.c" /* yacc.c:1646  */
+#line 1557 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 54 "uccompiler.y" /* yacc.c:1646  */
+#line 51 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1569 "y.tab.c" /* yacc.c:1646  */
+#line 1566 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 58 "uccompiler.y" /* yacc.c:1646  */
+#line 55 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1578 "y.tab.c" /* yacc.c:1646  */
+#line 1575 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 62 "uccompiler.y" /* yacc.c:1646  */
+#line 59 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1587 "y.tab.c" /* yacc.c:1646  */
+#line 1584 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
+#line 63 "uccompiler.y" /* yacc.c:1646  */
+    {
+																(yyval.ast) = (yyvsp[0].ast);
+															}
+#line 1592 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 7:
 #line 66 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1595 "y.tab.c" /* yacc.c:1646  */
+#line 1600 "y.tab.c" /* yacc.c:1646  */
     break;
 
-  case 7:
+  case 8:
 #line 69 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1603 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 8:
-#line 72 "uccompiler.y" /* yacc.c:1646  */
-    {
-																(yyval.ast) = (yyvsp[0].ast);
-															}
-#line 1611 "y.tab.c" /* yacc.c:1646  */
+#line 1608 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 78 "uccompiler.y" /* yacc.c:1646  */
+#line 75 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("FuncDefinition","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[-1].ast));
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 															}
-#line 1622 "y.tab.c" /* yacc.c:1646  */
+#line 1619 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 87 "uccompiler.y" /* yacc.c:1646  */
+#line 84 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("FuncBody","");
 															}
-#line 1630 "y.tab.c" /* yacc.c:1646  */
+#line 1627 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 90 "uccompiler.y" /* yacc.c:1646  */
+#line 87 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("FuncBody","");
 																adicionar_filho((yyval.ast),(yyvsp[-1].ast));
 															}
-#line 1639 "y.tab.c" /* yacc.c:1646  */
+#line 1636 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 97 "uccompiler.y" /* yacc.c:1646  */
+#line 94 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1648 "y.tab.c" /* yacc.c:1646  */
+#line 1645 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 101 "uccompiler.y" /* yacc.c:1646  */
+#line 98 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1657 "y.tab.c" /* yacc.c:1646  */
+#line 1654 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
+#line 102 "uccompiler.y" /* yacc.c:1646  */
+    {
+																(yyval.ast) = (yyvsp[0].ast);
+															}
+#line 1662 "y.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 15:
 #line 105 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1665 "y.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 15:
-#line 108 "uccompiler.y" /* yacc.c:1646  */
-    {
-																(yyval.ast) = (yyvsp[0].ast);
-															}
-#line 1673 "y.tab.c" /* yacc.c:1646  */
+#line 1670 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 114 "uccompiler.y" /* yacc.c:1646  */
+#line 111 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("FuncDeclaration","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[-1].ast));
 															}
-#line 1683 "y.tab.c" /* yacc.c:1646  */
+#line 1680 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 122 "uccompiler.y" /* yacc.c:1646  */
+#line 119 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Id",(yyvsp[-3].string));
 																adicionar_irmao((yyval.ast),(yyvsp[-1].ast));
 															}
-#line 1692 "y.tab.c" /* yacc.c:1646  */
+#line 1689 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 129 "uccompiler.y" /* yacc.c:1646  */
+#line 126 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("ParamList","");
 																adicionar_filho((yyval.ast),(yyvsp[-1].ast));
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 															}
-#line 1702 "y.tab.c" /* yacc.c:1646  */
+#line 1699 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 137 "uccompiler.y" /* yacc.c:1646  */
+#line 134 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 															}
-#line 1710 "y.tab.c" /* yacc.c:1646  */
+#line 1707 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 140 "uccompiler.y" /* yacc.c:1646  */
+#line 137 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_filho((yyval.ast),(yyvsp[-1].ast));
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1720 "y.tab.c" /* yacc.c:1646  */
+#line 1717 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 148 "uccompiler.y" /* yacc.c:1646  */
+#line 145 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("ParamDeclaration","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 1729 "y.tab.c" /* yacc.c:1646  */
+#line 1726 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 152 "uccompiler.y" /* yacc.c:1646  */
+#line 149 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("ParamDeclaration","");
 																aux = cria_no("Id",(yyvsp[0].string));
@@ -1737,39 +1734,39 @@ yyreduce:
 																adicionar_irmao((yyvsp[-1].ast),aux);
 
 															}
-#line 1741 "y.tab.c" /* yacc.c:1646  */
+#line 1738 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 162 "uccompiler.y" /* yacc.c:1646  */
+#line 159 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Declaration","");
 																adicionar_filho((yyval.ast),(yyvsp[-3].ast));
 																adicionar_irmao((yyvsp[-3].ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyval.ast),(yyvsp[-1].ast));
 															}
-#line 1752 "y.tab.c" /* yacc.c:1646  */
+#line 1749 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 168 "uccompiler.y" /* yacc.c:1646  */
+#line 165 "uccompiler.y" /* yacc.c:1646  */
     {
 																print_flag = 1;
 																(yyval.ast) = NULL;
 															}
-#line 1761 "y.tab.c" /* yacc.c:1646  */
+#line 1758 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 175 "uccompiler.y" /* yacc.c:1646  */
+#line 172 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 															}
-#line 1769 "y.tab.c" /* yacc.c:1646  */
+#line 1766 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 178 "uccompiler.y" /* yacc.c:1646  */
+#line 175 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Declaration","");
 																aux = cria_no(type_spec,"");
@@ -1777,81 +1774,81 @@ yyreduce:
 																adicionar_irmao(aux,(yyvsp[-1].ast));
 																adicionar_irmao((yyval.ast),(yyvsp[0].ast));
 															}
-#line 1781 "y.tab.c" /* yacc.c:1646  */
+#line 1778 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 188 "uccompiler.y" /* yacc.c:1646  */
+#line 185 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Char","");
 																type_spec = (yyval.ast)->tipo;
 															}
-#line 1790 "y.tab.c" /* yacc.c:1646  */
+#line 1787 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 192 "uccompiler.y" /* yacc.c:1646  */
+#line 189 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Int","");
 																type_spec = (yyval.ast)->tipo;
 															}
-#line 1799 "y.tab.c" /* yacc.c:1646  */
+#line 1796 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 196 "uccompiler.y" /* yacc.c:1646  */
+#line 193 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Void","");
 																type_spec = (yyval.ast)->tipo;
 															}
-#line 1808 "y.tab.c" /* yacc.c:1646  */
+#line 1805 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 200 "uccompiler.y" /* yacc.c:1646  */
+#line 197 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Short","");
 																type_spec = (yyval.ast)->tipo;
 															}
-#line 1817 "y.tab.c" /* yacc.c:1646  */
+#line 1814 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 204 "uccompiler.y" /* yacc.c:1646  */
+#line 201 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Double","");
 																type_spec = (yyval.ast)->tipo;
 															}
-#line 1826 "y.tab.c" /* yacc.c:1646  */
+#line 1823 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 211 "uccompiler.y" /* yacc.c:1646  */
+#line 208 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Id",(yyvsp[0].string));
 															}
-#line 1834 "y.tab.c" /* yacc.c:1646  */
+#line 1831 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 214 "uccompiler.y" /* yacc.c:1646  */
+#line 211 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Id",(yyvsp[-2].string));
 																adicionar_irmao((yyval.ast),(yyvsp[0].ast));
 															}
-#line 1843 "y.tab.c" /* yacc.c:1646  */
+#line 1840 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 220 "uccompiler.y" /* yacc.c:1646  */
+#line 217 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1851 "y.tab.c" /* yacc.c:1646  */
+#line 1848 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 223 "uccompiler.y" /* yacc.c:1646  */
+#line 220 "uccompiler.y" /* yacc.c:1646  */
     {
 																adicionar_irmao((yyvsp[-1].ast),(yyvsp[0].ast));
 																if((yyvsp[-1].ast)!=NULL)
@@ -1859,52 +1856,52 @@ yyreduce:
 																else
 																	(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1863 "y.tab.c" /* yacc.c:1646  */
+#line 1860 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 233 "uccompiler.y" /* yacc.c:1646  */
+#line 230 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[0].ast);
 															}
-#line 1871 "y.tab.c" /* yacc.c:1646  */
+#line 1868 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 236 "uccompiler.y" /* yacc.c:1646  */
+#line 233 "uccompiler.y" /* yacc.c:1646  */
     {
 																print_flag = 1;
 																(yyval.ast) = NULL;
 															}
-#line 1880 "y.tab.c" /* yacc.c:1646  */
+#line 1877 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 243 "uccompiler.y" /* yacc.c:1646  */
+#line 240 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 															}
-#line 1888 "y.tab.c" /* yacc.c:1646  */
+#line 1885 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 246 "uccompiler.y" /* yacc.c:1646  */
+#line 243 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 1896 "y.tab.c" /* yacc.c:1646  */
+#line 1893 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 249 "uccompiler.y" /* yacc.c:1646  */
+#line 246 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 															}
-#line 1904 "y.tab.c" /* yacc.c:1646  */
+#line 1901 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 252 "uccompiler.y" /* yacc.c:1646  */
+#line 249 "uccompiler.y" /* yacc.c:1646  */
     {
 																if((yyvsp[-1].ast)!=NULL && (yyvsp[-1].ast)->irmao!=NULL){
 																	(yyval.ast) = cria_no("StatList","");
@@ -1915,11 +1912,11 @@ yyreduce:
 																}
 																else (yyval.ast) = NULL;
 															}
-#line 1919 "y.tab.c" /* yacc.c:1646  */
+#line 1916 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 263 "uccompiler.y" /* yacc.c:1646  */
+#line 260 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("If","");
 																aux2 = (yyvsp[-2].ast);
@@ -1934,11 +1931,11 @@ yyreduce:
 																aux = cria_no("Null","");
 																adicionar_irmao(aux2,aux);
 															}
-#line 1938 "y.tab.c" /* yacc.c:1646  */
+#line 1935 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 277 "uccompiler.y" /* yacc.c:1646  */
+#line 274 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("If","");
 																aux2 = (yyvsp[-4].ast);
@@ -1958,11 +1955,11 @@ yyreduce:
 																	adicionar_irmao(aux2,aux);
 																}
 															}
-#line 1962 "y.tab.c" /* yacc.c:1646  */
+#line 1959 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 296 "uccompiler.y" /* yacc.c:1646  */
+#line 293 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("While","");
 																aux2 = (yyvsp[-2].ast);
@@ -1975,256 +1972,256 @@ yyreduce:
 																	adicionar_irmao(aux2,aux);
 																}
 															}
-#line 1979 "y.tab.c" /* yacc.c:1646  */
+#line 1976 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 308 "uccompiler.y" /* yacc.c:1646  */
+#line 305 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Return","");
 																adicionar_filho((yyval.ast),(yyvsp[-1].ast));
 															}
-#line 1988 "y.tab.c" /* yacc.c:1646  */
+#line 1985 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 312 "uccompiler.y" /* yacc.c:1646  */
+#line 309 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Return","");
 																aux = cria_no("Null","");
 																adicionar_filho((yyval.ast),aux);
 															}
-#line 1998 "y.tab.c" /* yacc.c:1646  */
+#line 1995 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 317 "uccompiler.y" /* yacc.c:1646  */
+#line 314 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 																print_flag = 1;
 															}
-#line 2007 "y.tab.c" /* yacc.c:1646  */
+#line 2004 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 324 "uccompiler.y" /* yacc.c:1646  */
+#line 321 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Store","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2017 "y.tab.c" /* yacc.c:1646  */
+#line 2014 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 329 "uccompiler.y" /* yacc.c:1646  */
+#line 326 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Comma","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2027 "y.tab.c" /* yacc.c:1646  */
+#line 2024 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 334 "uccompiler.y" /* yacc.c:1646  */
+#line 331 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Eq","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2037 "y.tab.c" /* yacc.c:1646  */
+#line 2034 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 339 "uccompiler.y" /* yacc.c:1646  */
+#line 336 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Ne","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2047 "y.tab.c" /* yacc.c:1646  */
+#line 2044 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 344 "uccompiler.y" /* yacc.c:1646  */
+#line 341 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Le","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2057 "y.tab.c" /* yacc.c:1646  */
+#line 2054 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 349 "uccompiler.y" /* yacc.c:1646  */
+#line 346 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Ge","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2067 "y.tab.c" /* yacc.c:1646  */
+#line 2064 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 354 "uccompiler.y" /* yacc.c:1646  */
+#line 351 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Lt","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2077 "y.tab.c" /* yacc.c:1646  */
+#line 2074 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 359 "uccompiler.y" /* yacc.c:1646  */
+#line 356 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Gt","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2087 "y.tab.c" /* yacc.c:1646  */
+#line 2084 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 364 "uccompiler.y" /* yacc.c:1646  */
+#line 361 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Add","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2097 "y.tab.c" /* yacc.c:1646  */
+#line 2094 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 369 "uccompiler.y" /* yacc.c:1646  */
+#line 366 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Sub","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2107 "y.tab.c" /* yacc.c:1646  */
+#line 2104 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 374 "uccompiler.y" /* yacc.c:1646  */
+#line 371 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Mul","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2117 "y.tab.c" /* yacc.c:1646  */
+#line 2114 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 379 "uccompiler.y" /* yacc.c:1646  */
+#line 376 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Div","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2127 "y.tab.c" /* yacc.c:1646  */
+#line 2124 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 384 "uccompiler.y" /* yacc.c:1646  */
+#line 381 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Mod","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2137 "y.tab.c" /* yacc.c:1646  */
+#line 2134 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 389 "uccompiler.y" /* yacc.c:1646  */
+#line 386 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Or","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2147 "y.tab.c" /* yacc.c:1646  */
+#line 2144 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 394 "uccompiler.y" /* yacc.c:1646  */
+#line 391 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("And","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2157 "y.tab.c" /* yacc.c:1646  */
+#line 2154 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 399 "uccompiler.y" /* yacc.c:1646  */
+#line 396 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseAnd","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2167 "y.tab.c" /* yacc.c:1646  */
+#line 2164 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 404 "uccompiler.y" /* yacc.c:1646  */
+#line 401 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseOr","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2177 "y.tab.c" /* yacc.c:1646  */
+#line 2174 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 409 "uccompiler.y" /* yacc.c:1646  */
+#line 406 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseXor","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2187 "y.tab.c" /* yacc.c:1646  */
+#line 2184 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 414 "uccompiler.y" /* yacc.c:1646  */
+#line 411 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Plus","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2196 "y.tab.c" /* yacc.c:1646  */
+#line 2193 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 418 "uccompiler.y" /* yacc.c:1646  */
+#line 415 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Minus","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2205 "y.tab.c" /* yacc.c:1646  */
+#line 2202 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 422 "uccompiler.y" /* yacc.c:1646  */
+#line 419 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Not","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2214 "y.tab.c" /* yacc.c:1646  */
+#line 2211 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 426 "uccompiler.y" /* yacc.c:1646  */
+#line 423 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Call","");
 																aux = cria_no("Id",(yyvsp[-2].string));
 																adicionar_filho((yyval.ast),aux);
 															}
-#line 2224 "y.tab.c" /* yacc.c:1646  */
+#line 2221 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 431 "uccompiler.y" /* yacc.c:1646  */
+#line 428 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Call","");
 																aux = cria_no("Id",(yyvsp[-3].string));
@@ -2232,354 +2229,354 @@ yyreduce:
 																adicionar_filho((yyval.ast),aux);
 																adicionar_irmao(aux,(yyvsp[-1].ast));
 															}
-#line 2236 "y.tab.c" /* yacc.c:1646  */
+#line 2233 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 438 "uccompiler.y" /* yacc.c:1646  */
+#line 435 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Id",(yyvsp[0].string));
 															}
-#line 2244 "y.tab.c" /* yacc.c:1646  */
+#line 2241 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 441 "uccompiler.y" /* yacc.c:1646  */
+#line 438 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("IntLit",(yyvsp[0].string));
 															}
-#line 2252 "y.tab.c" /* yacc.c:1646  */
+#line 2249 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 444 "uccompiler.y" /* yacc.c:1646  */
+#line 441 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("ChrLit",(yyvsp[0].string));
 															}
-#line 2260 "y.tab.c" /* yacc.c:1646  */
+#line 2257 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 447 "uccompiler.y" /* yacc.c:1646  */
+#line 444 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("RealLit",(yyvsp[0].string));
 															}
-#line 2268 "y.tab.c" /* yacc.c:1646  */
+#line 2265 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 450 "uccompiler.y" /* yacc.c:1646  */
+#line 447 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 2276 "y.tab.c" /* yacc.c:1646  */
+#line 2273 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 454 "uccompiler.y" /* yacc.c:1646  */
+#line 451 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 																print_flag = 1;
 															}
-#line 2285 "y.tab.c" /* yacc.c:1646  */
+#line 2282 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 458 "uccompiler.y" /* yacc.c:1646  */
+#line 455 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 																print_flag = 1;
 															}
-#line 2294 "y.tab.c" /* yacc.c:1646  */
+#line 2291 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 78:
-#line 465 "uccompiler.y" /* yacc.c:1646  */
+#line 462 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Store","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2304 "y.tab.c" /* yacc.c:1646  */
+#line 2301 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 79:
-#line 470 "uccompiler.y" /* yacc.c:1646  */
+#line 467 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[-2].ast);
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2313 "y.tab.c" /* yacc.c:1646  */
+#line 2310 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 80:
-#line 474 "uccompiler.y" /* yacc.c:1646  */
+#line 471 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Eq","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2323 "y.tab.c" /* yacc.c:1646  */
+#line 2320 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 81:
-#line 479 "uccompiler.y" /* yacc.c:1646  */
+#line 476 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Ne","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2333 "y.tab.c" /* yacc.c:1646  */
+#line 2330 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 82:
-#line 484 "uccompiler.y" /* yacc.c:1646  */
+#line 481 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Le","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2343 "y.tab.c" /* yacc.c:1646  */
+#line 2340 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 83:
-#line 489 "uccompiler.y" /* yacc.c:1646  */
+#line 486 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Ge","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2353 "y.tab.c" /* yacc.c:1646  */
+#line 2350 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 84:
-#line 494 "uccompiler.y" /* yacc.c:1646  */
+#line 491 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Lt","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2363 "y.tab.c" /* yacc.c:1646  */
+#line 2360 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 85:
-#line 499 "uccompiler.y" /* yacc.c:1646  */
+#line 496 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Gt","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2373 "y.tab.c" /* yacc.c:1646  */
+#line 2370 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 86:
-#line 504 "uccompiler.y" /* yacc.c:1646  */
+#line 501 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Add","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2383 "y.tab.c" /* yacc.c:1646  */
+#line 2380 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 87:
-#line 509 "uccompiler.y" /* yacc.c:1646  */
+#line 506 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Sub","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2393 "y.tab.c" /* yacc.c:1646  */
+#line 2390 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 88:
-#line 514 "uccompiler.y" /* yacc.c:1646  */
+#line 511 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Mul","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2403 "y.tab.c" /* yacc.c:1646  */
+#line 2400 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 89:
-#line 519 "uccompiler.y" /* yacc.c:1646  */
+#line 516 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Div","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2413 "y.tab.c" /* yacc.c:1646  */
+#line 2410 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 90:
-#line 524 "uccompiler.y" /* yacc.c:1646  */
+#line 521 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Mod","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2423 "y.tab.c" /* yacc.c:1646  */
+#line 2420 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 91:
-#line 529 "uccompiler.y" /* yacc.c:1646  */
+#line 526 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Or","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2433 "y.tab.c" /* yacc.c:1646  */
+#line 2430 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 92:
-#line 534 "uccompiler.y" /* yacc.c:1646  */
+#line 531 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("And","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2443 "y.tab.c" /* yacc.c:1646  */
+#line 2440 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 93:
-#line 539 "uccompiler.y" /* yacc.c:1646  */
+#line 536 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseAnd","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2453 "y.tab.c" /* yacc.c:1646  */
+#line 2450 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 94:
-#line 544 "uccompiler.y" /* yacc.c:1646  */
+#line 541 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseOr","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2463 "y.tab.c" /* yacc.c:1646  */
+#line 2460 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 95:
-#line 549 "uccompiler.y" /* yacc.c:1646  */
+#line 546 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("BitWiseXor","");
 																adicionar_filho((yyval.ast),(yyvsp[-2].ast));
 																adicionar_irmao((yyvsp[-2].ast),(yyvsp[0].ast));
 															}
-#line 2473 "y.tab.c" /* yacc.c:1646  */
+#line 2470 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 96:
-#line 555 "uccompiler.y" /* yacc.c:1646  */
+#line 552 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Plus","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2482 "y.tab.c" /* yacc.c:1646  */
+#line 2479 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 97:
-#line 559 "uccompiler.y" /* yacc.c:1646  */
+#line 556 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Minus","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2491 "y.tab.c" /* yacc.c:1646  */
+#line 2488 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 98:
-#line 563 "uccompiler.y" /* yacc.c:1646  */
+#line 560 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Not","");
 																adicionar_filho((yyval.ast),(yyvsp[0].ast));
 															}
-#line 2500 "y.tab.c" /* yacc.c:1646  */
+#line 2497 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 99:
-#line 567 "uccompiler.y" /* yacc.c:1646  */
+#line 564 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Call","");
 																aux = cria_no("Id",(yyvsp[-2].string));
 																adicionar_filho((yyval.ast),aux);
 															}
-#line 2510 "y.tab.c" /* yacc.c:1646  */
+#line 2507 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 100:
-#line 572 "uccompiler.y" /* yacc.c:1646  */
+#line 569 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Call","");
 																aux = cria_no("Id",(yyvsp[-3].string));
 																adicionar_filho((yyval.ast),aux);
 																adicionar_irmao(aux,(yyvsp[-1].ast));
 															}
-#line 2521 "y.tab.c" /* yacc.c:1646  */
+#line 2518 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 101:
-#line 578 "uccompiler.y" /* yacc.c:1646  */
+#line 575 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("Id",(yyvsp[0].string));
 															}
-#line 2529 "y.tab.c" /* yacc.c:1646  */
+#line 2526 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 102:
-#line 581 "uccompiler.y" /* yacc.c:1646  */
+#line 578 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("IntLit",(yyvsp[0].string));
 															}
-#line 2537 "y.tab.c" /* yacc.c:1646  */
+#line 2534 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 103:
-#line 584 "uccompiler.y" /* yacc.c:1646  */
+#line 581 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("ChrLit",(yyvsp[0].string));
 															}
-#line 2545 "y.tab.c" /* yacc.c:1646  */
+#line 2542 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 104:
-#line 587 "uccompiler.y" /* yacc.c:1646  */
+#line 584 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = cria_no("RealLit",(yyvsp[0].string));
 															}
-#line 2553 "y.tab.c" /* yacc.c:1646  */
+#line 2550 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 105:
-#line 590 "uccompiler.y" /* yacc.c:1646  */
+#line 587 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = (yyvsp[-1].ast);
 															}
-#line 2561 "y.tab.c" /* yacc.c:1646  */
+#line 2558 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 106:
-#line 593 "uccompiler.y" /* yacc.c:1646  */
+#line 590 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 																print_flag = 1;
 															}
-#line 2570 "y.tab.c" /* yacc.c:1646  */
+#line 2567 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 107:
-#line 597 "uccompiler.y" /* yacc.c:1646  */
+#line 594 "uccompiler.y" /* yacc.c:1646  */
     {
 																(yyval.ast) = NULL;
 																print_flag = 1;
 															}
-#line 2579 "y.tab.c" /* yacc.c:1646  */
+#line 2576 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2583 "y.tab.c" /* yacc.c:1646  */
+#line 2580 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2807,7 +2804,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 603 "uccompiler.y" /* yacc.c:1906  */
+#line 600 "uccompiler.y" /* yacc.c:1906  */
 
 
 
@@ -2821,11 +2818,10 @@ int main(int argc, char *argv[]){
 			
 			flag=2;
 			yyparse();
-			begin_table(root);
 			yylex_destroy();
-			
 			/*if(!print_flag)
 				imprime_arvore(root,0);*/
+			begin_table();
 		}
 
 	}

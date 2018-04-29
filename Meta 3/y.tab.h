@@ -134,7 +134,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 16 "uccompiler.y" /* yacc.c:1909  */
+#line 13 "uccompiler.y" /* yacc.c:1909  */
 
 	char* string;
 	struct AST* ast;

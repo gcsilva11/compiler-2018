@@ -50,6 +50,7 @@ typedef struct ntg{
 	//char** array_params;
 	no_tabela_func next_table;
 	no_tabela_global next;
+	no_tabela_global prev;
 
 }ntg;
 
@@ -57,5 +58,5 @@ no_tabela_global inicia_tabela_global();
 void insere_simbolo_global(char* tipo, char* nome);
 
 //funcs semantica
-void begin_table(AST_struct raiz);
+void begin_table();
 void print_tabela(no_tabela_global tab_print);
