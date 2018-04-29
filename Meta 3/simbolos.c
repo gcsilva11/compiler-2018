@@ -19,18 +19,19 @@ no_tabela_global inicia_tabela_global(){
 	tabela_simbolos->next_table = NULL;
 	tabela_simbolos->next = NULL;
 
-	/*char ** par_array = (char**)malloc(sizeof(char*)*MAX_ARRAY*MAX_CHAR);
+	char ** par_array = (char**)malloc(sizeof(char*)*MAX_ARRAY*MAX_CHAR);
 
 	par_array[0] = "void";
-	par_array[1] = "int";*/
-	insere_simbolo_global("int","putchar");
-	insere_simbolo_global("int","getchar");
+	par_array[1] = "int";
+
+	insere_simbolo_global("int","putchar",par_array[1]);
+	insere_simbolo_global("int","getchar",par_array[0]);
 
 	return tabela_simbolos;
 
 }
 
-void insere_simbolo_global(char* tipo, char* nome){
+void insere_simbolo_global(char* tipo, char* nome, char* params){
 	
 	no_tabela_global checker = tabela_simbolos;
 
@@ -45,6 +46,9 @@ void insere_simbolo_global(char* tipo, char* nome){
 
 	aux->nome = (char*)malloc(strlen(nome)*sizeof(char)+1);
 	strcpy(aux->nome,nome);
+
+	aux->array_params = (char*)malloc(strlen(nome)*sizeof(char)+1);
+	strcpy(aux->array_params,params);
 
 	aux->next_table = NULL;
 	aux->next = NULL;
