@@ -1,5 +1,7 @@
 int a,b,c;
 
+void lolfunc(int a);
+
 
 int main(void) {
 

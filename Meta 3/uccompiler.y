@@ -615,6 +615,13 @@ int main(int argc, char *argv[]){
 				imprime_arvore(root,0);
 		}
 
+		if(strcmp(argv[1],"-2") == 0){
+			
+			flag=2;
+			yyparse();
+			yylex_destroy();
+		}
+
 		if(strcmp(argv[1],"-s") == 0){
 			
 			flag=2;

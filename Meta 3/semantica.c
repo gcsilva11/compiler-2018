@@ -17,20 +17,8 @@ void begin_table(AST_struct raiz){
 	if(strcmp(raiz->tipo,"Declaration")==0){
 		
 		if(raiz->pai){
-		
 			if(strcmp(raiz->pai->tipo,"Program")==0){
-		
-				AST_struct dec_bro_check = raiz->irmao;
-
 				check_decl(raiz);
-				
-				while(dec_bro_check!=NULL){
-					if(strcmp(dec_bro_check->tipo,"Declaration")==0){
-						check_decl(dec_bro_check);
-					}
-
-					dec_bro_check = dec_bro_check->irmao;
-				}
 			}
 
 		}
