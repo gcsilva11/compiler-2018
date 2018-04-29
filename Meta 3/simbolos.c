@@ -15,10 +15,14 @@ no_tabela_global inicia_tabela_global(){
 	strcpy(tabela_simbolos->tipo,"===== Global Symbol Table =====");
 
 	tabela_simbolos->nome = NULL;
+	tabela_simbolos->array_params = NULL;
 	tabela_simbolos->next_table = NULL;
 	tabela_simbolos->next = NULL;
-	tabela_simbolos->prev = NULL;
-	
+
+	/*char ** par_array = (char**)malloc(sizeof(char*)*MAX_ARRAY*MAX_CHAR);
+
+	par_array[0] = "void";
+	par_array[1] = "int";*/
 	insere_simbolo_global("int","putchar");
 	insere_simbolo_global("int","getchar");
 
@@ -28,6 +32,11 @@ no_tabela_global inicia_tabela_global(){
 
 void insere_simbolo_global(char* tipo, char* nome){
 	
+	no_tabela_global checker = tabela_simbolos;
+
+	while(checker->next!=NULL){
+		checker = checker->next;
+	}
 
 	no_tabela_global aux = (no_tabela_global)malloc(sizeof(ntg));
 
@@ -39,6 +48,8 @@ void insere_simbolo_global(char* tipo, char* nome){
 
 	aux->next_table = NULL;
 	aux->next = NULL;
+
+	checker->next = aux;
 
 	return;
 }

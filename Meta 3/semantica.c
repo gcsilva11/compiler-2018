@@ -22,7 +22,7 @@ void print_tabela(no_tabela_global tab_print){
 			printf("%s\n", tab_print->tipo);
 		}
 		else{
-			printf("\n%s\t%s", tab_print->tipo,tab_print->nome);
+			printf("%s\t%s\n", tab_print->nome,tab_print->tipo);
 		}
 		tab_print = tab_print->next;
 	}

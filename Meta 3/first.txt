@@ -1,0 +1,2 @@
+===== Global Symbol Table =====
+int	putcharint	getchar

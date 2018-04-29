@@ -6,6 +6,8 @@ Guilherme Cardoso Gomes da Silva 2014226354
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+/*#define MAX_ARRAY 20 //20 strings MAX
+#define MAX_CHAR 100 //100 caracteres MAX*/
 
 typedef struct AST* AST_struct;
 typedef struct AST {
@@ -37,7 +39,7 @@ typedef struct nt{
 
 	char* nome;
 	char* tipo;
-	char* param;
+	//char* param;
 	no_tabela_func next;
 
 }nt;
@@ -47,10 +49,9 @@ typedef struct ntg{
 
 	char* tipo;
 	char* nome;
-	//char** array_params;
+	char** array_params;
 	no_tabela_func next_table;
 	no_tabela_global next;
-	no_tabela_global prev;
 
 }ntg;
 
