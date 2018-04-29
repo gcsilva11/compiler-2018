@@ -2,7 +2,7 @@
 	João Pedro Costa Ferreiro 2014197760
 	Guilherme Cardoso Gomes da Silva 2014226354
 */
-#include "arvore.h"
+#include "headers.h"
 
 
 void inicia_tabela_global(){

@@ -5,7 +5,7 @@
 	*/
 	#include <stdio.h>
 	#include <string.h>
-	#include "arvore.h"
+	#include "headers.h"
 	#include "y.tab.h"
 
 	void imprime(char* msg);

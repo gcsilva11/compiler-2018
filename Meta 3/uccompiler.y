@@ -3,7 +3,7 @@
 	João Pedro Costa Ferreiro 2014197760
 	Guilherme Cardoso Gomes da Silva 2014226354
 	*/
-	#include "arvore.h"
+	#include "headers.h"
 
 	AST_struct root = NULL, aux = NULL, aux2 = NULL;
 	int flag = 0, print_flag = 0;
@@ -606,32 +606,27 @@ int main(int argc, char *argv[]){
 			flag=1;
 			yylex();
 		}
-		if(strcmp(argv[1],"-t") == 0){
-			
+		if(strcmp(argv[1],"-t") == 0){	
 			flag=2;
 			yyparse();
 			yylex_destroy();
 			if(!print_flag)
 				imprime_arvore(root,0);
 		}
-
 		if(strcmp(argv[1],"-2") == 0){
-			
 			flag=2;
 			yyparse();
 			yylex_destroy();
 		}
-
 		if(strcmp(argv[1],"-s") == 0){
-			
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			begin_table(root);
-			print_tabela(tabela_simbolos);
+			begin_tabela(root);
+			print_tabela(tabela_global);
 		}
-
 	}
+
 	else{
 		flag=2;
 		yyparse();

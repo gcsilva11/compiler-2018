@@ -1,8 +1,0 @@
-===== Global Symbol Table =====
-putchar	int(int)
-getchar	int(void)
-a	int
-b	int
-c	int
-a	char
-main	int(void)

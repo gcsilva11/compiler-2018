@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "arvore.h"
+#include "headers.h"
 
 AST_struct cria_no(char* tipo, char* valor) {
 	AST_struct novo_no = (AST_struct)malloc(sizeof(AST));
@@ -41,10 +41,7 @@ void adicionar_irmao(AST_struct existente, AST_struct novo_no){
 		}
 
 		aux->irmao = novo_no;
-
-		if(novo_no->pai != NULL){
-			novo_no->pai = aux->pai;
-		}
+		novo_no->pai = aux->pai;
 	}
 	return;
 }
