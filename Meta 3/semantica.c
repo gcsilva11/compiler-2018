@@ -1,6 +1,6 @@
 #include "headers.h"
 
-void begin_table(AST_struct raiz){
+void begin_tabela(AST_struct raiz){
 
 	if(strcmp(raiz->tipo,"Program")==0){
 		inicia_tabela_global();
@@ -29,7 +29,7 @@ void begin_table(AST_struct raiz){
 	AST_struct aux = raiz->filho;
 
 	while(aux!=NULL){
-		begin_table(aux);
+		begin_tabela(aux);
 		aux = aux->irmao;
 	}
 

@@ -623,7 +623,7 @@ int main(int argc, char *argv[]){
 			yyparse();
 			yylex_destroy();
 			begin_tabela(root);
-			print_tabela(tabela_global);
+			print_tabela(tabela_simbolos);
 		}
 	}
 
