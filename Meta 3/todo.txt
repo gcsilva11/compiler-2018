@@ -1,0 +1,5 @@
+ - falta o valor nos parametros
+ - falta as declaracoes dentro das funcoes
+ - uma funcDeclaration sem funcDefinition nao pode ter tabela_func
+ - arvore anotada
+ - erros lol.exe
