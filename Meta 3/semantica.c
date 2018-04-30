@@ -88,7 +88,7 @@ void check_next_func(AST_struct no){
 
 	
 	if(new_func!=NULL){
-		insere_tabela(new_func);
+			insere_tabela(new_func);
 	}
 
 	return;

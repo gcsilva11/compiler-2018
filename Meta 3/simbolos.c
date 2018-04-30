@@ -87,11 +87,9 @@ void insere_tabela(no_tabela_global ntg){
 
 void criar_tabela_func(no_tabela_global ntg){
 
-	char nome_tab[15]  = "===== Function ";
+	char nome_tab[200]  = "===== Function ";
 	strcat(nome_tab, ntg->nome);
 	strcat(nome_tab, " Symbol Table =====");
-
-	printf("%s",nome_tab);
 
 	no_tabela_func novo_no = (no_tabela_func)malloc(sizeof(nt));
 
@@ -100,17 +98,23 @@ void criar_tabela_func(no_tabela_global ntg){
 
 	novo_no->nome = NULL;
 	novo_no->param = NULL;
+	novo_no->next = NULL;
 
 	ntg->next_table = novo_no;
 
 	//Adicionar return a tabela
 	no_tabela_func return_no = (no_tabela_func)malloc(sizeof(nt));
 
-	return_no->nome = (char*)malloc((strlen("return")+1)*sizeof(char));
-	strcpy(return_no->nome,"return");
+	char* return_text = "return";
+	char* return_type = ntg->tipo;
 
-	return_no->tipo = (char*)malloc((strlen(ntg->tipo)+1)*sizeof(char));
-	strcpy(return_no->tipo,ntg->tipo);
+	return_no->nome = (char*)malloc((strlen(return_text)+1)*sizeof(char));
+	strcpy(return_no->nome,return_text);
+
+	if(return_type!=NULL){
+		return_no->tipo = (char*)malloc((strlen(ntg->tipo)+1)*sizeof(char));
+		strcpy(return_no->tipo,return_type);
+	}
 
 	return_no->param = NULL;
 	return_no->next = NULL;
