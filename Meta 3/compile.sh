@@ -1,4 +1,5 @@
-#!/bin/sh
+#João Pedro Costa Ferreiro 2014197760
+#Guilherme Cardoso Gomes da Silva 2014226354
 
 #Meta 1
 #flex uccompiler.l

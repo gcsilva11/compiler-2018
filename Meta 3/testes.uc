@@ -124,7 +124,7 @@ int x(int x){
     putchar(x=a,a+v,c-d,!b,+a,-b); 
 }
 
-int a;
+int a,b,c;
 int main(int argc, char argv) {
   int a, b;
   if(a){

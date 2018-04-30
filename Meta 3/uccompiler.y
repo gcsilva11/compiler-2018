@@ -1,7 +1,7 @@
 %{
 	/*
-	João Pedro Costa Ferreiro 2014197760
-	Guilherme Cardoso Gomes da Silva 2014226354
+		João Pedro Costa Ferreiro 2014197760
+		Guilherme Cardoso Gomes da Silva 2014226354
 	*/
 	#include "headers.h"
 
@@ -622,10 +622,9 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			inicia_tabela_global();
-			begin_tabela(root);
-			print_tabela(tabela_simbolos);
-			printf("\n");
+			le_arvore(root);
+			imprime_tabela(tabela_simbolos);
+			imprime_arvore(root,0);
 		}
 	}
 
