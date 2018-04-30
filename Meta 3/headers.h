@@ -55,7 +55,7 @@ typedef struct ntg{
 }ntg;
 
 void inicia_tabela_global();
-void insere_simbolo_global(char* tipo, char* nome,char* array_params);
+no_tabela_global insere_simbolo_global(char* tipo, char* nome,char* array_params);
 
 //funcs semantica
 
@@ -66,3 +66,7 @@ void check_next_func(AST_struct no);
 char* check_func_name(AST_struct no);
 char* check_func_params(AST_struct no);
 void check_decl(AST_struct no);
+void insere_tabela(no_tabela_global ntg);
+void insere_tabela_func(char* nome,char* tipo,char* params,no_tabela_func no);
+void criar_tabela_func(no_tabela_global ntg);
+void print_tabela_func(no_tabela_func no);

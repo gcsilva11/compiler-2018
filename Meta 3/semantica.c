@@ -26,24 +26,53 @@ void begin_tabela(AST_struct raiz){
 
 void print_tabela(no_tabela_global tab_print){
 
+	no_tabela_global print_aux= tab_print;
 
-	while(tab_print!=NULL){
-		if(tab_print->nome==NULL){
-			printf("%s\n", tab_print->tipo);
+	while(print_aux!=NULL){
+		if(print_aux->nome==NULL){
+			printf("%s\n", print_aux->tipo);
 		}
 		else{
-			if(strcmp(tab_print->array_params,"")==0){
-				printf("%s\t%s\n", tab_print->nome,tab_print->tipo);
+			if(strcmp(print_aux->array_params,"")==0){
+				printf("%s\t%s\n", print_aux->nome,print_aux->tipo);
 			}
 			else{
-				printf("%s\t%s(%s)\n", tab_print->nome,tab_print->tipo,tab_print->array_params);
+				printf("%s\t%s(%s)\n", print_aux->nome,print_aux->tipo,print_aux->array_params);
 			}
+		}
+		print_aux = print_aux->next;
+	}
+
+	while(tab_print!=NULL){
+		if(tab_print->next_table!=NULL){
+			print_tabela_func(print_aux->next_table);
 		}
 		tab_print = tab_print->next;
 	}
 
 	return;
 
+}
+
+void print_tabela_func(no_tabela_func tab_print){
+
+	no_tabela_func print_aux= tab_print;
+
+	while(print_aux!=NULL){
+		if(print_aux->nome==NULL){
+			printf("%s\n", print_aux->tipo);
+		}
+		else{
+			if(strcmp(print_aux->param,"")==0){
+				printf("%s\t%s\n", print_aux->nome,print_aux->tipo);
+			}
+			else{
+				printf("%s\t%s(%s)\n", print_aux->nome,print_aux->tipo,print_aux->param);
+			}
+		}
+		print_aux = print_aux->next;
+	}
+	return;
 }
 
 
@@ -55,7 +84,12 @@ void check_next_func(AST_struct no){
 
 	char* params = check_func_params(no->filho->irmao->irmao);
 
-	insere_simbolo_global(tipo,nome,params);
+	no_tabela_global new_func = insere_simbolo_global(tipo,nome,params);
+
+	
+	if(new_func!=NULL){
+		insere_tabela(new_func);
+	}
 
 	return;
 
