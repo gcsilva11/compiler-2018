@@ -40,8 +40,9 @@ void adicionar_irmao(AST_struct existente, AST_struct novo_no){
 			aux = aux->irmao;
 		}
 
+		novo_no->pai = existente->pai;
+
 		aux->irmao = novo_no;
-		novo_no->pai = aux->pai;
 	}
 	return;
 }

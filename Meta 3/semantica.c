@@ -2,39 +2,26 @@
 
 void begin_tabela(AST_struct raiz){
 
-	if(strcmp(raiz->tipo,"Program")==0){
-		inicia_tabela_global();
-
-
-	}
-	if(strcmp(raiz->tipo,"FuncDefinition")==0){
-		check_next_func(raiz);
-	}
-
-	if(strcmp(raiz->tipo,"FuncDeclaration")==0){
-		check_next_func(raiz);
-	}
-	if(strcmp(raiz->tipo,"Declaration")==0){
-		
-		if(raiz->pai){
-			if(strcmp(raiz->pai->tipo,"Program")==0){
-				check_decl(raiz);
-			}
-
+	if(raiz!=NULL){
+		if(strcmp(raiz->tipo,"Program")==0){
+			raiz = raiz->filho;
 		}
-		
+		else if(strcmp(raiz->tipo,"FuncDefinition")==0){
+			check_next_func(raiz);
+			raiz = raiz->irmao;
+		}
+
+		else if(strcmp(raiz->tipo,"FuncDeclaration")==0){
+			check_next_func(raiz);
+			raiz = raiz->irmao;
+		}
+		else{
+			check_decl(raiz);
+			raiz = raiz->irmao;
+		}
+		begin_tabela(raiz);	
 	}
-
-	
-	AST_struct aux = raiz->filho;
-
-	while(aux!=NULL){
-		begin_tabela(aux);
-		aux = aux->irmao;
-	}
-
 	return;
-
 }
 
 void print_tabela(no_tabela_global tab_print){
@@ -76,8 +63,7 @@ void check_next_func(AST_struct no){
 
 
 char* check_func_params(AST_struct no){
-
-	char params[300] = "";
+	char params[1000] = "";
 	AST_struct aux = NULL;
 	
 	if(no->filho){
@@ -91,6 +77,8 @@ char* check_func_params(AST_struct no){
 			strcat(params,"int");
 		else if(strcmp(aux->filho->tipo,"Double")==0)
 			strcat(params,"double");
+		else if(strcmp(aux->filho->tipo,"Char")==0)
+			strcat(params,"char");
 		if(aux->irmao)
 			strcat(params,",");
 		aux=aux->irmao;
