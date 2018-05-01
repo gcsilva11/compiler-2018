@@ -16,7 +16,7 @@ int readint (int a) {
         if(c != '-'){
             read = read * 10 + c - '0';
         }
-        c = getchar();
+        c = getchar((a,b));
     }
     return sign * read;
 }

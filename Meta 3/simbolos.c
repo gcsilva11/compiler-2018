@@ -121,10 +121,18 @@ void insere_simbolo_funcao(char* tipo, char* nome, int param, no_tabela_func no)
 
 void anotar_arvore(AST_struct no){
 	AST_struct aux = no;
+	char* tipo_aux = "";
 	if(aux != NULL){
 		if (strcmp(no->tipo,"Store") == 0){
 
 		}else if(strcmp(no->tipo,"Comma") == 0){
+			//fica com o tipo do filho a direita
+			if(aux->irmao->anotacao!=NULL){
+				strcpy(tipo_aux,aux->irmao->anotacao);
+				aux->anotacao = (char*)malloc(strlen(tipo_aux)*sizeof(char)+1);
+				strcpy(aux->anotacao,tipo_aux);
+				no = aux;
+			}
 
 		}else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0){
 
@@ -134,11 +142,7 @@ void anotar_arvore(AST_struct no){
 
 		}else if(strcmp(no->tipo,"Sub") == 0){
 
-		}else if(strcmp(no->tipo,"Mul") == 0){
-
-		}else if(strcmp(no->tipo,"Div") == 0){
-
-		}else if(strcmp(no->tipo,"Mod") == 0){
+		}else if((strcmp(no->tipo,"Mul") == 0)||(strcmp(no->tipo,"Div") == 0)||(strcmp(no->tipo,"Mod") == 0)){
 
 		}else if(strcmp(no->tipo,"Or") == 0){
 
@@ -150,9 +154,7 @@ void anotar_arvore(AST_struct no){
 
 		}else if(strcmp(no->tipo,"BitWiseXor") == 0){
 
-		}else if(strcmp(no->tipo,"Plus") == 0){
-
-		}else if(strcmp(no->tipo,"Minus") == 0){
+		}else if((strcmp(no->tipo,"Plus") == 0)||(strcmp(no->tipo,"Minus") == 0)){
 
 		}else if(strcmp(no->tipo,"Not") == 0){
 
