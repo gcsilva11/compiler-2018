@@ -622,9 +622,11 @@ int main(int argc, char *argv[]){
 			flag=2;
 			yyparse();
 			yylex_destroy();
-			le_arvore(root);
-			imprime_tabela(tabela_simbolos);
-			imprime_arvore(root,0);
+			if(!print_flag){
+				le_arvore(root);
+				imprime_tabela(tabela_simbolos);
+				imprime_arvore(root,0);
+			}
 		}
 	}
 

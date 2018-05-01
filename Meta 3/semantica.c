@@ -12,19 +12,19 @@ void le_arvore(AST_struct raiz){
 			inicia_tabela_global();
 			raiz = raiz->filho;
 		}
-	
-		else if(strcmp(raiz->tipo,"FuncDefinition")==0){
-			verifica_funcao(raiz);
+
+		else if(strcmp(raiz->tipo,"FuncDeclaration")==0){
+			verifica_funcao(raiz,0);
 			raiz = raiz->irmao;
 		}
 	
-		else if(strcmp(raiz->tipo,"FuncDeclaration")==0){
-			verifica_funcao(raiz);
+		else if(strcmp(raiz->tipo,"FuncDefinition")==0){
+			verifica_funcao(raiz,1);
 			raiz = raiz->irmao;
 		}
 	
 		else{
-			verifica_declaracao(raiz);
+			verifica_declaration(raiz);
 			raiz = raiz->irmao;
 		}
 	
@@ -33,7 +33,7 @@ void le_arvore(AST_struct raiz){
 	return;
 }
 
-void verifica_funcao(AST_struct no){
+void verifica_funcao(AST_struct no, int func_type){
 	char* nome = strdup(no->filho->irmao->valor);
 	char* tipo = strdup(no->filho->tipo);
 	tipo[0] = tipo[0] + 32;
@@ -41,14 +41,25 @@ void verifica_funcao(AST_struct no){
 	char* params = verifica_params_funcao(no->filho->irmao->irmao);
 	no_tabela_global new_func = insere_simbolo_global(tipo,nome,params);
 	
-	if(new_func!=NULL){
+	if(new_func!=NULL && func_type == 1){
 		inicia_tabela_funcao(new_func);
+		insere_param_list(no->filho->irmao->irmao,new_func);
+		insere_func_body(no->filho->irmao->irmao->irmao,new_func);
 	}
 	return;
 }
 
+void verifica_declaration(AST_struct no){
+	char* nome = strdup(no->filho->irmao->valor);
+	char* tipo = strdup(no->filho->tipo);
+	tipo[0] = tipo[0] + 32;
+	
+	insere_simbolo_global(tipo,nome,"");
+	return;
+}
+
 char* verifica_params_funcao(AST_struct no){
-	char params[1000] = "";
+	char params[10000] = "";
 	AST_struct aux = NULL;
 	
 	if(no->filho){
@@ -75,13 +86,34 @@ char* verifica_params_funcao(AST_struct no){
 	return strdup(params);
 }
 
-void verifica_declaracao(AST_struct no){
-	char* nome = strdup(no->filho->irmao->valor);
-	char* tipo = strdup(no->filho->tipo);
-	tipo[0] = tipo[0] + 32;
-	
-	insere_simbolo_global(tipo,nome,"");
+void insere_param_list(AST_struct param_list, no_tabela_global new_func){
+	AST_struct aux = param_list;
+
+	aux = aux->filho;
+	while(aux!=NULL){
+		char* tipo = strdup(aux->filho->tipo);
+		tipo[0] = tipo[0] + 32;
+		if(aux->filho->irmao!=NULL){
+			insere_simbolo_funcao(tipo,aux->filho->irmao->valor,1,new_func->next_table);
+		}
+		aux = aux -> irmao;
+	}
 	return;
+}
+
+void insere_func_body(AST_struct func_body, no_tabela_global new_func){
+
+	AST_struct aux = func_body;
+	if(strcmp(aux->tipo,"Declaration")==0){
+		char* tipo = strdup(aux->filho->tipo);
+		tipo[0] = tipo[0] + 32;
+		insere_simbolo_funcao(tipo,aux->filho->irmao->valor,0,new_func->next_table);	
+	}
+	aux = aux->filho;
+	while(aux != NULL){
+		insere_func_body(aux,new_func);
+		aux = aux->irmao;
+	}
 }
 
 void imprime_tabela(no_tabela_global tab_print){
@@ -122,13 +154,12 @@ void imprime_tabela_funcao(no_tabela_func tab_print){
 		if(print_aux->nome==NULL){
 			printf("%s\n", print_aux->tipo);
 		}
-	
-		else
-			if(print_aux->param)
+		else{
+			if(print_aux->param == 1)
 				printf("%s\t%s\tparam\n", print_aux->nome,print_aux->tipo);
-	
 			else
 				printf("%s\t%s\n", print_aux->nome,print_aux->tipo);
+		}
 		print_aux = print_aux->next;
 	}
 	

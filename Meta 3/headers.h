@@ -6,8 +6,6 @@ Guilherme Cardoso Gomes da Silva 2014226354
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX_ARRAY 20 //20 strings MAX
-#define MAX_CHAR 100 //100 caracteres MAX
 
 typedef struct AST* AST_struct;
 typedef struct AST {
@@ -38,7 +36,7 @@ typedef struct nt{
 
 	char* nome;
 	char* tipo;
-	char* param;
+	int param;
 	no_tabela_func next;
 
 }nt;
@@ -56,14 +54,17 @@ typedef struct ntg{
 
 //Funcoes simbolos.c
 void inicia_tabela_global();
-no_tabela_global insere_simbolo_global(char* tipo, char* nome,char* array_params);
-void inicia_tabela_funcao(no_tabela_global ntg);
+no_tabela_global insere_simbolo_global(char*, char*, char*);
+void inicia_tabela_funcao(no_tabela_global);
+void insere_simbolo_funcao(char*, char*, int, no_tabela_func);
 
 //Funcoes semantica.c
 no_tabela_global tabela_simbolos;
-void le_arvore(AST_struct raiz);
-void verifica_funcao(AST_struct no);
-char* verifica_params_funcao(AST_struct no);
-void verifica_declaracao(AST_struct no);
-void imprime_tabela(no_tabela_global tab_print);
-void imprime_tabela_funcao(no_tabela_func tab_print);
+void le_arvore(AST_struct);
+void verifica_funcao(AST_struct, int);
+char* verifica_params_funcao(AST_struct);
+void verifica_declaration(AST_struct);
+void imprime_tabela(no_tabela_global);
+void imprime_tabela_funcao(no_tabela_func);
+void insere_param_list(AST_struct, no_tabela_global);
+void insere_func_body(AST_struct, no_tabela_global);
