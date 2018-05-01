@@ -15,8 +15,8 @@
 	struct AST* ast;
 }
 
-%token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT OR PLUS RBRACE RPAR SEMI
-%token <string> REALLIT CHRLIT INTLIT ID RESERVED
+%token CHAR ELSE WHILE IF SHORT INT DOUBLE RETURN VOID BITWISEOR BITWISEAND BITWISEXOR AND ASSIGN MUL COMMA DIV EQ GE GT LBRACE LE LPAR LT MINUS MOD NE NOT xOR PLUS RBRACE RPAR SEMI RESERVED
+%token <string> REALLIT CHRLIT INTLIT ID
 
 %type <ast> Program FunctionsAndDeclarations FunctionDefinition FunctionBody DeclarationAndStatements FunctionDeclaration FunctionDeclarator ParameterList ParameterDeclaration Declaration DeclarationAux TypeSpec Declarator Statement StatementAux StatementError Expr ParameterListAux Expr2
 
@@ -130,12 +130,11 @@ ParameterList:
 															}
 	;
 
-	ParameterListAux:
+ParameterListAux:
 															{
 																$$ = NULL;
 															}
 	| COMMA ParameterDeclaration ParameterListAux			{
-																adicionar_filho($$,$2);
 																adicionar_irmao($2,$3);
 																$$ = $2;
 															}
@@ -623,9 +622,10 @@ int main(int argc, char *argv[]){
 			yyparse();
 			yylex_destroy();
 			if(!print_flag){
-				le_arvore(root);
+				le_arvore_tabela(root);
+				anotar_arvore(root);
 				imprime_tabela(tabela_simbolos);
-				imprime_arvore(root,0);
+				imprime_arvore_anotada(root,0);
 			}
 		}
 	}

@@ -1,3 +1,9 @@
+int a = 1;
+int alves(int,int);
+
+int alves(char a,int b){}
+
+
 int a,b,c,d,e,f;
 int oi(int);
 int readint (int a) {

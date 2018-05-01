@@ -14,6 +14,7 @@ typedef struct AST {
 	AST_struct irmao;
 	char* valor;
 	char* tipo;
+	char* anotacao;
 }AST;
 
 //Lex
@@ -60,7 +61,8 @@ void insere_simbolo_funcao(char*, char*, int, no_tabela_func);
 
 //Funcoes semantica.c
 no_tabela_global tabela_simbolos;
-void le_arvore(AST_struct);
+void le_arvore_tabela(AST_struct);
+void anotar_arvore(AST_struct);
 void verifica_funcao(AST_struct, int);
 char* verifica_params_funcao(AST_struct);
 void verifica_declaration(AST_struct);
@@ -68,3 +70,4 @@ void imprime_tabela(no_tabela_global);
 void imprime_tabela_funcao(no_tabela_func);
 void insere_param_list(AST_struct, no_tabela_global);
 void insere_func_body(AST_struct, no_tabela_global);
+void imprime_arvore_anotada(AST_struct no, int profundidade);

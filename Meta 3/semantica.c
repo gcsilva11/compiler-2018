@@ -4,7 +4,7 @@
 */
 #include "headers.h"
 
-void le_arvore(AST_struct raiz){
+void le_arvore_tabela(AST_struct raiz){
 	
 	if(raiz!=NULL){
 	
@@ -28,7 +28,7 @@ void le_arvore(AST_struct raiz){
 			raiz = raiz->irmao;
 		}
 	
-		le_arvore(raiz);	
+		le_arvore_tabela(raiz);	
 	}
 	return;
 }

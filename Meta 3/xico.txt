@@ -1,7 +1,10 @@
+Line 4, col 5: Conflicting types (got int(char,int), expected int(int,int))
+Line 42, col 7: Conflicting types (got short(short), expected int(int))
 ===== Global Symbol Table =====
 putchar	int(int)
 getchar	int(void)
 a	int
+alves	int(int,int)
 b	int
 c	int
 d	int
@@ -11,9 +14,6 @@ oi	int(int)
 readint	int(int)
 printint	void(int)
 main	int(void)
-
-===== Function oi Symbol Table =====
-return	int
 
 ===== Function readint Symbol Table =====
 return	int
@@ -31,6 +31,29 @@ return	int
 i	int
 
 Program
+..Declaration
+....Int
+....Id(a)
+....IntLit(1) - int
+..FuncDeclaration
+....Int
+....Id(alves)
+....ParamList
+......ParamDeclaration
+........Int
+......ParamDeclaration
+........Int
+..FuncDefinition
+....Int
+....Id(alves)
+....ParamList
+......ParamDeclaration
+........Char
+........Id(a)
+......ParamDeclaration
+........Int
+........Id(b)
+....FuncBody
 ..Declaration
 ....Int
 ....Id(a)
@@ -177,9 +200,10 @@ Program
 ............Id(putchar) - int(int)
 ............ChrLit('\n') - int
 ..FuncDefinition
-....Int
+....Short
 ....Id(oi)
 ....ParamList
 ......ParamDeclaration
-........Int
+........Short
+........Id(sho)
 ....FuncBody

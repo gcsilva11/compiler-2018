@@ -1,6 +1,7 @@
 ===== Global Symbol Table =====
 putchar	int(int)
 getchar	int(void)
+alves	int(int,int)
 a	int
 b	int
 c	int
@@ -33,6 +34,25 @@ return	short
 sho	short	param
 
 Program
+..FuncDeclaration
+....Int
+....Id(alves)
+....ParamList
+......ParamDeclaration
+........Int
+......ParamDeclaration
+........Int
+..FuncDefinition
+....Int
+....Id(alves)
+....ParamList
+......ParamDeclaration
+........Char
+........Id(a)
+......ParamDeclaration
+........Int
+........Id(b)
+....FuncBody
 ..Declaration
 ....Int
 ....Id(a)

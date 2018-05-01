@@ -67,18 +67,19 @@
      MOD = 283,
      NE = 284,
      NOT = 285,
-     OR = 286,
+     xOR = 286,
      PLUS = 287,
      RBRACE = 288,
      RPAR = 289,
      SEMI = 290,
-     REALLIT = 291,
-     CHRLIT = 292,
-     INTLIT = 293,
-     ID = 294,
-     RESERVED = 295,
-     SIGNAL = 296,
-     ELSE_PRIORITY = 297
+     RESERVED = 291,
+     REALLIT = 292,
+     CHRLIT = 293,
+     INTLIT = 294,
+     ID = 295,
+     OR = 296,
+     SIGNAL = 297,
+     ELSE_PRIORITY = 298
    };
 #endif
 /* Tokens.  */
@@ -110,18 +111,19 @@
 #define MOD 283
 #define NE 284
 #define NOT 285
-#define OR 286
+#define xOR 286
 #define PLUS 287
 #define RBRACE 288
 #define RPAR 289
 #define SEMI 290
-#define REALLIT 291
-#define CHRLIT 292
-#define INTLIT 293
-#define ID 294
-#define RESERVED 295
-#define SIGNAL 296
-#define ELSE_PRIORITY 297
+#define RESERVED 291
+#define REALLIT 292
+#define CHRLIT 293
+#define INTLIT 294
+#define ID 295
+#define OR 296
+#define SIGNAL 297
+#define ELSE_PRIORITY 298
 
 
 
@@ -134,7 +136,7 @@ typedef union YYSTYPE
 	struct AST* ast;
 }
 /* Line 1529 of yacc.c.  */
-#line 138 "y.tab.h"
+#line 140 "y.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
