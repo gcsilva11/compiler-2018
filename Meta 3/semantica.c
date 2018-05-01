@@ -78,6 +78,9 @@ char* verifica_params_funcao(AST_struct no){
 	
 		else if(strcmp(aux->filho->tipo,"Char")==0)
 			strcat(params,"char");
+
+		else if(strcmp(aux->filho->tipo,"Short")==0)
+			strcat(params,"short");
 	
 		if(aux->irmao)
 			strcat(params,",");
