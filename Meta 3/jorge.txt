@@ -17,10 +17,6 @@ n	int	param
 
 ===== Function main Symbol Table =====
 return	int
-a	char
-b	char
-c	char
-d	char
 i	int
 
 Program
@@ -126,18 +122,6 @@ Program
 ........Void
 ....FuncBody
 ......Declaration
-........Char
-........Id(a)
-......Declaration
-........Char
-........Id(b)
-......Declaration
-........Char
-........Id(c)
-......Declaration
-........Char
-........Id(d)
-......Declaration
 ........Int
 ........Id(i)
 ........IntLit(1) - int
@@ -150,25 +134,9 @@ Program
 ............Id(i) - int
 ............Call - int
 ..............Id(readint) - int(void)
-..............Id(a) - char
-..............Id(b) - char
-..............Id(c) - char
-..............Id(d) - char
-..........Store - int
-............Id(i) - int
-............Call - int
-..............Id(readint) - int(void)
-..............IntLit(1) - int
-..............Comma - int
-................IntLit(2) - int
-................IntLit(3) - int
-..............IntLit(4) - int
 ..........Call - void
 ............Id(printint) - void(int)
 ............Id(i) - int
 ..........Call - int
 ............Id(putchar) - int(int)
 ............ChrLit('\n') - int
-..........Store - char
-............Id(a) - char
-............ChrLit('a') - int

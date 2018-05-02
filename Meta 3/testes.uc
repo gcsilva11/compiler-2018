@@ -1,14 +1,12 @@
-double main(char in,int,void,void,double,int,double);
-double main(void, char) {
+double main(char) {
 
-    int a, b, c; d = 2, a = 'a';
-    int a = b2 != x;
+    int a, b, c, d = 2;
 }
 
 
 
-int main(int x, int y, int z) { 
-    int x = 1, y = 2, z; 
+int main1(int x, int y, int z) { 
+    x = 1, y = 2, z; 
     int a,b,c,d,e; 
     if (x > y && z > y || z != x) { 
         while (1){ 
@@ -173,7 +171,7 @@ int main(void){
     (a+b)*a+b = b/a>(a*(c-d));
 }
 
-int main(void){
+int main2(void){
 
         if(a){
         a = 0;
@@ -250,7 +248,7 @@ int max(int num1, double num2) {
 
 int max(double num1, int num2);
 
-int main (void) {
+int main3 (void) {
 
    int a = 100;
    int b = 200;
@@ -275,7 +273,7 @@ int max(int num1, void) {
    return result;
 }
 
-int main(int a)
+int main4(int a)
 {
     int firstNumber, secondNumber, sumOfTwoNumbers;
     scanf(firstNumber,secondNumber);
@@ -285,7 +283,7 @@ int main(int a)
     return 0;
 }
 
-int main(int a)
+int main5(int a)
 {
     int base, exponent;
     while (exponent != 0)
@@ -301,7 +299,7 @@ int main(int a)
 
 int a;
 
-int main(int n)
+int main6(int n)
 {
     int reversedNumber = 0, remainder;
 
@@ -317,7 +315,7 @@ int main(int n)
     return 0;
 }
 
-int main(void)
+int main7(void)
 {
     if(1,2){};
     if(1&&2);

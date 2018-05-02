@@ -1,22 +1,13 @@
-int a = 1.1;
-int alves(int,int);
-
-int alves(char a,int b){}
-
-
-int a,b,c,d,e,f;
-int oi(int);
-int readint (int a) {
+int readint (void) {
     int read = 0 ,sign = 1;
     //read = 1, sign = 0, read = 1;
     char c = getchar();
     if(c == '-')
         sign = -1;
     while(c != '\n') {
-        if(c != '-'){
+        if(c != '-')
             read = read * 10 + c - '0';
-        }
-        c = getchar((a,b));
+        c = getchar();
     }
     return sign * read;
 }
@@ -31,15 +22,13 @@ void printint (int n) {
     putchar (n % 10 + '0');
 }
 int main (void) {
+    char a,b,c,d;
     int i = 1;
-    double f = 54;
     while (i != 0) {
-        i = readint();
+        i = readint(a,b,c,d);
+        i = readint(1,(2,3),4);
         printint(i);
         putchar('\n');
+        a = 'a';
     }
-}
-
-short oi(short sho){
-	
 }
