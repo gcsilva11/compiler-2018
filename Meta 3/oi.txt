@@ -1,0 +1,25 @@
+"Store" - Filho directo
+"Comma" - Fica com o tipo do filho à direita. É preciso ir busca à tabela.
+"Le" - int
+"Ge" - int
+"Lt" - int
+"Gt" - int
+"Eq" - int
+"Ne" - int
+"Add" - Comparar os dois filhos e ver qual é o maior double > int > short > char
+"Sub" - Comparar os dois filhos e ver qual é o maior double > int > short > char
+"Mul" - Comparar os dois filhos e ver qual é o maior double > int > short > char
+"Div" - Comparar os dois filhos e ver qual é o maior double > int > short > char
+"Or" - int
+"And"- int
+"Not" - int
+"BitWiseOr" - int
+"BitWiseAnd" - int
+"BitWiseXor" - int
+"Plus" - Valor igual ao filho
+"Minus" - Valor igual ao filho
+"Call" - Filho directo
+"Id" - 
+"IntLit" - int
+"Chrlit" - int
+"RealLit" - double

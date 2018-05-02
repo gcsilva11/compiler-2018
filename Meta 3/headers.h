@@ -62,6 +62,7 @@ void anotar_arvore(AST_struct);
 
 //Funcoes semantica.c
 no_tabela_global tabela_simbolos;
+char* func_tracker;
 void le_arvore_tabela(AST_struct);
 void verifica_funcao(AST_struct, int);
 char* verifica_params_funcao(AST_struct);
@@ -70,4 +71,5 @@ void imprime_tabela(no_tabela_global);
 void imprime_tabela_funcao(no_tabela_func);
 void insere_param_list(AST_struct, no_tabela_global);
 void insere_func_body(AST_struct, no_tabela_global);
-void imprime_arvore_anotada(AST_struct no, int profundidade);
+void imprime_arvore_anotada(AST_struct,int);
+char* anotar_filho(AST_struct);
