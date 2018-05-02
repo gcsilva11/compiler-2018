@@ -147,11 +147,17 @@ void anotar_arvore(AST_struct no){
 
 		}else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0){
 			
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
 		}else if(strcmp(no->tipo,"Eq") == 0 || strcmp(no->tipo,"Ne") == 0){
 
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
@@ -159,6 +165,7 @@ void anotar_arvore(AST_struct no){
 
 			char* anot_filho= anotar_filho(no->filho);
 			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			if(anot_filho && anot_irm){
 				if((strcmp(anot_filho,"double")==0)||(strcmp(anot_irm,"double")==0)){
 					no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
@@ -249,16 +256,23 @@ void anotar_arvore(AST_struct no){
 
 		}else if(strcmp(no->tipo,"Or") == 0){
 
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
 		}else if(strcmp(no->tipo,"And") == 0){
-
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
 		}else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0){
-
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
@@ -274,6 +288,9 @@ void anotar_arvore(AST_struct no){
 
 		}else if(strcmp(no->tipo,"Not") == 0){
 
+			char* anot_filho= anotar_filho(no->filho);
+			char* anot_irm  = anotar_filho(no->filho->irmao);
+			anot_filho = anot_irm; //para ignorar warning
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
