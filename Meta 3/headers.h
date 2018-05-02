@@ -58,11 +58,11 @@ void inicia_tabela_global();
 no_tabela_global insere_simbolo_global(char*, char*, char*);
 void inicia_tabela_funcao(no_tabela_global);
 void insere_simbolo_funcao(char*, char*, int, no_tabela_func);
+void anotar_arvore(AST_struct);
 
 //Funcoes semantica.c
 no_tabela_global tabela_simbolos;
 void le_arvore_tabela(AST_struct);
-void anotar_arvore(AST_struct);
 void verifica_funcao(AST_struct, int);
 char* verifica_params_funcao(AST_struct);
 void verifica_declaration(AST_struct);

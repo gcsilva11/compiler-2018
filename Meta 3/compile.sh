@@ -16,5 +16,5 @@
 #Meta 3
 flex uccompiler.l
 yacc -d uccompiler.y
-clang-3.8 -o uccompiler -Wall -Wno-unused-function *.c
+clang-3.8 -g -o uccompiler -Wall -Wno-unused-function *.c
 zip -r uccompiler.zip uccompiler.l uccompiler.y arvore.c headers.h simbolos.c semantica.c

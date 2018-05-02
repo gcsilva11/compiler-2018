@@ -623,8 +623,9 @@ int main(int argc, char *argv[]){
 			yylex_destroy();
 			if(!print_flag){
 				le_arvore_tabela(root);
-				anotar_arvore(root);
 				imprime_tabela(tabela_simbolos);
+				anotar_arvore(root);
+				anotar_arvore(root);
 				imprime_arvore_anotada(root,0);
 			}
 		}

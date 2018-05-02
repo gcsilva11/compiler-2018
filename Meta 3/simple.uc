@@ -1,4 +1,4 @@
-int a = 1;
+int a = 1.1;
 int alves(int,int);
 
 int alves(char a,int b){}
@@ -32,6 +32,7 @@ void printint (int n) {
 }
 int main (void) {
     int i = 1;
+    double f = 54;
     while (i != 0) {
         i = readint();
         printint(i);

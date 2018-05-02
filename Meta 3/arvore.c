@@ -124,7 +124,7 @@ void imprime_arvore_anotada(AST_struct no, int profundidade){
 		aux = no->filho;
 		while(aux != NULL){
 			AST_struct freeMe = aux;
-			imprime_arvore(aux,profundidade+1);
+			imprime_arvore_anotada(aux,profundidade+1);
 			aux = aux->irmao;
 
 			free(freeMe->tipo);

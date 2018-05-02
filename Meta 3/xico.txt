@@ -1,5 +1,6 @@
+Line 1, col 5: Conflicting types (got double, expected int)
 Line 4, col 5: Conflicting types (got int(char,int), expected int(int,int))
-Line 42, col 7: Conflicting types (got short(short), expected int(int))
+Line 43, col 7: Conflicting types (got short(short), expected int(int))
 ===== Global Symbol Table =====
 putchar	int(int)
 getchar	int(void)
@@ -29,12 +30,13 @@ n	int	param
 ===== Function main Symbol Table =====
 return	int
 i	int
+f	double
 
 Program
 ..Declaration
 ....Int
 ....Id(a)
-....IntLit(1) - int
+....RealLit(1.1) - double
 ..FuncDeclaration
 ....Int
 ....Id(alves)
@@ -131,6 +133,9 @@ Program
 ............Id(c) - char
 ............Call - int
 ..............Id(getchar) - int(void)
+..............Comma - int
+................Id(a) - int
+................Id(b) - int
 ......Return
 ........Mul - int
 ..........Id(sign) - int
@@ -184,6 +189,10 @@ Program
 ........Int
 ........Id(i)
 ........IntLit(1) - int
+......Declaration
+........Double
+........Id(f)
+........IntLit(54) - int
 ......While
 ........Ne - int
 ..........Id(i) - int

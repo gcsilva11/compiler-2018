@@ -120,61 +120,70 @@ void insere_simbolo_funcao(char* tipo, char* nome, int param, no_tabela_func no)
 }
 
 void anotar_arvore(AST_struct no){
-	AST_struct aux = no;
 	char* tipo_aux = "";
-	if(aux != NULL){
+	if(no != NULL){
 		if (strcmp(no->tipo,"Store") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Comma") == 0){
 			//fica com o tipo do filho a direita
-			if(aux->irmao->anotacao!=NULL){
-				strcpy(tipo_aux,aux->irmao->anotacao);
-				aux->anotacao = (char*)malloc(strlen(tipo_aux)*sizeof(char)+1);
-				strcpy(aux->anotacao,tipo_aux);
-				no = aux;
+			if(no->filho->irmao->anotacao!=NULL){
+				strcpy(tipo_aux,no->filho->irmao->anotacao);
+				no->anotacao = (char*)malloc(strlen(tipo_aux)*sizeof(char)+1);
+				strcpy(no->anotacao,tipo_aux);
 			}
 
 		}else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Eq") == 0 || strcmp(no->tipo,"Ne") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Add") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Sub") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if((strcmp(no->tipo,"Mul") == 0)||(strcmp(no->tipo,"Div") == 0)||(strcmp(no->tipo,"Mod") == 0)){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Or") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"And") == 0){
-
-		}else if(strcmp(no->tipo,"BitWiseAnd") == 0){
-
-		}else if(strcmp(no->tipo,"BitWiseOr") == 0){
-
-		}else if(strcmp(no->tipo,"BitWiseXor") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+		}else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0){
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if((strcmp(no->tipo,"Plus") == 0)||(strcmp(no->tipo,"Minus") == 0)){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Not") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"Call") == 0){
 
 		}else if(strcmp(no->tipo,"Id") == 0){
 
 		}else if(strcmp(no->tipo,"IntLit") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+			printf("%s",no->anotacao);
 		}else if(strcmp(no->tipo,"ChrLit") == 0){
-
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
 		}else if(strcmp(no->tipo,"RealLit") == 0){
-
+			no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
+			strcpy(no->anotacao,"double");
 		}
 	}
 
-	aux = no->filho;
-	while(aux != NULL){
-		anotar_arvore(aux);
-		aux = aux->irmao;
+	no = no->filho;
+	while(no != NULL){
+		anotar_arvore(no);
+		no = no->irmao;
 	}
 	return;
 }
