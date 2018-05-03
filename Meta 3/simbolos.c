@@ -127,28 +127,54 @@ void anotar_arvore(AST_struct no){
 			func_tracker = no->filho->irmao->valor;
 		}
 
-		if (strcmp(no->tipo,"Store") == 0){
-			if(no->filho!=NULL){
-				char* anot_filho = anotar_filho(no->filho);
-				if(anot_filho!=NULL){
-					no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
-					strcpy(no->anotacao,anot_filho);
-				}
-			}
+		else if(strcmp(no->tipo,"IntLit") == 0){
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+		}
+		else if(strcmp(no->tipo,"ChrLit") == 0){		
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+		}
+		else if(strcmp(no->tipo,"RealLit") == 0){
+			no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
+			strcpy(no->anotacao,"double");
+		}
 
-		}else if(strcmp(no->tipo,"Comma") == 0){
-			char* anot_irm = anotar_filho(no->filho->irmao);
-			if(anot_irm){
-				no->anotacao=(char*)malloc(strlen(anot_irm)*sizeof(char)+1);
-				strcpy(no->anotacao,anot_irm);
-			}
-
-		}else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0 || strcmp(no->tipo,"Eq") == 0 || strcmp(no->tipo,"Ne") == 0){
+		else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0 || strcmp(no->tipo,"Eq") == 0 || strcmp(no->tipo,"Ne") == 0){
 			anotar_filho(no->filho);
+			AST_struct aux = no->filho;
+			while(aux->irmao){
+				anotar_filho(aux->irmao);
+				aux = aux->irmao;
+			}
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
 
-		}else if((strcmp(no->tipo,"Add") == 0) || (strcmp(no->tipo,"Sub") == 0) || (strcmp(no->tipo,"Mul") == 0)||(strcmp(no->tipo,"Div") == 0) || (strcmp(no->tipo,"Mod") == 0)){
+		}
+
+		else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0 || strcmp(no->tipo,"And") == 0 || strcmp(no->tipo,"Or") == 0){
+			anotar_filho(no->filho);
+			anotar_filho(no->filho->irmao);
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+
+		}
+		else if(strcmp(no->tipo,"Not") == 0){
+			anotar_filho(no->filho);
+			anotar_filho(no->filho->irmao);
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+		}
+		else if(strcmp(no->tipo,"Plus") == 0 || strcmp(no->tipo,"Minus") == 0){
+			anotar_filho(no->filho->irmao);
+			char* anot_filho = anotar_filho(no->filho);
+			if(anot_filho!=NULL){
+				no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
+				strcpy(no->anotacao,anot_filho);
+			}
+		}
+
+		else if((strcmp(no->tipo,"Add") == 0) || (strcmp(no->tipo,"Sub") == 0) || (strcmp(no->tipo,"Mul") == 0)||(strcmp(no->tipo,"Div") == 0) || (strcmp(no->tipo,"Mod") == 0)){
 
 			char* anot_filho= anotar_filho(no->filho);
 			char* anot_irm  = anotar_filho(no->filho->irmao);
@@ -189,29 +215,18 @@ void anotar_arvore(AST_struct no){
 					strcpy(no->anotacao,"char");
 				}
 			}
-		}else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0 || strcmp(no->tipo,"And") == 0 || strcmp(no->tipo,"Or") == 0){
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
+		}
 
-		}else if((strcmp(no->tipo,"Plus") == 0)||(strcmp(no->tipo,"Minus") == 0)){
-
-			if(no->filho!=NULL){
-				char* anot_filho = anotar_filho(no->filho);
-				if(anot_filho!=NULL){
-					no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
-					strcpy(no->anotacao,anot_filho);
-				}
-			}
-
-		}else if(strcmp(no->tipo,"Not") == 0){
-
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
-
-		}else if(strcmp(no->tipo,"Call") == 0){
+		else if(strcmp(no->tipo,"Call") == 0){
+			char* anot_filho = anotar_filho(no->filho);
 			
 			if(no->filho!=NULL){
-				char* anot_filho = anotar_filho(no->filho);
+				AST_struct aux = no->filho;
+				while(aux->irmao){
+					anotar_filho(aux->irmao);
+					aux = aux->irmao;
+				}
+
 				if(anot_filho!=NULL){
 					char* aux = malloc(strlen(anot_filho)+1*sizeof(char));
 					strcpy(aux, anot_filho);
@@ -222,28 +237,49 @@ void anotar_arvore(AST_struct no){
 				}
 			}
 		
-		}else if(strcmp(no->tipo,"IntLit") == 0){
-		
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
-		
-		}else if(strcmp(no->tipo,"ChrLit") == 0){
-		
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
-		
-		}else if(strcmp(no->tipo,"RealLit") == 0){
-		
-			no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
-			strcpy(no->anotacao,"double");
-		
 		}
-	}
 
-	no = no->filho;
-	while(no != NULL){
-		anotar_arvore(no);
-		no = no->irmao;
+		else if (strcmp(no->tipo,"Store") == 0){
+			char* anot_filho = anotar_filho(no->filho);
+			anotar_filho(no->filho->irmao);
+			if(anot_filho!=NULL){
+				no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
+				strcpy(no->anotacao,anot_filho);
+			}
+		}
+
+		else if(strcmp(no->tipo,"Comma") == 0){
+			char* anot_irm = anotar_filho(no->filho);
+			
+			AST_struct aux = no->filho;
+				while(aux->irmao){
+					anotar_filho(aux->irmao);
+					aux = aux->irmao;
+				}
+			
+			if(anot_irm){
+				no->anotacao=(char*)malloc(strlen(anot_irm)*sizeof(char)+1);
+				strcpy(no->anotacao,anot_irm);
+			}
+		}
+
+		else if(strcmp(no->tipo,"Return") == 0 || strcmp(no->tipo,"If") == 0 || strcmp(no->tipo,"While") == 0){
+			if(no->filho!=NULL){
+				
+				AST_struct aux = no->filho;
+				anotar_filho(aux);
+				while(aux->irmao){
+					anotar_filho(aux->irmao);
+					aux = aux->irmao;
+				}
+			}
+		}
+
+		AST_struct aux_no = no->filho;
+		while(aux_no != NULL){
+			anotar_arvore(aux_no);
+			aux_no = aux_no->irmao;
+		}
 	}
 	return;
 }

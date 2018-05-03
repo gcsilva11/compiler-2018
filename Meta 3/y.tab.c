@@ -2871,7 +2871,6 @@ int main(int argc, char *argv[]){
 				le_arvore_tabela(root);
 				imprime_tabela(tabela_simbolos);
 				anotar_arvore(root);
-				anotar_arvore(root);
 				imprime_arvore_anotada(root,0);
 			}
 		}
