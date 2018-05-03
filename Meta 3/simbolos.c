@@ -252,10 +252,16 @@ void anotar_arvore(AST_struct no){
 			char* anot_irm = anotar_filho(no->filho);
 			
 			AST_struct aux = no->filho;
-				while(aux->irmao){
-					anotar_filho(aux->irmao);
-					aux = aux->irmao;
-				}
+
+			if(aux->irmao){
+				anot_irm = anotar_filho(aux->irmao);
+				aux = aux->irmao;
+			}
+
+			while(aux->irmao){
+				anotar_filho(aux->irmao);
+				aux = aux->irmao;
+			}
 			
 			if(anot_irm){
 				no->anotacao=(char*)malloc(strlen(anot_irm)*sizeof(char)+1);
@@ -287,6 +293,9 @@ void anotar_arvore(AST_struct no){
 
 char* anotar_filho(AST_struct no){
 	//Encontrar tabela da funcao
+	if(!func_tracker){
+		func_tracker = "";
+	}
 	if(no!=NULL){
 		no_tabela_global find_tab = tabela_simbolos;
 		no_tabela_func find_var;
