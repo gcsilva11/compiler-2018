@@ -119,27 +119,30 @@ void insere_simbolo_funcao(char* tipo, char* nome, int param, no_tabela_func no)
 	return;
 }
 
-void anotar_arvore(AST_struct no){
-
+char* anotar_arvore(AST_struct no){
 	if(no != NULL){
-		
+
 		if (strcmp(no->tipo,"FuncDefinition") == 0){
 			func_tracker = no->filho->irmao->valor;
 		}
 
-		else if(strcmp(no->tipo,"IntLit") == 0){
+		if(strcmp(no->tipo,"IntLit") == 0 || strcmp(no->tipo,"ChrLit") == 0){
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
-		}
-		else if(strcmp(no->tipo,"ChrLit") == 0){		
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
+			return no->anotacao;
 		}
 		else if(strcmp(no->tipo,"RealLit") == 0){
 			no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
 			strcpy(no->anotacao,"double");
+			return no->anotacao;
 		}
-
+		else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0 || strcmp(no->tipo,"And") == 0 || strcmp(no->tipo,"Or") == 0){
+			anotar_filho(no->filho);
+			anotar_filho(no->filho->irmao);
+			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
+			strcpy(no->anotacao,"int");
+			return no->anotacao;
+		}
 		else if(strcmp(no->tipo,"Le") == 0 || strcmp(no->tipo,"Ge") == 0 || strcmp(no->tipo,"Lt") == 0 || strcmp(no->tipo,"Gt") == 0 || strcmp(no->tipo,"Eq") == 0 || strcmp(no->tipo,"Ne") == 0){
 			anotar_filho(no->filho);
 			AST_struct aux = no->filho;
@@ -149,75 +152,50 @@ void anotar_arvore(AST_struct no){
 			}
 			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 			strcpy(no->anotacao,"int");
-
+			return no->anotacao;
 		}
-
-		else if(strcmp(no->tipo,"BitWiseAnd") == 0 || strcmp(no->tipo,"BitWiseOr") == 0 || strcmp(no->tipo,"BitWiseXor") == 0 || strcmp(no->tipo,"And") == 0 || strcmp(no->tipo,"Or") == 0){
-			anotar_filho(no->filho);
-			anotar_filho(no->filho->irmao);
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
-
-		}
-		else if(strcmp(no->tipo,"Not") == 0){
-			anotar_filho(no->filho);
-			anotar_filho(no->filho->irmao);
-			no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-			strcpy(no->anotacao,"int");
-		}
-		else if(strcmp(no->tipo,"Plus") == 0 || strcmp(no->tipo,"Minus") == 0){
+		else if(strcmp(no->tipo,"Plus") == 0 || strcmp(no->tipo,"Minus") == 0 || strcmp(no->tipo,"Not") == 0){
 			anotar_filho(no->filho->irmao);
 			char* anot_filho = anotar_filho(no->filho);
 			if(anot_filho!=NULL){
 				no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
 				strcpy(no->anotacao,anot_filho);
 			}
+			return no->anotacao;
 		}
-
 		else if((strcmp(no->tipo,"Add") == 0) || (strcmp(no->tipo,"Sub") == 0) || (strcmp(no->tipo,"Mul") == 0)||(strcmp(no->tipo,"Div") == 0) || (strcmp(no->tipo,"Mod") == 0)){
-
-			char* anot_filho= anotar_filho(no->filho);
-			char* anot_irm  = anotar_filho(no->filho->irmao);
-
-			if(anot_filho){
-				if(strcmp(anot_filho,"double")==0){
+			char* anot_filho = anotar_filho(no->filho);
+			char* anot_irm;
+			AST_struct aux = no->filho;
+			while(aux->irmao){
+				anot_irm  = anotar_filho(no->filho->irmao);
+				aux = aux->irmao;
+			}
+			if(anot_filho && anot_irm){
+				if(strcmp(anot_filho,"double")==0 || strcmp(anot_irm,"double")==0){
 					no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
 					strcpy(no->anotacao,"double");
 				}
-				else if(strcmp(anot_filho,"int")==0){
+				else if(strcmp(anot_filho,"int")==0 || strcmp(anot_irm,"int")==0){
 					no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
 					strcpy(no->anotacao,"int");
 				}
-				else if(strcmp(anot_filho,"short")==0){
+				else if(strcmp(anot_filho,"short")==0 || strcmp(anot_irm,"short")==0){
 					no->anotacao = (char*)malloc(strlen("short")*sizeof(char)+1);
 					strcpy(no->anotacao,"short");
 				}
-				else if(strcmp(anot_filho,"char")==0){
+				else if(strcmp(anot_filho,"char")==0 || strcmp(anot_irm,"char")==0){
 					no->anotacao = (char*)malloc(strlen("char")*sizeof(char)+1);
 					strcpy(no->anotacao,"char");
 				}
-			}
-			else if(anot_irm){
-				if(strcmp(anot_irm,"double")==0){
-					no->anotacao = (char*)malloc(strlen("double")*sizeof(char)+1);
-					strcpy(no->anotacao,"double");
-				}
-				else if(strcmp(anot_irm,"int")==0){
-					no->anotacao = (char*)malloc(strlen("int")*sizeof(char)+1);
-					strcpy(no->anotacao,"int");
-				}
-				else if(strcmp(anot_irm,"short")==0){
-					no->anotacao = (char*)malloc(strlen("short")*sizeof(char)+1);
-					strcpy(no->anotacao,"short");
-				}
-				else if(strcmp(anot_irm,"char")==0){
-					no->anotacao = (char*)malloc(strlen("char")*sizeof(char)+1);
-					strcpy(no->anotacao,"char");
+				else if(strcmp(anot_filho,"void")==0 || strcmp(anot_irm,"void")==0){
+					no->anotacao = (char*)malloc(strlen("void")*sizeof(char)+1);
+					strcpy(no->anotacao,"void");
 				}
 			}
+			return no->anotacao;
 		}
-
-		else if(strcmp(no->tipo,"Call") == 0){
+		else if(strcmp(no->tipo,"Call") == 0 || strcmp(no->tipo,"Store") == 0){
 			char* anot_filho = anotar_filho(no->filho);
 			
 			if(no->filho!=NULL){
@@ -236,43 +214,39 @@ void anotar_arvore(AST_struct no){
 					free(aux);
 				}
 			}
-		
+			return no->anotacao;
 		}
-
-		else if (strcmp(no->tipo,"Store") == 0){
-			char* anot_filho = anotar_filho(no->filho);
-			anotar_filho(no->filho->irmao);
-			if(anot_filho!=NULL){
-				no->anotacao=(char*)malloc(strlen(anot_filho)*sizeof(char)+1);
-				strcpy(no->anotacao,anot_filho);
+		else if(strcmp(no->tipo,"Return") == 0 || strcmp(no->tipo,"If") == 0 || strcmp(no->tipo,"While") == 0){
+			if(no->filho!=NULL){
+				AST_struct aux = no->filho;
+				anotar_filho(aux);
+				while(aux->irmao){
+					anotar_filho(aux->irmao);
+					aux = aux->irmao;
+				}
 			}
+			return no->anotacao;
 		}
-
 		else if(strcmp(no->tipo,"Comma") == 0){
 			char* anot_irm = anotar_filho(no->filho);
-			
 			AST_struct aux = no->filho;
-
 			if(aux->irmao){
 				anot_irm = anotar_filho(aux->irmao);
 				aux = aux->irmao;
 			}
-
 			while(aux->irmao){
 				anotar_filho(aux->irmao);
 				aux = aux->irmao;
 			}
-			
 			if(anot_irm){
 				no->anotacao=(char*)malloc(strlen(anot_irm)*sizeof(char)+1);
 				strcpy(no->anotacao,anot_irm);
 			}
+			return no->anotacao;
 		}
-
-		else if(strcmp(no->tipo,"Return") == 0 || strcmp(no->tipo,"If") == 0 || strcmp(no->tipo,"While") == 0){
-			if(no->filho!=NULL){
-				
-				AST_struct aux = no->filho;
+		else if(strcmp(no->tipo,"Declaration")==0){
+			AST_struct aux = no->filho->irmao->irmao;
+			if(aux!=NULL){
 				anotar_filho(aux);
 				while(aux->irmao){
 					anotar_filho(aux->irmao);
@@ -287,7 +261,7 @@ void anotar_arvore(AST_struct no){
 			aux_no = aux_no->irmao;
 		}
 	}
-	return;
+	return NULL;
 }
 
 
@@ -336,7 +310,7 @@ char* anotar_filho(AST_struct no){
 					//Anota o no (se a func tiver parametros anota estes tambem)
 					char anotacao[1000] = "";
 					strcat(anotacao,find_tab->tipo);
-					if(find_tab->array_params!=NULL){
+					if(find_tab->array_params!=NULL && strcmp(find_tab->array_params,"")!=0){
 						strcat(anotacao,"(");
 						strcat(anotacao,find_tab->array_params);
 						strcat(anotacao,")");
@@ -349,8 +323,7 @@ char* anotar_filho(AST_struct no){
 			
 			find_tab = find_tab->next;
 		}
-		//Senao, null
-		return NULL;
+		return anotar_arvore(no);
 	}
 	else
 		return NULL;

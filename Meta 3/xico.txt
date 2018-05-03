@@ -1,9 +1,49 @@
+Line 151, col 10: Symbol x already defined
+Line 166, col 7: Symbol n already defined
+Line 168, col 7: Symbol b already defined
+Line 169, col 10: Symbol b already defined
+Line 192, col 7: Symbol c already defined
+Line 226, col 6: Invalid use of void type in declaration
+Line 227, col 6: Invalid use of void type in declaration
+Line 234, col 5: Unknown symbol e
+Line 235, col 5: Unknown symbol e
+Line 236, col 1: Unknown symbol e
+Line 237, col 1: Unknown symbol e
+Line 238, col 1: Unknown symbol e
+Line 239, col 1: Unknown symbol e
+Line 240, col 1: Unknown symbol e
+Line 241, col 1: Unknown symbol e
+Line 242, col 1: Unknown symbol e
+Line 243, col 1: Unknown symbol e
+Line 244, col 1: Unknown symbol e
+Line 244, col 3: Unknown symbol v
+Line 244, col 4: Operator + cannot be applied to types undef, double
+Line 245, col 1: Unknown symbol e
+Line 245, col 3: Unknown symbol v
+Line 245, col 4: Operator + cannot be applied to types undef, int
+Line 246, col 1: Unknown symbol e
+Line 246, col 3: Unknown symbol v
+Line 246, col 4: Operator + cannot be applied to types undef, short
+Line 247, col 1: Unknown symbol e
+Line 247, col 3: Unknown symbol v
+Line 247, col 4: Operator + cannot be applied to types undef, char
+Line 248, col 1: Unknown symbol e
+Line 248, col 3: Unknown symbol v
+Line 248, col 5: Unknown symbol v
+Line 248, col 4: Operator + cannot be applied to types undef, undef
+Line 257, col 18: Unknown symbol a
+Line 257, col 16: Operator + cannot be applied to types int, undef
+Line 257, col 6: Conflicting types (got undef, expected char)
+Line 259, col 5: Symbol f already defined
+Line 261, col 5: Conflicting types (got int(int,int), expected int(char,int,int))
 ===== Global Symbol Table =====
 putchar	int(int)
 getchar	int(void)
 x	int(char)
+var	char
 lmao	double(char,int,double,int)
 main	int(char,int,int)
+retornaChar	char(void)
 expressions	int(void)
 statements	int(void)
 oi	int(int,int)
@@ -21,7 +61,6 @@ b	int(char)
 f5	int(int,int)
 f7	int(char,int)
 k	int
-v	int
 f8	int(char)
 f9	int(int,double)
 teste	int(void)
@@ -33,16 +72,15 @@ help2	int(int,int)
 f10	void(void)
 f12	void(short)
 c	int
-e	int
 g	int(void)
-readint	int(void)
-printint	void(int)
-main3	int(void)
-fff	int
-cona	void(int,int)
-a	int
-main2	int(int,int)
-ola	int(int,int,int)
+br	int
+br1	int
+br2	double
+br3	double
+br4	double
+br5	char
+br6	char
+a	int(void)
 
 ===== Function x Symbol Table =====
 return	int
@@ -62,6 +100,9 @@ b	int
 c	int
 d	int
 e	int
+
+===== Function retornaChar Symbol Table =====
+return	char
 
 ===== Function expressions Symbol Table =====
 return	int
@@ -109,11 +150,11 @@ b	char	param
 c	char	param
 d	double	param
 t	int	param
-aa	int
-ee	double
-bb	short
-yy	int
-hh	int
+aaa	int
+eee	double
+bbb	short
+y	int
+h	int
 
 ===== Function f3 Symbol Table =====
 return	int
@@ -131,8 +172,6 @@ a	int	param
 return	int
 x	char	param
 y	int	param
-xxx	char
-xx	double
 
 ===== Function b Symbol Table =====
 return	int
@@ -145,10 +184,7 @@ a	int	param
 b	int	param
 f	double
 n	int
-n1	int
-b1	int
 c	int
-b12	int
 
 ===== Function f7 Symbol Table =====
 return	int
@@ -167,7 +203,6 @@ b	int
 ===== Function main1 Symbol Table =====
 return	void
 c	int
-cc	int
 m	int
 
 ===== Function rekt Symbol Table =====
@@ -186,11 +221,6 @@ y	int	param
 wgdsg	int
 gsfrgs	char
 
-===== Function f10 Symbol Table =====
-return	void
-a	short
-b	short
-
 ===== Function f12 Symbol Table =====
 return	void
 a	short	param
@@ -198,36 +228,14 @@ b	double
 
 ===== Function g Symbol Table =====
 return	int
-
-===== Function readint Symbol Table =====
-return	int
-read	int
-sign	int
-c	char
-
-===== Function printint Symbol Table =====
-return	void
-n	int	param
-
-===== Function main3 Symbol Table =====
-return	int
-a	char
-b	char
-c	char
-d	char
+d	double
 i	int
+s	short
+c	char
 
-===== Function main2 Symbol Table =====
+===== Function a Symbol Table =====
 return	int
-a	int	param
-b	int	param
-c	int
-
-===== Function ola Symbol Table =====
-return	int
-a	int	param
-b	int	param
-c	int	param
+b	int
 
 Program
 ..FuncDefinition
@@ -254,6 +262,9 @@ Program
 ......Store - char
 ........Id(a) - char
 ........ChrLit('a') - int
+..Declaration
+....Char
+....Id(var)
 ..FuncDeclaration
 ....Double
 ....Id(lmao)
@@ -311,6 +322,15 @@ Program
 ........Null
 ........Return
 ..........IntLit(0) - int
+..FuncDefinition
+....Char
+....Id(retornaChar)
+....ParamList
+......ParamDeclaration
+........Void
+....FuncBody
+......Return
+........Id(var) - char
 ..FuncDefinition
 ....Int
 ....Id(expressions)
@@ -691,19 +711,19 @@ Program
 ....FuncBody
 ......Declaration
 ........Int
-........Id(aa)
+........Id(aaa)
 ......Declaration
 ........Double
-........Id(ee)
+........Id(eee)
 ......Declaration
 ........Short
-........Id(bb)
+........Id(bbb)
 ......Declaration
 ........Int
-........Id(yy)
+........Id(y)
 ......Declaration
 ........Int
-........Id(hh)
+........Id(h)
 ........Call - int
 ..........Id(f2) - int(char,char)
 ..........ChrLit('a') - int
@@ -763,12 +783,8 @@ Program
 ........Id(y)
 ....FuncBody
 ......Declaration
-........Char
-........Id(xxx)
-........ChrLit('\23') - int
-......Declaration
 ........Double
-........Id(xx)
+........Id(x)
 ........RealLit(2.3) - double
 ..FuncDeclaration
 ....Int
@@ -817,16 +833,16 @@ Program
 ........Id(n)
 ......Declaration
 ........Int
-........Id(n1)
+........Id(n)
 ......Declaration
 ........Int
-........Id(b1)
+........Id(b)
 ......Declaration
 ........Int
 ........Id(c)
 ......Declaration
 ........Int
-........Id(b12)
+........Id(b)
 ..FuncDefinition
 ....Int
 ....Id(f7)
@@ -841,9 +857,6 @@ Program
 ..Declaration
 ....Int
 ....Id(k)
-..Declaration
-....Int
-....Id(v)
 ..FuncDefinition
 ....Int
 ....Id(f8)
@@ -889,7 +902,7 @@ Program
 ........Id(c)
 ......Declaration
 ........Int
-........Id(cc)
+........Id(c)
 ......Declaration
 ........Int
 ........Id(m)
@@ -900,6 +913,33 @@ Program
 ......ParamDeclaration
 ........Void
 ....FuncBody
+......Store - int
+........Id(k) - int
+........Sub - int
+..........Add - int
+............Add - int
+..............Sub - int
+................Add - int
+..................Mul - int
+....................Call - void
+......................Id(main1) - void(void)
+....................Call - int
+......................Id(f9) - int(int,double)
+..................IntLit(1) - int
+................Div - int
+..................Call - int
+....................Id(f7) - int(char,int)
+..................Id(k) - int
+..............Mul - int
+................IntLit(1) - int
+................IntLit(3) - int
+............IntLit(2) - int
+..........Div - int
+............Call - void
+..............Id(main1) - void(void)
+............IntLit(7) - int
+......Call - char
+........Id(retornaChar) - char(void)
 ..FuncDeclaration
 ....Int
 ....Id(help)
@@ -951,25 +991,21 @@ Program
 ......Declaration
 ........Char
 ........Id(gsfrgs)
+......Store - int
+........Id(wgdsg) - int
+........Sub - int
+..........Add - int
+............Mul - int
+..............Id(wgdsg) - int
+..............IntLit(10) - int
+............Id(wgdsg) - int
+..........ChrLit('0') - int
 ..FuncDeclaration
 ....Void
 ....Id(f10)
 ....ParamList
 ......ParamDeclaration
 ........Void
-..FuncDefinition
-....Void
-....Id(f10)
-....ParamList
-......ParamDeclaration
-........Void
-....FuncBody
-......Declaration
-........Short
-........Id(a)
-......Declaration
-........Short
-........Id(b)
 ..FuncDefinition
 ....Void
 ....Id(f12)
@@ -978,6 +1014,13 @@ Program
 ........Short
 ........Id(a)
 ....FuncBody
+......Call - int
+........Id(putchar) - int(int)
+........Add - int
+..........Mod - int
+............Id(var) - char
+............IntLit(10) - int
+..........ChrLit('0') - int
 ......Declaration
 ........Double
 ........Id(b)
@@ -986,8 +1029,11 @@ Program
 ....Int
 ....Id(c)
 ..Declaration
-....Int
+....Void
 ....Id(e)
+..Declaration
+....Void
+....Id(v)
 ..FuncDefinition
 ....Int
 ....Id(g)
@@ -995,194 +1041,135 @@ Program
 ......ParamDeclaration
 ........Void
 ....FuncBody
-..FuncDefinition
-....Int
-....Id(readint)
-....ParamList
-......ParamDeclaration
-........Void
-....FuncBody
 ......Declaration
-........Int
-........Id(read)
-........IntLit(0) - int
-......Declaration
-........Int
-........Id(sign)
-........IntLit(1) - int
-......Declaration
-........Char
-........Id(c)
-........Call - int
-..........Id(getchar) - int(void)
-......If
-........Eq - int
-..........Id(c) - char
-..........ChrLit('-') - int
-........Store - int
-..........Id(sign) - int
-..........Minus - int
-............IntLit(1) - int
-........Null
-......While
-........Ne - int
-..........Id(c) - char
-..........ChrLit('\n') - int
-........StatList
-..........If
-............Ne - int
-..............Id(c) - char
-..............ChrLit('-') - int
-............Store - int
-..............Id(read) - int
-..............Sub - int
-................Add - int
-..................Mul - int
-....................Id(read) - int
-....................IntLit(10) - int
-..................Minus - char
-....................Plus - char
-......................Id(c) - char
-................ChrLit('0') - int
-............Null
-..........Store - char
-............Id(c) - char
-............Call - int
-..............Id(getchar) - int(void)
-......Return
-........Mul - int
-..........Id(sign) - int
-..........Id(read) - int
-..FuncDefinition
-....Void
-....Id(printint)
-....ParamList
-......ParamDeclaration
-........Int
-........Id(n)
-....FuncBody
-......Comma - int
-........Id(n) - int
-........IntLit(1) - int
-......Comma - int
-........Id(n) - int
-........Id(n) - int
-......Comma - int
-........IntLit(2) - int
-........IntLit(1) - int
-......Comma - int
-........IntLit(1) - int
-........Id(n) - int
-......If
-........Lt - int
-..........Id(n) - int
-..........IntLit(0) - int
-........StatList
-..........Call - int
-............Id(putchar) - int(int)
-............ChrLit('-') - int
-..........Store - int
-............Id(n) - int
-............Minus - int
-..............Id(n) - int
-........Null
-......If
-........Or - int
-..........BitWiseOr - int
-............BitWiseXor - int
-..............BitWiseAnd - int
-................Ne - int
-..................Id(n) - int
-..................IntLit(10) - int
-................IntLit(1) - int
-..............IntLit(1) - int
-............Plus - int
-..............IntLit(1) - int
-..........And - int
-............IntLit(2) - int
-............IntLit(2) - int
-........Call - void
-..........Id(printint) - void(int)
-..........Div - int
-............Id(n) - int
-............IntLit(10) - int
-........Null
-......Call - int
-........Id(putchar) - int(int)
-........Add - int
-..........Mod - int
-............Id(n) - int
-............IntLit(10) - int
-..........ChrLit('0') - int
-......Call - int
-........Id(putchar) - int(int)
-........Div - double
-..........Mul - double
-............Id(n) - int
-............RealLit(10.0) - double
-..........ChrLit('0') - int
-..FuncDefinition
-....Int
-....Id(main3)
-....ParamList
-......ParamDeclaration
-........Void
-....FuncBody
-......Declaration
-........Char
-........Id(a)
-......Declaration
-........Char
-........Id(b)
-......Declaration
-........Char
-........Id(c)
-......Declaration
-........Char
+........Double
 ........Id(d)
 ......Declaration
 ........Int
 ........Id(i)
-........IntLit(1) - int
-......While
-........Ne - int
+......Declaration
+........Short
+........Id(s)
+......Declaration
+........Char
+........Id(c)
+......Store - undef
+........Id(e) - undef
+........Add - double
+..........Id(d) - double
+..........Id(d) - double
+......Store - undef
+........Id(e) - undef
+........Add - double
+..........Id(d) - double
 ..........Id(i) - int
-..........IntLit(0) - int
-........StatList
-..........Store - int
-............Id(i) - int
-............Call - int
-..............Id(readint) - int(void)
-..............Id(a) - char
-..............Id(b) - char
-..............Id(c) - char
-..............Id(d) - char
-..........Store - int
-............Id(i) - int
-............Call - int
-..............Id(readint) - int(void)
-..............Not - int
-................IntLit(1) - int
-..............Comma - int
-................IntLit(2) - int
-................IntLit(3) - int
-..............IntLit(4) - int
-..........Call - void
-............Id(printint) - void(int)
-............Id(i) - int
-..........Call - int
-............Id(putchar) - int(int)
-............ChrLit('\n') - int
-..........Store - char
-............Id(a) - char
-............ChrLit('a') - int
+......Store - undef
+........Id(e) - undef
+........Add - double
+..........Id(d) - double
+..........Id(s) - short
+......Store - undef
+........Id(e) - undef
+........Add - double
+..........Id(d) - double
+..........Id(c) - char
+......Store - undef
+........Id(e) - undef
+........Add - int
+..........Id(i) - int
+..........Id(i) - int
+......Store - undef
+........Id(e) - undef
+........Add - int
+..........Id(i) - int
+..........Id(s) - short
+......Store - undef
+........Id(e) - undef
+........Add - int
+..........Id(i) - int
+..........Id(c) - char
+......Store - undef
+........Id(e) - undef
+........Add - short
+..........Id(s) - short
+..........Id(c) - char
+......Store - undef
+........Id(e) - undef
+........Add - char
+..........Id(c) - char
+..........Id(c) - char
+......Store - undef
+........Id(e) - undef
+........Add - short
+..........Id(s) - short
+..........Id(s) - short
+......Store - undef
+........Id(e) - undef
+........Add - undef
+..........Id(v) - undef
+..........Id(d) - double
+......Store - undef
+........Id(e) - undef
+........Add - undef
+..........Id(v) - undef
+..........Id(i) - int
+......Store - undef
+........Id(e) - undef
+........Add - undef
+..........Id(v) - undef
+..........Id(s) - short
+......Store - undef
+........Id(e) - undef
+........Add - undef
+..........Id(v) - undef
+..........Id(c) - char
+......Store - undef
+........Id(e) - undef
+........Add - undef
+..........Id(v) - undef
+..........Id(v) - undef
 ..Declaration
 ....Int
-....Id(fff)
+....Id(br)
 ....IntLit(1) - int
+..Declaration
+....Int
+....Id(br1)
+....Add - int
+......IntLit(2) - int
+......IntLit(3) - int
+..Declaration
+....Double
+....Id(br2)
+....Add - double
+......Id(br1) - int
+......Id(br2) - double
+..Declaration
+....Double
+....Id(br3)
+....RealLit(23.3) - double
+..Declaration
+....Double
+....Id(br4)
+....Add - double
+......Id(br2) - double
+......Id(br3) - double
+..Declaration
+....Char
+....Id(br5)
+....ChrLit('a') - int
+..Declaration
+....Char
+....Id(br6)
+....Add - undef
+......ChrLit('a') - int
+......Id(a) - undef
+..Declaration
+....Int
+....Id(f)
 ..FuncDeclaration
-....Void
-....Id(cona)
+....Int
+....Id(main)
 ....ParamList
 ......ParamDeclaration
 ........Int
@@ -1190,118 +1177,16 @@ Program
 ......ParamDeclaration
 ........Int
 ........Id(b)
-..Declaration
+..FuncDefinition
 ....Int
 ....Id(a)
-....IntLit(1) - int
-..FuncDeclaration
-....Int
-....Id(main2)
 ....ParamList
 ......ParamDeclaration
-........Int
-........Id(a)
-......ParamDeclaration
-........Int
-........Id(b)
-..FuncDefinition
-....Int
-....Id(main2)
-....ParamList
-......ParamDeclaration
-........Int
-........Id(a)
-......ParamDeclaration
-........Int
-........Id(b)
+........Void
 ....FuncBody
-......Store - int
-........Id(a) - int
-........Ne - int
-..........Id(b) - int
-..........Id(c) - int
-......Call - int
-........Id(getchar) - int(void)
-........Store - int
-..........Id(a) - int
-..........Sub - int
-............Add - int
-..............ChrLit('a') - int
-..............IntLit(10) - int
-............Div - int
-..............Call - int
-................Id(putchar) - int(int)
-................IntLit(10) - int
-..............ChrLit('a') - int
 ......Declaration
 ........Int
-........Id(c)
-........Add - int
-..........Id(a) - int
-..........Id(b) - int
-......If
-........Eq - int
-..........Id(a) - int
-..........Id(b) - int
-........StatList
-..........Store - int
-............Id(a) - int
-............Add - int
-..............Id(a) - int
-..............IntLit(2) - int
-..........Store - int
-............Id(b) - int
-............Add - int
-..............Id(a) - int
-..............IntLit(3) - int
-........Null
-......While
-........Eq - int
-..........Id(a) - int
-..........Id(b) - int
-........Store - int
-..........Id(a) - int
-..........Add - int
-............Id(a) - int
-............IntLit(2) - int
-......Store - int
-........Id(a) - int
-........Gt - int
-..........Add - int
-............Id(a) - int
-............Id(a) - int
-..........Add - int
-............Add - int
-..............Id(a) - int
-..............Id(a) - int
-............Id(b) - int
-......If
-........Gt - int
-..........Id(a) - int
-..........Id(b) - int
-........Store - int
-..........Id(a) - int
-..........Sub - int
-............Id(a) - int
-............Id(b) - int
-........Store - int
-..........Id(a) - int
-..........Add - int
-............Id(a) - int
-............Id(b) - int
-......Return
-........Id(c) - int
-..FuncDefinition
-....Int
-....Id(ola)
-....ParamList
-......ParamDeclaration
-........Int
-........Id(a)
-......ParamDeclaration
-........Int
 ........Id(b)
-......ParamDeclaration
-........Int
-........Id(c)
-....FuncBody
+........IntLit(0) - int
+......Return
+........Id(b) - int
