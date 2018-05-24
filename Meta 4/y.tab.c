@@ -2894,7 +2894,9 @@ int main(int argc, char *argv[]){
 		yyparse();
 		yylex_destroy();
 		if(!print_flag){
-			//gerar_codigo(root);
+			le_arvore_tabela(root);
+			anotar_arvore(root);
+			gera_codigo(root);
 		}
 		return 0;
 	}
