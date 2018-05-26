@@ -1,0 +1,52 @@
+declare i32 @getchar()
+declare i32 @putchar(i32)
+
+define i32 @sum() {
+	%c = alloca i32
+	%1 = load i32, i32* %c
+	ret i32 %1
+}
+
+define i32 @main() {
+	call i32 @putchar(i32 0)
+	%a = alloca i32
+	ret i32 0
+}
+
+define void @_1() {
+	ret void 
+}
+
+define i32 @_2() {
+	%a = alloca i32
+	%b = alloca i32
+	%c = alloca i32
+	%d = alloca i32
+	%1 = load i32, i32* %b
+	store i32 %1, i32* %a
+	%aa = alloca i8
+	%bb = alloca i8
+	%2 = load i8, i8* %bb
+	store i8 %2, i8* %aa
+	%aaa = alloca i16
+	%bbb = alloca i16
+	%3 = load i16, i16* %bbb
+	store i16 %3, i16* %aaa
+	%aaaa = alloca double
+	%bbbb = alloca double
+	%4 = load double, double* %bbbb
+	store double %4, double* %aaaa
+	store i32 1, i32* %a
+	store i32 1, i32* %b
+	store i32 1, i32* %c
+	store i32 1, i32* %d
+	store i8 'A', i8* %aa
+	store i8 1, i8* %bb
+	store i16 1, i16* %aaa
+	store i16 1, i16* %bbb
+	store double 1, double* %aaaa
+	store double 1, double* %bbbb
+	%5 = load i32, i32* %d
+	ret i32 %5
+}
+

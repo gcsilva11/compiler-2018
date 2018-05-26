@@ -68,7 +68,7 @@ char* verifica_params_funcao(AST_struct no){
 	
 	while(aux){
 		if(strcmp(aux->filho->tipo,"Void")==0)
-			strcat(params,"void");	
+			strcat(params,"void");
 	
 		else if(strcmp(aux->filho->tipo,"Int")==0)
 			strcat(params,"int");
