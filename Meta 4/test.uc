@@ -1,7 +1,7 @@
 // 20 pontos
-int main(void){
-	return 0;
-}
+//int main(void){
+//	return 0;
+//}
 
 // 60 pontos
 int assignment(void){
@@ -27,19 +27,22 @@ int assignment(void){
 	return d;
 }
 
+char chario(char a){
+	return a;
+}
+
 // 60 pontos
-int unary_minus(void){
-	int c = -1;
-	int d = -c;
-	int a = 1;
-	int b;
-	b = -a;
-	b = -2;
-	return 0;
+int unary_minus(int a, int bbb, char ccc, short ddd){
+	int b = -a;
+	int c = -b;
+	int d;
+	d = -2;
+	d = -b;
+	return d;
 }
 
 // 60 - 100 pontos
-int printing(void){
+void main(void){
 	// 60 pontos
 	char _11 = 'A';
 	int _12 = 65;
@@ -66,5 +69,5 @@ int printing(void){
 	putchar('\116');
 	putchar('\10');
 	putchar('\65');
-    return 0;
+    return;
 }

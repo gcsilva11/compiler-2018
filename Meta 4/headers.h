@@ -91,6 +91,7 @@ void gera_func_definition(AST_struct,char*,char*);
 
 char* variable_type(char*,char*);
 char* function_type(char*);
+char* func_param(char*);
 char* type2llvm(char*);
 
 int check_global(char*,char*);
