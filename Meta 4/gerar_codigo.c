@@ -16,7 +16,6 @@ void gera_codigo(AST_struct raiz){
 			printf("\n");
 		}
 		else if(strcmp(raiz->tipo,"FuncDeclaration")==0){
-			// 
 			raiz = raiz->irmao;
 			printf("\n");
 		}
@@ -42,9 +41,6 @@ void gera_program(AST_struct raiz){
 
 void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao){
 	printf("define %s @%s() {\n", tipo_funcao, nome_funcao);
-
-	// Analisar funcao
-
 	AST_struct aux = raiz->filho;
 	while(aux->irmao!=NULL){
 		aux = aux->irmao;
@@ -156,17 +152,29 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 	 					else {
 	 						int variavel;
 	 						if(strcmp(declaration_aux->filho->irmao->tipo,"ChrLit")==0){
-	 							if(strstr(declaration_aux->filho->irmao->valor,"\\n")!=NULL)
-	 								variavel = 10;
- 								else if(strstr(declaration_aux->filho->irmao->valor,"\\t")!=NULL)
-	 								variavel = 9;
-	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\\\")!=NULL)
-	 								variavel = 92;
-	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\'")!=NULL)
-	 								variavel = 39;
-	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\\"")!=NULL)
-	 								variavel = 34;
-	 							else
+ 								if(*(declaration_aux->filho->irmao->valor+1)=='\\'){
+ 									if(*(declaration_aux->filho->irmao->valor+2)=='n'){
+ 										variavel = 10;
+ 									}
+ 									else if(*(declaration_aux->filho->irmao->valor+2)=='t'){
+ 										variavel = 9;
+ 									}
+ 									else if(*(declaration_aux->filho->irmao->valor+2)=='\\'){
+ 										variavel = 92;
+ 									}
+ 									else if(*(declaration_aux->filho->irmao->valor+2)=='\''){
+ 										variavel = 39;
+ 									}
+ 									else if(*(declaration_aux->filho->irmao->valor+2)=='\"'){
+ 										variavel = 34;
+ 									}
+ 									else{
+ 										declaration_aux->filho->irmao->valor = declaration_aux->filho->irmao->valor+1;
+ 										declaration_aux->filho->irmao->valor++[strlen(declaration_aux->filho->irmao->valor)-1] = 0;
+ 										variavel = octal_to_decimal(declaration_aux->filho->irmao->valor);
+ 									}
+ 								}
+ 								else
  									variavel = *(declaration_aux->filho->irmao->valor+sizeof(char));
 	 						}
 	 						else
@@ -214,7 +222,7 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 	printf("}\n");
 }
 
-int check_global(char * variavel, char * nome_funcao){
+int check_global(char * variavel, char * nome_funcao) {
 	no_tabela_global tabela_simb = tabela_simbolos;
 	while(tabela_simb!=NULL){
 		no_tabela_func aux = tabela_simb->next_table;
@@ -237,7 +245,7 @@ int check_global(char * variavel, char * nome_funcao){
 	return -1;
 }
 
-char* variable_type(char * variavel, char * nome_funcao){
+char* variable_type(char * variavel, char * nome_funcao) {
 	no_tabela_global tabela_simb = tabela_simbolos;
 	while(tabela_simb!=NULL){
 		no_tabela_func aux = tabela_simb->next_table;
@@ -261,7 +269,7 @@ char* variable_type(char * variavel, char * nome_funcao){
 	return "";
 }
 
-char* function_type(char * nome_funcao){
+char* function_type(char * nome_funcao) {
 	no_tabela_global tabela_simb = tabela_simbolos;
 	while(tabela_simb!=NULL){
 		if(nome_funcao!=NULL && tabela_simb->nome !=NULL && strcmp(nome_funcao,tabela_simb->nome) == 0){
@@ -289,4 +297,24 @@ char* type2llvm(char* type) {
 		return type;
 	}
 	else return NULL;
+}
+
+int octal_to_decimal(char* octalChar) {
+	int decimal = 0, octal = atoi(octalChar), i = 0;
+	while(octal != 0){
+		decimal += (octal%10) * power_to(8,i);
+		i++;
+		octal/=10;
+	}
+	return decimal;
+}
+
+int power_to(int a, int b) {
+    int i;
+    int number = 1;
+
+    for (i = 0; i < b; ++i)
+        number *= a;
+
+    return(number);
 }

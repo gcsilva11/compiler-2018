@@ -9,7 +9,7 @@ Guilherme Cardoso Gomes da Silva 2014226354
 #include <ctype.h>
 
 //Lex
-int yylex(void);
+int yylex();
 void yyerror (const char *);
 int yylex_destroy();
 int yyparse();
@@ -30,8 +30,6 @@ AST_struct cria_no(char*, char*);
 
 void adicionar_filho(AST_struct,AST_struct);
 void adicionar_irmao(AST_struct,AST_struct);
-
-
 
 void imprime_arvore(AST_struct,int);
 void imprime_arvore_anotada(AST_struct,int);
@@ -96,3 +94,6 @@ char* function_type(char*);
 char* type2llvm(char*);
 
 int check_global(char*,char*);
+
+int octal_to_decimal(char*);
+int power_to(int,int);

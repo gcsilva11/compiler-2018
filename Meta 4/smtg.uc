@@ -1,14 +1,8 @@
-int sum(int a,int b){
-	int c;
-	c = a + b;
-	return c;
-}
-
-void _1(void){
+/*void return_void(void){
 	return;
 }
 
-int _2(void){
+int assignment(void){
 	int a, b, c;
 	int d;
 	a = b;
@@ -31,7 +25,7 @@ int _2(void){
 	return d;
 }
 
-int main1(void){
+int putchars(void){
 	char _11 = 'A';
 	int _12 = 65;
 	short _13 = 65;
@@ -55,12 +49,24 @@ int main1(void){
     return 0;
 }
 
-int main(void){
+int unary_minus(void){
 	int c = -1;
 	int d = -c;
 	int a = 1;
 	int b;
 	b = -a;
 	b = -2;
+	return 0;
+}
+
+int main(void){
+	putchar(78);
+	putchar('\116');
+	putchar('\10');
+	putchar('\65');
+	return 0;
+}*/
+
+int main(void){
 	return 0;
 }
