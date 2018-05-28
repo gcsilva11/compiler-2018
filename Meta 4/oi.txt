@@ -3,14 +3,8 @@ declare i32 @putchar(i32)
 
 define i32 @sum() {
 	%c = alloca i32
-	%1 = load i32, i32* %c
+		%1 = load i32, i32* %c
 	ret i32 %1
-}
-
-define i32 @main() {
-	call i32 @putchar(i32 0)
-	%a = alloca i32
-	ret i32 0
 }
 
 define void @_1() {
@@ -40,13 +34,48 @@ define i32 @_2() {
 	store i32 1, i32* %b
 	store i32 1, i32* %c
 	store i32 1, i32* %d
-	store i8 'A', i8* %aa
-	store i8 1, i8* %bb
+	store i8 65, i8* %aa
+	store i8 122, i8* %bb
 	store i16 1, i16* %aaa
 	store i16 1, i16* %bbb
-	store double 1, double* %aaaa
-	store double 1, double* %bbbb
+	store double 1.0, double* %aaaa
+	store double 1.0, double* %bbbb
 	%5 = load i32, i32* %d
 	ret i32 %5
+}
+
+define i32 @main() {
+	%_11 = alloca i8
+	store i8 65, i8* %_11
+	%_12 = alloca i32
+	store i32 65, i32* %_12
+	%_13 = alloca i16
+	store i16 65, i16* %_13
+	%_14 = alloca double
+	store double 65.0, double* %_14
+	call i32 @putchar(i32 97)
+	call i32 @putchar(i32 97)
+	call i32 @putchar(i32 65)
+	%4 = load i8, i8* %_11
+	%conv0 = sext i8 %4 to i32
+	call i32 @putchar(i32 %conv0)
+	%6 = load i32, i32* %_12
+	call i32 @putchar(i32 %6)
+	%8 = load i16, i16* %_13
+	%conv1 = sext i16 %8 to i32
+	call i32 @putchar(i32 %conv1)
+	%10 = load double, double* %_14
+	%conv2 = fptoui double %10 to i32
+	call i32 @putchar(i32 %conv2)
+	call i32 @putchar(i32 10)
+	call i32 @putchar(i32 9)
+	call i32 @putchar(i32 10)
+	call i32 @putchar(i32 39)
+	call i32 @putchar(i32 10)
+	call i32 @putchar(i32 34)
+	call i32 @putchar(i32 10)
+	call i32 @putchar(i32 92)
+	call i32 @putchar(i32 92)
+	ret i32 0
 }
 

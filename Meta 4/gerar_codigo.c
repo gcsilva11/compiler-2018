@@ -4,6 +4,9 @@ Guilherme Cardoso Gomes da Silva 2014226354
 */
 #include "headers.h"
 
+int id_aux = 0;
+int conv_aux = 0;
+
 void gera_codigo(AST_struct raiz){
 	if(raiz!=NULL){
 		if(strcmp(raiz->tipo,"Program")==0){
@@ -17,6 +20,7 @@ void gera_codigo(AST_struct raiz){
 			printf("\n");
 		}
 		else if(strcmp(raiz->tipo,"FuncDefinition")==0){
+			id_aux = 1;
 			gera_func_definition(raiz, type2llvm(raiz->filho->tipo),raiz->filho->irmao->valor);
 			raiz = raiz->irmao;
 			printf("\n");
@@ -36,23 +40,35 @@ void gera_program(AST_struct raiz){
 }
 
 void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao){
-	int id_aux = 1;
 	printf("define %s @%s() {\n", tipo_funcao, nome_funcao);
 
 	// Analisar funcao
 
 	AST_struct aux = raiz->filho;
 	while(aux->irmao!=NULL){
-	 	aux = aux->irmao;
-	 	if(aux!=NULL && strcmp(aux->tipo,"FuncBody")==0){
-	 		AST_struct declaration_aux = aux->filho;
-	 		while(declaration_aux){
-	 			printf("\t");
-	 			if(declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Declaration")==0){
-	 				printf("%%%s = alloca %s\n",declaration_aux->filho->irmao->valor,type2llvm(declaration_aux->filho->tipo));
+		aux = aux->irmao;
+		if(aux!=NULL && strcmp(aux->tipo,"FuncBody")==0){
+			AST_struct declaration_aux = aux->filho;
+			while(declaration_aux){
+				printf("\t");
+				char scope_aux = '\0';
+				if(declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Declaration")==0){
+					printf("%%%s = alloca %s\n",declaration_aux->filho->irmao->valor,type2llvm(declaration_aux->filho->tipo));
+					if(declaration_aux->filho->irmao->irmao){
+						if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==1){
+							scope_aux = '@';
+						}
+						if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==0){
+							scope_aux = '%';
+						}
+ 						printf("\t");
+ 						if(strcmp(declaration_aux->filho->irmao->irmao->tipo,"ChrLit")==0)
+ 							printf("store %s %d, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), *(declaration_aux->filho->irmao->irmao->valor+sizeof(char)), variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+ 						else
+							printf("store %s %s, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), declaration_aux->filho->irmao->irmao->valor, variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+	 				}
 	 			}
 	 			else if(declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Store")==0){
-	 				char scope_aux = '\0';
 					if(check_global(declaration_aux->filho->valor,nome_funcao)==1){
 						scope_aux = '@';
 					}
@@ -63,16 +79,72 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 		  				printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->valor,nome_funcao), variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
 		  				printf("\t");
 		  				printf("store %s %%%d, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), id_aux, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
-
 		  				id_aux++;
 		  			}
-		  			else{
-		  				printf("store %s %s, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), declaration_aux->filho->irmao->valor, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
+		  			else if(strcmp(declaration_aux->filho->irmao->tipo,"ChrLit")==0){
+	  					printf("store %s %d, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), *(declaration_aux->filho->irmao->valor+sizeof(char)), variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
+		  			}
+	  				else if( strcmp(declaration_aux->filho->irmao->tipo,"IntLit") == 0 || strcmp(declaration_aux->filho->irmao->tipo,"RealLit") == 0 ){
+	  					printf("store %s %s, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), declaration_aux->filho->irmao->valor, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
 		  			}
 	 			}
 	 			else if (declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Call")==0){
- 					printf("call %s @%s(%s)\n",function_type(declaration_aux->filho->valor),declaration_aux->filho->valor,func_param(declaration_aux->filho->valor,1));
- 					id_aux++;
+	 				if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==1){
+						scope_aux = '@';
+					}
+					if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==0){
+						scope_aux = '%';
+					}
+	 				if(strcmp(declaration_aux->filho->valor,"putchar")==0){
+	 					if(strcmp(declaration_aux->filho->irmao->tipo,"Id")==0){
+	 						if(strcmp(declaration_aux->filho->irmao->anotacao,"char")==0 || strcmp(declaration_aux->filho->irmao->anotacao,"short")==0){
+	 							printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->valor, nome_funcao), variable_type(declaration_aux->filho->irmao->valor, nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+		 						printf("\t");
+	 							printf("%%conv%d = sext %s %%%d to i32\n",conv_aux,variable_type(declaration_aux->filho->irmao->valor, nome_funcao), id_aux);
+			  					printf("\t");
+			  					printf("call %s @%s(%s %%conv%d)\n",function_type(declaration_aux->filho->valor),declaration_aux->filho->valor,variable_type(declaration_aux->filho->valor,nome_funcao),conv_aux);
+				  				id_aux++;
+				  				conv_aux++;
+				  			}
+				  			else if(strcmp(declaration_aux->filho->irmao->anotacao,"double")==0){
+				  				printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->valor, nome_funcao), variable_type(declaration_aux->filho->irmao->valor, nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+		 						printf("\t");
+	 							printf("%%conv%d = fptoui %s %%%d to i32\n",conv_aux,variable_type(declaration_aux->filho->irmao->valor, nome_funcao), id_aux);
+			  					printf("\t");
+			  					printf("call %s @%s(%s %%conv%d)\n",function_type(declaration_aux->filho->valor),declaration_aux->filho->valor,variable_type(declaration_aux->filho->valor,nome_funcao),conv_aux);
+				  				id_aux++;
+				  				conv_aux++;
+				  			}
+				  			else{
+				  				printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->valor,nome_funcao), variable_type(declaration_aux->filho->irmao->valor, nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+				  				printf("\t");
+				  				printf("call %s @%s(%s %%%d)\n",function_type(declaration_aux->filho->valor),declaration_aux->filho->valor,variable_type(declaration_aux->filho->irmao->valor,nome_funcao),id_aux);
+				  				id_aux++;
+				  			}
+
+	 					}
+	 					else {
+	 						int variavel;
+	 						if(strcmp(declaration_aux->filho->irmao->tipo,"ChrLit")==0){
+	 							if(strstr(declaration_aux->filho->irmao->valor,"\\n")!=NULL)
+	 								variavel = 10;
+ 								else if(strstr(declaration_aux->filho->irmao->valor,"\\t")!=NULL)
+	 								variavel = 9;
+	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\\\")!=NULL)
+	 								variavel = 92;
+	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\'")!=NULL)
+	 								variavel = 39;
+	 							else if(strstr(declaration_aux->filho->irmao->valor,"\\\"")!=NULL)
+	 								variavel = 34;
+	 							else
+ 									variavel = *(declaration_aux->filho->irmao->valor+sizeof(char));
+	 						}
+	 						else
+	 							variavel = atoi(declaration_aux->filho->irmao->valor);
+	 						printf("call %s @%s(%s %d)\n",function_type(declaration_aux->filho->valor),declaration_aux->filho->valor,variable_type(declaration_aux->filho->valor,nome_funcao),variavel);
+	 					}
+	 					id_aux++;
+					}
 	 			}
 	 			declaration_aux = declaration_aux->irmao;
 	 		}
@@ -168,38 +240,6 @@ char* function_type(char * nome_funcao){
 		tabela_simb = tabela_simb->next;
 	}
 	return "";
-}
-
-char* func_param(char * nome_funcao, int flag){
-	if(strcmp(nome_funcao,"putchar")!=0){
-		char ret_me[10000] = "";
-		no_tabela_global tabela_simb = tabela_simbolos;
-		while(tabela_simb!=NULL){
-			no_tabela_func aux = tabela_simb->next_table;
-			if(nome_funcao!=NULL && tabela_simb->nome && strcmp(tabela_simb->nome,nome_funcao)==0){
-				while(aux){
-					if(aux->param == 1){
-						strcat(ret_me,type2llvm(aux->tipo));
-						strcat(ret_me," ");
-
-						if(check_global(aux->nome,nome_funcao)==1)
-							strcat(ret_me,"@");
-						if(check_global(aux->nome,nome_funcao)==0)
-							strcat(ret_me,"%");
-
-						strcat(ret_me,aux->nome);
-						if(aux->next && aux->next->param == 1)
-							strcat(ret_me,", ");
-					}
-					aux = aux->next;
-				}
-			}
-			tabela_simb=tabela_simb->next;
-		}
-		return strdup(ret_me);
-	}
-		return "i32 0";
-
 }
 
 char* type2llvm(char* type) {
