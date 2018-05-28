@@ -6,6 +6,7 @@ Guilherme Cardoso Gomes da Silva 2014226354
 
 int id_aux = 0;
 int conv_aux = 0;
+int sub_aux = 0;
 
 void gera_codigo(AST_struct raiz){
 	if(raiz!=NULL){
@@ -64,8 +65,23 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
  						printf("\t");
  						if(strcmp(declaration_aux->filho->irmao->irmao->tipo,"ChrLit")==0)
  							printf("store %s %d, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), *(declaration_aux->filho->irmao->irmao->valor+sizeof(char)), variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
- 						else
+ 						else if(strcmp(declaration_aux->filho->irmao->irmao->tipo,"IntLit")==0 || strcmp(declaration_aux->filho->irmao->irmao->tipo,"RealLit")==0)
 							printf("store %s %s, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), declaration_aux->filho->irmao->irmao->valor, variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+						
+						else if(strcmp(declaration_aux->filho->irmao->irmao->tipo,"Minus")==0){
+							if (strcmp(declaration_aux->filho->irmao->irmao->filho->tipo,"Id")==0){
+								printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->irmao->filho->valor,nome_funcao), variable_type(declaration_aux->filho->irmao->irmao->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->irmao->filho->valor);
+								printf("\t");
+								printf("%%sub%d = sub nsw %s 0, %%%d\n", sub_aux, variable_type(declaration_aux->filho->irmao->irmao->filho->valor,nome_funcao), id_aux);
+								printf("\t");
+								printf("store %s %%sub%d, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->irmao->filho->valor,nome_funcao), sub_aux, variable_type(declaration_aux->filho->irmao->irmao->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+								sub_aux++;
+								id_aux++;
+							}
+							else{
+								printf("store %s -%s, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), declaration_aux->filho->irmao->irmao->filho->valor, variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
+							}
+						}
 	 				}
 	 			}
 	 			else if(declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Store")==0){
@@ -84,8 +100,22 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 		  			else if(strcmp(declaration_aux->filho->irmao->tipo,"ChrLit")==0){
 	  					printf("store %s %d, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), *(declaration_aux->filho->irmao->valor+sizeof(char)), variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
 		  			}
-	  				else if( strcmp(declaration_aux->filho->irmao->tipo,"IntLit") == 0 || strcmp(declaration_aux->filho->irmao->tipo,"RealLit") == 0 ){
+	  				else if(strcmp(declaration_aux->filho->irmao->tipo,"IntLit") == 0 || strcmp(declaration_aux->filho->irmao->tipo,"RealLit") == 0 ){
 	  					printf("store %s %s, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), declaration_aux->filho->irmao->valor, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
+		  			}
+		  			else if(strcmp(declaration_aux->filho->irmao->tipo,"Minus") == 0){
+	  					if (strcmp(declaration_aux->filho->irmao->filho->tipo,"Id")==0){
+							printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->filho->valor,nome_funcao), variable_type(declaration_aux->filho->irmao->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->filho->valor);
+							printf("\t");
+							printf("%%sub%d = sub nsw %s 0, %%%d\n", sub_aux, variable_type(declaration_aux->filho->irmao->filho->valor,nome_funcao), id_aux);
+							printf("\t");
+							printf("store %s %%sub%d, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->filho->valor,nome_funcao), sub_aux, variable_type(declaration_aux->filho->irmao->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
+							sub_aux++;
+							id_aux++;
+						}
+						else{
+							printf("store %s -%s, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), declaration_aux->filho->irmao->filho->valor, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
+						}
 		  			}
 	 			}
 	 			else if (declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Call")==0){

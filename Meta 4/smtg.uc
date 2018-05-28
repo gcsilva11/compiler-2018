@@ -31,7 +31,7 @@ int _2(void){
 	return d;
 }
 
-int main(void){
+int main1(void){
 	char _11 = 'A';
 	int _12 = 65;
 	short _13 = 65;
@@ -53,4 +53,14 @@ int main(void){
 	putchar('\\');
 	putchar('\123');
     return 0;
+}
+
+int main(void){
+	int c = -1;
+	int d = -c;
+	int a = 1;
+	int b;
+	b = -a;
+	b = -2;
+	return 0;
 }

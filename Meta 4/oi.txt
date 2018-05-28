@@ -44,7 +44,7 @@ define i32 @_2() {
 	ret i32 %5
 }
 
-define i32 @main() {
+define i32 @main1() {
 	%_11 = alloca i8
 	store i8 65, i8* %_11
 	%_12 = alloca i32
@@ -76,6 +76,23 @@ define i32 @main() {
 	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 92)
 	call i32 @putchar(i32 92)
+	ret i32 0
+}
+
+define i32 @main() {
+	%c = alloca i32
+	store i32 -1, i32* %c
+	%d = alloca i32
+	%1 = load i32, i32* %c
+	%sub0 = sub nsw i32 0, %1
+	store i32 %sub0, i32* %d
+	%a = alloca i32
+	store i32 1, i32* %a
+	%b = alloca i32
+	%2 = load i32, i32* %a
+	%sub1 = sub nsw i32 0, %2
+	store i32 %sub1, i32* %b
+	store i32 -2, i32* %b
 	ret i32 0
 }
 
