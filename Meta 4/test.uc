@@ -1,7 +1,9 @@
-/*void return_void(void){
-	return;
+// 20 pontos
+int main(void){
+	return 0;
 }
 
+// 60 pontos
 int assignment(void){
 	int a, b, c;
 	int d;
@@ -25,7 +27,20 @@ int assignment(void){
 	return d;
 }
 
-int putchars(void){
+// 60 pontos
+int unary_minus(void){
+	int c = -1;
+	int d = -c;
+	int a = 1;
+	int b;
+	b = -a;
+	b = -2;
+	return 0;
+}
+
+// 60 - 100 pontos
+int printing(void){
+	// 60 pontos
 	char _11 = 'A';
 	int _12 = 65;
 	short _13 = 65;
@@ -46,27 +61,10 @@ int putchars(void){
 	putchar('\n');
 	putchar('\\');
 	putchar('\123');
-    return 0;
-}
-
-int unary_minus(void){
-	int c = -1;
-	int d = -c;
-	int a = 1;
-	int b;
-	b = -a;
-	b = -2;
-	return 0;
-}
-
-int main(void){
+	// 100 pontos
 	putchar(78);
 	putchar('\116');
 	putchar('\10');
 	putchar('\65');
-	return 0;
-}*/
-
-int main(void){
-	return 0;
+    return 0;
 }
