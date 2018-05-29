@@ -1,122 +1,358 @@
-declare i32 @getchar()
-declare i32 @putchar(i32)
+===== Global Symbol Table =====
+putchar	int(int)
+getchar	int(void)
+a_global	int
+b_global	double
+c_global	char
+d_global	short
+main	int(void)
+assignment	int(void)
+chario	char(char)
+unary_minus	int(int,int,char,short)
+putchars	void(void)
+storing	void(void)
 
-@a_global = global i32 0
+===== Function main Symbol Table =====
+return	int
+ass	int
 
-@b_global = global double 0.0
+===== Function assignment Symbol Table =====
+return	int
+a	int
+b	int
+c	int
+d	int
+aa	char
+bb	char
+aaa	short
+bbb	short
+aaaa	double
+bbbb	double
 
-@c_global = global i8 0
+===== Function chario Symbol Table =====
+return	char
+a	char	param
 
-@d_global = global i16 0
+===== Function unary_minus Symbol Table =====
+return	int
+a	int	param
+bbb	int	param
+ccc	char	param
+ddd	short	param
+b	int
+c	int
+d	int
 
-define i32 @main() {
-	%ass = alloca i32
-		call void @putchars()
-	ret i32 0
-}
+===== Function putchars Symbol Table =====
+return	void
+_11	char
+_12	int
+_13	short
+_14	double
 
-define i32 @assignment() {
-	%a = alloca i32
-	%b = alloca i32
-	%c = alloca i32
-	%d = alloca i32
-	%1 = load i32, i32* %b
-	store i32 %1, i32* %a
-	%aa = alloca i8
-	%bb = alloca i8
-	%2 = load i8, i8* %bb
-	store i8 %2, i8* %aa
-	%aaa = alloca i16
-	%bbb = alloca i16
-	%3 = load i16, i16* %bbb
-	store i16 %3, i16* %aaa
-	%aaaa = alloca double
-	%bbbb = alloca double
-	%4 = load double, double* %bbbb
-	store double %4, double* %aaaa
-	store i32 1, i32* %a
-	store i32 1, i32* %b
-	store i32 1, i32* %c
-	store i32 1, i32* %d
-	store i8 65, i8* %aa
-	store i8 122, i8* %bb
-	store i16 1, i16* %aaa
-	store i16 1, i16* %bbb
-	store double 1.0, double* %aaaa
-	store double 1.0, double* %bbbb
-	%5 = load i32, i32* %d
-	ret i32 %5
-}
+===== Function storing Symbol Table =====
+return	void
+a	int
+b	int
+c	int
+d	int
 
-define i8 @chario() {
-	%a = alloca i8
-	%1 = load i8, i8* %a
-	ret i8 %1
-}
-
-define i32 @unary_minus() {
-	%a = alloca i32
-	%bbb = alloca i32
-	%ccc = alloca i8
-	%ddd = alloca i16
-	%b = alloca i32
-	%1 = load i32, i32* %a
-	%sub0 = sub nsw i32 0, %1
-	store i32 %sub0, i32* %b
-	%c = alloca i32
-	%2 = load i32, i32* %b
-	%sub1 = sub nsw i32 0, %2
-	store i32 %sub1, i32* %c
-	%d = alloca i32
-	store i32 -2, i32* %d
-	%3 = load i32, i32* %b
-	%sub2 = sub nsw i32 0, %3
-	store i32 %sub2, i32* %d
-	%4 = load i32, i32* %d
-	ret i32 %4
-}
-
-define void @putchars() {
-	%_11 = alloca i8
-	store i8 65, i8* %_11
-	%_12 = alloca i32
-	store i32 65, i32* %_12
-	%_13 = alloca i16
-	store i16 65, i16* %_13
-	%_14 = alloca double
-	store double 65.0, double* %_14
-	call i32 @putchar(i32 97)
-	call i32 @putchar(i32 97)
-	call i32 @putchar(i32 65)
-	%4 = load i8, i8* %_11
-	%conv0 = sext i8 %4 to i32
-	call i32 @putchar(i32 %conv0)
-	%6 = load i32, i32* %_12
-	call i32 @putchar(i32 %6)
-	%8 = load i16, i16* %_13
-	%conv1 = sext i16 %8 to i32
-	call i32 @putchar(i32 %conv1)
-	%10 = load double, double* %_14
-	%conv2 = fptoui double %10 to i32
-	call i32 @putchar(i32 %conv2)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 9)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 39)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 34)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 92)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 83)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 78)
-	call i32 @putchar(i32 78)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 8)
-	call i32 @putchar(i32 10)
-	call i32 @putchar(i32 53)
-	call i32 @putchar(i32 10)
-	ret void 
-}
-
+Program
+..Declaration
+....Int
+....Id(a_global)
+..Declaration
+....Double
+....Id(b_global)
+..Declaration
+....Char
+....Id(c_global)
+..Declaration
+....Short
+....Id(d_global)
+..FuncDefinition
+....Int
+....Id(main)
+....ParamList
+......ParamDeclaration
+........Void
+....FuncBody
+......Declaration
+........Int
+........Id(ass)
+........Call - int
+..........Id(assignment) - int(void)
+......Call - void
+........Id(putchars) - void(void)
+......Return
+........IntLit(0) - int
+..FuncDefinition
+....Int
+....Id(assignment)
+....ParamList
+......ParamDeclaration
+........Void
+....FuncBody
+......Declaration
+........Int
+........Id(a)
+......Declaration
+........Int
+........Id(b)
+......Declaration
+........Int
+........Id(c)
+......Declaration
+........Int
+........Id(d)
+......Store - int
+........Id(a) - int
+........Id(b) - int
+......Declaration
+........Char
+........Id(aa)
+......Declaration
+........Char
+........Id(bb)
+......Store - char
+........Id(aa) - char
+........Id(bb) - char
+......Declaration
+........Short
+........Id(aaa)
+......Declaration
+........Short
+........Id(bbb)
+......Store - short
+........Id(aaa) - short
+........Id(bbb) - short
+......Declaration
+........Double
+........Id(aaaa)
+......Declaration
+........Double
+........Id(bbbb)
+......Store - double
+........Id(aaaa) - double
+........Id(bbbb) - double
+......Store - int
+........Id(a) - int
+........IntLit(1) - int
+......Store - int
+........Id(b) - int
+........IntLit(1) - int
+......Store - int
+........Id(c) - int
+........IntLit(1) - int
+......Store - int
+........Id(d) - int
+........IntLit(1) - int
+......Store - char
+........Id(aa) - char
+........ChrLit('A') - int
+......Store - char
+........Id(bb) - char
+........ChrLit('z') - int
+......Store - short
+........Id(aaa) - short
+........IntLit(1) - int
+......Store - short
+........Id(bbb) - short
+........IntLit(1) - int
+......Store - double
+........Id(aaaa) - double
+........RealLit(1.0) - double
+......Store - double
+........Id(bbbb) - double
+........RealLit(1.0) - double
+......Return
+........Id(d) - int
+..FuncDefinition
+....Char
+....Id(chario)
+....ParamList
+......ParamDeclaration
+........Char
+........Id(a)
+....FuncBody
+......Return
+........Id(a) - char
+..FuncDefinition
+....Int
+....Id(unary_minus)
+....ParamList
+......ParamDeclaration
+........Int
+........Id(a)
+......ParamDeclaration
+........Int
+........Id(bbb)
+......ParamDeclaration
+........Char
+........Id(ccc)
+......ParamDeclaration
+........Short
+........Id(ddd)
+....FuncBody
+......Declaration
+........Int
+........Id(b)
+........Minus - int
+..........Id(a) - int
+......Declaration
+........Int
+........Id(c)
+........Minus - int
+..........Id(b) - int
+......Declaration
+........Int
+........Id(d)
+......Store - int
+........Id(d) - int
+........Minus - int
+..........IntLit(2) - int
+......Store - int
+........Id(d) - int
+........Minus - int
+..........Id(b) - int
+......Return
+........Id(d) - int
+..FuncDefinition
+....Void
+....Id(putchars)
+....ParamList
+......ParamDeclaration
+........Void
+....FuncBody
+......Declaration
+........Char
+........Id(_11)
+........ChrLit('A') - int
+......Declaration
+........Int
+........Id(_12)
+........IntLit(65) - int
+......Declaration
+........Short
+........Id(_13)
+........IntLit(65) - int
+......Declaration
+........Double
+........Id(_14)
+........RealLit(65.0) - double
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('a') - int
+......Call - int
+........Id(putchar) - int(int)
+........IntLit(97) - int
+......Call - int
+........Id(putchar) - int(int)
+........RealLit(65.0) - double
+......Call - int
+........Id(putchar) - int(int)
+........Id(_11) - char
+......Call - int
+........Id(putchar) - int(int)
+........Id(_12) - int
+......Call - int
+........Id(putchar) - int(int)
+........Id(_13) - short
+......Call - int
+........Id(putchar) - int(int)
+........Id(_14) - double
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\t') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\'') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\"') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\\') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\123') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........IntLit(78) - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\116') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\10') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\65') - int
+......Call - int
+........Id(putchar) - int(int)
+........ChrLit('\n') - int
+......Return
+........Null
+..FuncDefinition
+....Void
+....Id(storing)
+....ParamList
+......ParamDeclaration
+........Void
+....FuncBody
+......Declaration
+........Int
+........Id(a)
+......Declaration
+........Int
+........Id(b)
+......Declaration
+........Int
+........Id(c)
+......Store - int
+........Id(a) - int
+........Add - int
+..........IntLit(1) - int
+..........IntLit(2) - int
+......Store - int
+........Id(a) - int
+........Sub - int
+..........Id(b) - int
+..........Id(c) - int
+......Store - int
+........Id(a) - int
+........Add - int
+..........IntLit(50) - int
+..........Id(c) - int
+......Declaration
+........Int
+........Id(d)
+........Add - int
+..........Id(b) - int
+..........Id(c) - int
+......Return
+........Null
