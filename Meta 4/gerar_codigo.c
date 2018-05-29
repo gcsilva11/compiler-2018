@@ -99,6 +99,7 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 								printf("store %s -%s, %s* %c%s\n", variable_type(declaration_aux->filho->irmao->valor,nome_funcao), declaration_aux->filho->irmao->irmao->filho->valor, variable_type(declaration_aux->filho->irmao->valor,nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
 							}
 						}
+						/*
 						else if(strcmp(declaration_aux->filho->irmao->irmao->tipo,"Add")==0){
 							int flag_left = 0, flag_right = 0;
 							if(strcmp(declaration_aux->filho->irmao->irmao->filho->tipo,"Id")==0){
@@ -159,6 +160,7 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 							printf("store %s %%sub%d, %s* %c%s\n", type2llvm(declaration_aux->filho->irmao->anotacao), sub_aux, type2llvm(declaration_aux->filho->anotacao), scope_aux, declaration_aux->filho->valor);
 							add_aux++;
 						}
+						*/
 					}
 				}
 				else if(declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Store")==0){
@@ -194,6 +196,7 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 							printf("store %s -%s, %s* %c%s\n", variable_type(declaration_aux->filho->valor,nome_funcao), declaration_aux->filho->irmao->filho->valor, variable_type(declaration_aux->filho->valor,nome_funcao), scope_aux, declaration_aux->filho->valor);
 						}
 					}
+					/*
 						else if(declaration_aux->filho->irmao!=NULL && strcmp(declaration_aux->filho->irmao->tipo,"Add") == 0){
 							int flag_left = 0, flag_right = 0;
 							if(strcmp(declaration_aux->filho->irmao->filho->tipo,"Id")==0){
@@ -254,6 +257,7 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 							printf("store %s %%sub%d, %s* %c%s\n", type2llvm(declaration_aux->filho->irmao->anotacao), sub_aux, type2llvm(declaration_aux->filho->anotacao), scope_aux, declaration_aux->filho->valor);
 							add_aux++;
 						}
+						*/
 					}
 					else if (declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Call")==0){
 						if(strcmp(declaration_aux->filho->valor,"putchar")==0){
