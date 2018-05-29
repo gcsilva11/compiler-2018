@@ -28,7 +28,10 @@ void gera_codigo(AST_struct raiz){
 			printf("\n");
 		}
 		else if(strcmp(raiz->tipo,"Declaration")==0){
-			printf("@%s = global %s 0\n",raiz->filho->irmao->valor,type2llvm(raiz->filho->tipo));
+			if(strcmp(raiz->filho->tipo,"Double")!=0)
+				printf("@%s = global %s 0\n",raiz->filho->irmao->valor,type2llvm(raiz->filho->tipo));
+			else
+				printf("@%s = global %s 0.0\n",raiz->filho->irmao->valor,type2llvm(raiz->filho->tipo));
 			raiz = raiz->irmao;
 			printf("\n");
 		}
@@ -133,13 +136,13 @@ void gera_func_definition(AST_struct raiz, char * tipo_funcao, char* nome_funcao
 	 			}
 	 			else if (declaration_aux!=NULL && strcmp(declaration_aux->tipo,"Call")==0){
 	 				if(strcmp(declaration_aux->filho->valor,"putchar")==0){
-	 					if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==1){
-							scope_aux = '@';
-						}
-						if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==0){
-							scope_aux = '%';
-						}
 	 					if(strcmp(declaration_aux->filho->irmao->tipo,"Id")==0){
+	 						if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==1){
+								scope_aux = '@';
+							}
+							if(check_global(declaration_aux->filho->irmao->valor,nome_funcao)==0){
+								scope_aux = '%';
+							}
 	 						if(strcmp(declaration_aux->filho->irmao->anotacao,"char")==0 || strcmp(declaration_aux->filho->irmao->anotacao,"short")==0){
 	 							printf("%%%d = load %s, %s* %c%s\n", id_aux, variable_type(declaration_aux->filho->irmao->valor, nome_funcao), variable_type(declaration_aux->filho->irmao->valor, nome_funcao), scope_aux, declaration_aux->filho->irmao->valor);
 		 						printf("\t");

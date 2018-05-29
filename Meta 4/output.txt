@@ -1,6 +1,20 @@
 declare i32 @getchar()
 declare i32 @putchar(i32)
 
+@a_global = global i32 0
+
+@b_global = global double 0.0
+
+@c_global = global i8 0
+
+@d_global = global i16 0
+
+define i32 @main() {
+	%ass = alloca i32
+		call void @putchars()
+	ret i32 0
+}
+
 define i32 @assignment() {
 	%a = alloca i32
 	%b = alloca i32
@@ -62,7 +76,7 @@ define i32 @unary_minus() {
 	ret i32 %4
 }
 
-define void @main() {
+define void @putchars() {
 	%_11 = alloca i8
 	store i8 65, i8* %_11
 	%_12 = alloca i32
@@ -93,11 +107,16 @@ define void @main() {
 	call i32 @putchar(i32 34)
 	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 92)
+	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 83)
+	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 78)
 	call i32 @putchar(i32 78)
+	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 8)
+	call i32 @putchar(i32 10)
 	call i32 @putchar(i32 53)
+	call i32 @putchar(i32 10)
 	ret void 
 }
 

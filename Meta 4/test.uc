@@ -1,7 +1,14 @@
-// 20 pontos
-//int main(void){
-//	return 0;
-//}
+int a_global;
+double b_global;
+char c_global;
+short d_global;
+
+//20 pontos
+int main(void){
+	int ass = assignment();
+	putchars();
+	return 0;
+}
 
 // 60 pontos
 int assignment(void){
@@ -42,7 +49,7 @@ int unary_minus(int a, int bbb, char ccc, short ddd){
 }
 
 // 60 - 100 pontos
-void main(void){
+void putchars(void){
 	// 60 pontos
 	char _11 = 'A';
 	int _12 = 65;
@@ -63,11 +70,16 @@ void main(void){
 	putchar('\"');
 	putchar('\n');
 	putchar('\\');
-	putchar('\123');
+	putchar('\n');
 	// 100 pontos
+	putchar('\123');
+	putchar('\n');
 	putchar(78);
 	putchar('\116');
+	putchar('\n');
 	putchar('\10');
+	putchar('\n');
 	putchar('\65');
+	putchar('\n');
     return;
 }
