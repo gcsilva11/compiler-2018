@@ -86,13 +86,11 @@ void putchars(void){
 
 void storing(void){
 	int a, b, c;
-	
 	a = 1 + 2;
-	
 	a = b - c;
-
 	a = 50 + c;
-
-	int d = b + c;
+	double d = b + c;
+	a = d + 1;
+	char oi= 'a' + 2;
 	return;
 }

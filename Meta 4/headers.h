@@ -93,6 +93,7 @@ char* variable_type(char*,char*);
 char* function_type(char*);
 char* func_param(char*);
 char* type2llvm(char*);
+int convert_type(AST_struct,AST_struct,char*,char);
 
 int check_global(char*,char*);
 
