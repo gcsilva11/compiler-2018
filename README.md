@@ -1,2 +1,2 @@
-# compiler-2018
+# UC Language Compiler 2018
 Small compiler project for the "UC" language @ University Of Coimbra
